@@ -1377,5 +1377,983 @@ html.scroll-up .road-badge.badge-right {
     transform: translateX(8px);
 }
 
+/* ==========================================
+   브랜드 소개 페이지 - 메인 KV (1920*850)
+   ========================================== */
+.brand-intro-page {
+    width: 100%;
+    background-color: #F7F8FC;
+}
+
+.brand-intro-kv {
+    position: relative;
+    width: 100%;
+    max-width: 1920px;
+    height: 850px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.brand-intro-kv-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+.brand-intro-kv-overlay {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(34, 37, 42, 0.4);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.brand-intro-kv-content-wrap {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 24px;
+    box-sizing: border-box;
+    z-index: 2;
+}
+
+.brand-intro-kv-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    text-align: center;
+}
+
+.brand-intro-kv-content .h1-title,
+.brand-intro-kv-content .h2-title,
+.brand-intro-kv-title,
+.brand-intro-kv-subtitle {
+    color: #F7F8FC;
+    margin: 0;
+    word-break: keep-all;
+}
+
+/* ==========================================
+   브랜드 소개 페이지 - MELLOWAY’s HERITAGE 섹션
+   ========================================== */
+.brand-heritage-section {
+    position: relative;
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+    padding-top: 120px;
+    padding-bottom: 120px;
+    background-color: #F7F8FC;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.brand-heritage-title {
+    margin: 0 240px;
+}
+
+.brand-heritage-visual {
+    position: relative;
+    width: 100%;
+    padding-top: 226px;
+    min-height: 300px;
+    box-sizing: border-box;
+}
+
+.brand-heritage-road {
+    width: 100%;
+    height: auto;
+    display: block;
+    position: relative;
+    z-index: 1;
+}
+
+.brand-heritage-car {
+    position: absolute;
+    top: 120px;
+    left: 56px;
+    width: 230px;
+    height: 120px;
+    display: block;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.brand-heritage-flag {
+    position: absolute;
+    top: 167px;
+    right: calc(240px + (100% - 480px - 72px) / 8 - 62px);
+    width: 93px;
+    height: 96px;
+    display: block;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.brand-heritage-list {
+    margin: 40px 240px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    box-sizing: border-box;
+}
+
+.brand-heritage-item {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    text-align: center;
+}
+
+.brand-heritage-item-title {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--main-font-color, #22252A);
+    line-height: 1.3;
+    letter-spacing: 0;
+    margin: 0;
+}
+
+.brand-heritage-item-desc {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #3E434C;
+    line-height: 1.5;
+    letter-spacing: 0;
+    margin: 0;
+    word-break: keep-all;
+}
+
+/* ==========================================
+   브랜드 소개 페이지 - WHAT DRIVE US 섹션 (1920*902)
+   ========================================== */
+.brand-values-section {
+    position: relative;
+    width: 100%;
+    max-width: 1920px;
+    min-height: 902px;
+    margin: 0 auto;
+    padding-bottom: 120px;
+    background-color: #F7F8FC;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.brand-values-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    text-align: center;
+}
+
+.brand-values-title,
+.brand-values-subtitle {
+    margin: 0;
+    word-break: keep-all;
+}
+
+.brand-values-grid {
+    width: 1196px;
+    max-width: calc(100% - 48px);
+    height: 582px;
+    margin-top: 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    box-sizing: border-box;
+}
+
+.brand-values-top-row {
+    display: flex;
+    align-items: stretch;
+    gap: 24px;
+    width: 100%;
+    height: 380px;
+    flex-shrink: 0;
+    transition: height 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.brand-values-grid.is-hovered-freedom .brand-values-top-row,
+.brand-values-grid.is-hovered-together .brand-values-top-row {
+    height: 406px;
+}
+
+.brand-values-grid.is-hovered-possibility .brand-values-top-row {
+    height: 240px;
+}
+
+.brand-value-card {
+    position: relative;
+    background-color: #F7F8FC;
+    border: 1px solid #D5D8E0;
+    border-radius: 30px;
+    box-sizing: border-box;
+    overflow: hidden;
+    color: var(--main-font-color, #22252A);
+    cursor: pointer;
+    outline: none;
+    transition:
+        width 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+        height 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+        background-color 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.35s ease;
+}
+
+.brand-value-card.is-active,
+.brand-value-card:hover {
+    background-color: #22252A;
+    border-color: #22252A;
+    box-shadow: 0 18px 36px rgba(34, 37, 42, 0.16);
+    z-index: 2;
+}
+
+.brand-value-head {
+    position: absolute;
+    top: 32px;
+    left: 36px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    transition:
+        top 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+        left 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.brand-value-title {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--main-font-color, #22252A);
+    line-height: 1.2;
+    letter-spacing: 0;
+    margin: 0;
+    transition: color 0.3s ease;
+}
+
+.brand-value-subtitle {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #3E434C;
+    line-height: 1.4;
+    letter-spacing: 0;
+    margin: 0;
+    transition: color 0.3s ease;
+}
+
+.brand-value-desc {
+    position: absolute;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #3E434C;
+    line-height: 1.5;
+    letter-spacing: 0;
+    margin: 0;
+    white-space: nowrap;
+    transition:
+        top 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+        bottom 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+        left 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+        color 0.3s ease;
+}
+
+.brand-value-desc strong {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--main-font-color, #22252A);
+    transition: color 0.3s ease;
+}
+
+.brand-value-card.is-active .brand-value-title,
+.brand-value-card:hover .brand-value-title {
+    color: #85C9F9;
+}
+
+.brand-value-card.is-active .brand-value-subtitle,
+.brand-value-card:hover .brand-value-subtitle {
+    color: #F7F8FC;
+}
+
+.brand-value-card.is-active .brand-value-desc,
+.brand-value-card:hover .brand-value-desc {
+    color: #D4D8E1;
+}
+
+.brand-value-card.is-active .brand-value-desc strong,
+.brand-value-card:hover .brand-value-desc strong {
+    color: #F7F8FC;
+}
+
+.brand-value-icon {
+    position: absolute;
+    display: block;
+    object-fit: contain;
+    pointer-events: none;
+    transition:
+        top 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+        left 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+        width 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ==========================================
+   FREEDOM 박스 (기본 586*380 / 호버 830*405 / 축소 342*406)
+   ========================================== */
+.brand-value-card--freedom {
+    width: calc(50% - 12px);
+    height: 100%;
+    flex-shrink: 0;
+}
+
+.brand-values-grid.is-hovered-freedom .brand-value-card--freedom {
+    width: 830px;
+    height: 405px;
+}
+
+.brand-values-grid.is-hovered-together .brand-value-card--freedom {
+    width: 342px;
+}
+
+.brand-value-icon--freedom {
+    top: 46%;
+    left: 50%;
+    width: 220px;
+    height: auto;
+    transform: translate(-50%, -50%);
+}
+
+.brand-value-desc--freedom {
+    bottom: 28px;
+    left: calc(100% - 36px);
+    transform: translateX(-100%);
+    text-align: right;
+}
+
+.brand-values-grid.is-hovered-freedom .brand-value-card--freedom .brand-value-head {
+    top: 36px;
+    left: 40px;
+}
+
+.brand-values-grid.is-hovered-freedom .brand-value-icon--freedom {
+    top: 50%;
+    left: 50%;
+    width: 295px;
+    transform: translate(-50%, -50%);
+}
+
+.brand-values-grid.is-hovered-freedom .brand-value-desc--freedom {
+    bottom: 36px;
+    left: calc(100% - 40px);
+    transform: translateX(-100%);
+    text-align: right;
+}
+
+.brand-values-grid.is-hovered-together .brand-value-card--freedom .brand-value-head {
+    top: 32px;
+    left: 28px;
+}
+
+.brand-values-grid.is-hovered-together .brand-value-icon--freedom {
+    top: 45%;
+    left: 50%;
+    width: 190px;
+    transform: translate(-50%, -50%);
+}
+
+.brand-values-grid.is-hovered-together .brand-value-desc--freedom {
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.brand-values-grid.is-hovered-possibility .brand-value-card--freedom .brand-value-head {
+    top: 26px;
+    left: 32px;
+}
+
+.brand-values-grid.is-hovered-possibility .brand-value-icon--freedom {
+    top: 50%;
+    left: 77%;
+    width: 170px;
+    transform: translate(-50%, -50%);
+}
+
+.brand-values-grid.is-hovered-possibility .brand-value-desc--freedom {
+    bottom: 26px;
+    left: 32px;
+    transform: translateX(0);
+    text-align: left;
+}
+
+/* ==========================================
+   TOGETHER 박스 (기본 586*380 / 호버 830*406 / 축소 342*406)
+   ========================================== */
+.brand-value-card--together {
+    width: calc(50% - 12px);
+    height: 100%;
+    flex-shrink: 0;
+}
+
+.brand-values-grid.is-hovered-freedom .brand-value-card--together {
+    width: 342px;
+}
+
+.brand-values-grid.is-hovered-together .brand-value-card--together {
+    width: 830px;
+}
+
+.brand-value-icon--together {
+    top: 46%;
+    left: 50%;
+    width: 186px;
+    height: auto;
+    transform: translate(-50%, -50%);
+}
+
+.brand-value-desc--together {
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.brand-values-grid.is-hovered-freedom .brand-value-card--together .brand-value-head {
+    top: 36px;
+    left: 30px;
+}
+
+.brand-values-grid.is-hovered-freedom .brand-value-icon--together {
+    top: 46%;
+    left: 50%;
+    width: 186px;
+    transform: translate(-50%, -50%);
+}
+
+.brand-values-grid.is-hovered-freedom .brand-value-desc--together {
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.brand-values-grid.is-hovered-together .brand-value-card--together .brand-value-head {
+    top: 36px;
+    left: 40px;
+}
+
+.brand-values-grid.is-hovered-together .brand-value-icon--together {
+    top: 50%;
+    left: 50%;
+    width: 250px;
+    transform: translate(-50%, -50%);
+}
+
+.brand-values-grid.is-hovered-together .brand-value-desc--together {
+    bottom: 36px;
+    left: calc(100% - 40px);
+    transform: translateX(-100%);
+    text-align: right;
+}
+
+.brand-values-grid.is-hovered-possibility .brand-value-card--together .brand-value-head {
+    top: 26px;
+    left: 32px;
+}
+
+.brand-values-grid.is-hovered-possibility .brand-value-icon--together {
+    top: 50%;
+    left: 77%;
+    width: 155px;
+    transform: translate(-50%, -50%);
+}
+
+.brand-values-grid.is-hovered-possibility .brand-value-desc--together {
+    bottom: 26px;
+    left: 32px;
+    transform: translateX(0);
+    text-align: left;
+}
+
+/* ==========================================
+   POSSIBILITY 박스 (기본 1196*178 / 상단 호버 1196*152 / 호버 1196*318)
+   ========================================== */
+.brand-value-card--possibility {
+    width: 100%;
+    flex: 1;
+    min-height: 152px;
+}
+
+.brand-value-card--possibility .brand-value-head {
+    top: 50%;
+    left: 44px;
+    transform: translateY(-50%);
+}
+
+.brand-value-desc--possibility {
+    top: 50%;
+    left: 232px;
+    transform: translate(0, -50%);
+    text-align: left;
+}
+
+.brand-value-icon--possibility {
+    top: 50%;
+    left: calc(100% - 84px);
+    width: 94px;
+    height: auto;
+    transform: translate(-100%, -50%);
+}
+
+.brand-values-grid.is-hovered-possibility .brand-value-card--possibility .brand-value-head {
+    top: 36px;
+    left: 44px;
+    transform: translateY(0);
+}
+
+.brand-values-grid.is-hovered-possibility .brand-value-icon--possibility {
+    top: 50%;
+    left: 50%;
+    width: 165px;
+    transform: translate(-50%, -50%);
+}
+
+.brand-values-grid.is-hovered-possibility .brand-value-desc--possibility {
+    top: calc(100% - 72px);
+    left: calc(100% - 44px);
+    transform: translate(-100%, -50%);
+    text-align: right;
+}
+
+@media (max-width: 1240px) {
+    .brand-values-grid {
+        height: auto;
+    }
+
+    .brand-values-top-row,
+    .brand-values-grid.is-hovered-freedom .brand-values-top-row,
+    .brand-values-grid.is-hovered-together .brand-values-top-row,
+    .brand-values-grid.is-hovered-possibility .brand-values-top-row {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .brand-value-card--freedom,
+    .brand-value-card--together,
+    .brand-values-grid.is-hovered-freedom .brand-value-card--freedom,
+    .brand-values-grid.is-hovered-together .brand-value-card--freedom,
+    .brand-values-grid.is-hovered-freedom .brand-value-card--together,
+    .brand-values-grid.is-hovered-together .brand-value-card--together,
+    .brand-value-card--possibility {
+        width: 100%;
+        height: auto;
+        min-height: 280px;
+        padding: 32px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .brand-value-head,
+    .brand-value-desc,
+    .brand-value-icon,
+    .brand-value-card--possibility .brand-value-head,
+    .brand-value-desc--possibility,
+    .brand-value-icon--possibility {
+        position: static;
+        transform: none;
+        text-align: left;
+    }
+
+    .brand-value-icon {
+        align-self: center;
+    }
+}
+
+/* ==========================================
+   브랜드 소개 페이지 - 창업 문의 안내 섹션 (1920*938)
+   ========================================== */
+.brand-ask-section {
+    position: relative;
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+    padding-bottom: 88px;
+    background-color: var(--bg-color, #F7F8FC);
+    box-sizing: border-box;
+}
+
+.brand-ask-header {
+    margin: 0 240px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    text-align: left;
+}
+
+.brand-ask-title {
+    color: #22252A;
+    margin: 0;
+    word-break: keep-all;
+}
+
+.brand-ask-subtitle {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: #22252A;
+    line-height: 1.5;
+    letter-spacing: 0;
+    margin: 0;
+    word-break: keep-all;
+}
+
+.brand-ask-content {
+    position: relative;
+    margin: 121px 240px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 531px;
+}
+
+.brand-ask-connector {
+    position: absolute;
+    left: 464px;
+    top: -111px;
+    pointer-events: none;
+}
+
+.brand-ask-profile-outer {
+    width: 464px;
+    height: 528px;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    box-shadow: 0 0 18px 0 rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.brand-ask-profile-inner {
+    width: 446px;
+    height: 516px;
+    border-radius: 10px;
+    background-color: #EEF8FF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.brand-ask-profile-topbar {
+    width: 446px;
+    height: 64px;
+    border-radius: 10px 10px 0 0;
+    background-color: #FFFFFF;
+    flex-shrink: 0;
+}
+
+.brand-ask-profile-body {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    text-align: center;
+}
+
+.brand-ask-profile-icon {
+    width: 116px;
+    height: 155px;
+    display: block;
+    object-fit: contain;
+}
+
+.brand-ask-profile-text {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--main-font-color, #22252A);
+    line-height: 1.4;
+    letter-spacing: 0;
+    margin: 0;
+}
+
+/* ==========================================
+   브랜드 소개 페이지 - 오른쪽 메신저 박스 (454*759)
+   ========================================== */
+.brand-ask-chat-outer {
+    width: 454px;
+    height: 759px;
+    margin-top: -231px;
+    border-radius: 10px;
+    background-color: #F7F8FC;
+    box-shadow: 0 0 18px 0 rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.brand-ask-chat-inner {
+    width: 436px;
+    height: 741px;
+    border-radius: 10px;
+    background-color: #EEF8FF;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.brand-ask-chat-topbar {
+    position: relative;
+    width: 436px;
+    height: 62px;
+    border-radius: 10px 10px 0 0;
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.brand-ask-chat-back {
+    position: absolute;
+    left: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.brand-ask-chat-title {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--main-font-color, #22252A);
+    line-height: 1;
+    letter-spacing: 0;
+}
+
+.brand-ask-chat-messages {
+    flex: 1;
+    padding: 28px 24px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    box-sizing: border-box;
+}
+
+.brand-ask-chat-pair {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.brand-ask-bubble {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    border-radius: 10px;
+    box-sizing: border-box;
+    word-break: keep-all;
+}
+
+.brand-ask-bubble--question {
+    align-self: flex-start;
+    padding: 14px 18px;
+    background-color: var(--bg-color, #F7F8FC);
+    color: var(--main-font-color, #22252A);
+}
+
+.brand-ask-bubble--answer {
+    align-self: flex-end;
+    max-width: 325px;
+    padding: 16px 20px;
+    background-color: #1C84E8;
+    color: var(--bg-color, #F7F8FC);
+    text-align: left;
+}
+
+.brand-ask-chat-footer {
+    width: 100%;
+    height: 66px;
+    padding: 0 20px;
+    background-color: #FFFFFF;
+    border-radius: 0 0 10px 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-sizing: border-box;
+    flex-shrink: 0;
+}
+
+.brand-ask-chat-mic {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #1C84E8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.brand-ask-chat-input-wrap {
+    flex: 1;
+    height: 40px;
+    padding: 0 6px 0 16px;
+    border-radius: 999px;
+    background-color: #F7F8FC;
+    border: 1px solid #D9DCE3;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-sizing: border-box;
+}
+
+.brand-ask-chat-input {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    background: transparent;
+    outline: none;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 14px;
+    color: var(--main-font-color, #22252A);
+}
+
+.brand-ask-chat-send {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: none;
+    background-color: #D5D8DC;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+/* ==========================================
+   브랜드 소개 페이지 - 하단 CTA 섹션 (1920*444)
+   ========================================== */
+.brand-cta-section {
+    width: 100%;
+    max-width: 1920px;
+    height: 444px;
+    margin: 0 auto;
+    padding: 0 24px;
+    background-color: #161E33;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.brand-cta-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    text-align: center;
+}
+
+.brand-cta-text-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    text-align: center;
+}
+
+.brand-cta-title {
+    color: var(--bg-color, #F7F8FC);
+    margin: 0;
+    word-break: keep-all;
+}
+
+.brand-cta-subtitle {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--bg-color, #F7F8FC);
+    line-height: 1.5;
+    letter-spacing: 0;
+    margin: 0;
+    word-break: keep-all;
+}
+
+.brand-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 15px 40px;
+    border-radius: 50px;
+    background-color: var(--bg-color, #F7F8FC);
+    color: var(--main-font-color, #22252A);
+    text-decoration: none;
+    box-sizing: border-box;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.brand-cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+}
+
+.brand-cta-btn-label {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--main-font-color, #22252A);
+    line-height: 1.2;
+    letter-spacing: 0;
+}
+
+.brand-cta-btn-arrow {
+    width: 33px;
+    height: 27px;
+    display: block;
+    flex-shrink: 0;
+    transition: transform 0.25s ease;
+}
+
+.brand-cta-btn:hover .brand-cta-btn-arrow {
+    transform: translateX(6px);
+}
+
 
 

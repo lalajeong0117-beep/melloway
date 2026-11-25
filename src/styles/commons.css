@@ -72,6 +72,7 @@
 
 :root {
     --main-font-color: #22252A;
+    --bg-color: #F7F8FC;
 }
 
 body {
@@ -88,6 +89,18 @@ body {
     font-size: 48px;
     font-weight: 700;
     color: #22252A;
+    letter-spacing: 0;
+    line-height: 1.3;
+}
+
+/* ==========================================
+   Figma 공통 텍스트 스타일: H2 (중제목)
+   ========================================== */
+.h2-title {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--main-font-color, #22252A);
     letter-spacing: 0;
     line-height: 1.3;
 }
