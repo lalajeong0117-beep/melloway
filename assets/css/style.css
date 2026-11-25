@@ -1,0 +1,86 @@
+@import url(reset.css);
+@import url(normalize.css);
+@import url(commons.css);
+
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.container {
+    position: relative;
+    justify-content: center;
+    background-repeat: no-repeat;
+    background: url(/assets/images/hero-main-kv01.jpg);
+    width: 100%;
+    height: 100vh;
+}
+
+.navi {
+    position: absolute;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
+    width: 1440px;
+    height: 81px;
+    border-radius: 50px;
+    background: #f7f8fc;
+    padding: 3px 40px;
+    margin: 20px;
+}
+
+.menu {
+    gap: 80px;
+}
+
+.menu a {
+    color: #22252a;
+}
+
+.btn {
+    gap: 20px;
+}
+
+.btn button {
+    width: 120px;
+    height: 41px;
+    border: none;
+    border-radius: 20px;
+    background: #22252a;
+    font-size: 16px;
+    font-weight: 600;
+    color: #f7f8fc;
+}
+
+.hero-kv-main-title {
+    position: absolute;
+    top: 221px; /* 헤더 하단(top 20px + height 81px)으로부터 120px */
+    left: 0;
+    margin-left: 240px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    z-index: 10;
+}
+
+.hero-kv-main-title .main-title,
+.hero-kv-main-title h1 {
+    color: #22252a;
+    font-size: 56px;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.hero-kv-main-title .sub-title,
+.hero-kv-main-title p {
+    color: #3e434c;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.6;
+}
