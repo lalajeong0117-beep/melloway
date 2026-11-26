@@ -1,0 +1,99 @@
+/* ==========================================================================
+   Business (파트너스 안내) 페이지 전용 스타일
+   - 전역 스타일과의 충돌을 방지하기 위해 `.business-` 접두사를 사용합니다.
+   ========================================================================== */
+
+.business-page {
+    width: 100%;
+    background-color: var(--bg-color, #F7F8FC);
+}
+
+/* 메인 KV 섹션 (1920 * 850) */
+.business-kv-section {
+    position: relative;
+    width: 100%;
+    max-width: 1920px;
+    height: 850px;
+    margin: 0 auto;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* KV 배경 이미지 */
+.business-kv-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    z-index: 0;
+}
+
+/* 22252A 색상 opacity 40% 오버레이 박스 (1920 * 850) */
+.business-kv-overlay {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(34, 37, 42, 0.4);
+    z-index: 1;
+}
+
+/* 정중앙 가운데 정렬 타이틀 래퍼 */
+.business-kv-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 20px;
+    padding: 0 24px;
+    box-sizing: border-box;
+}
+
+/* 메인 타이틀: H1 + --bg-color (#F7F8FC) */
+.h1-title.business-kv-main-title {
+    color: var(--bg-color, #F7F8FC);
+    margin: 0;
+}
+
+/* 서브 타이틀: H2 + --bg-color (#F7F8FC) */
+.h2-title.business-kv-sub-title {
+    color: var(--bg-color, #F7F8FC);
+    margin: 0;
+}
+
+/* 반응형 대응 */
+@media (max-width: 1024px) {
+    .business-kv-section {
+        height: 680px;
+    }
+
+    .business-kv-main-title {
+        font-size: 38px;
+    }
+
+    .business-kv-sub-title {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 768px) {
+    .business-kv-section {
+        height: 540px;
+    }
+
+    .business-kv-main-title {
+        font-size: 30px;
+    }
+
+    .business-kv-sub-title {
+        font-size: 20px;
+    }
+}
