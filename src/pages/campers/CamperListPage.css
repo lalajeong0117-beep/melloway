@@ -89,6 +89,7 @@
     letter-spacing: 0;
     color: var(--main-font-color, #22252A);
     margin: 0;
+    will-change: transform, opacity;
 }
 
 .camper-lineup-grid {
@@ -111,6 +112,7 @@
     background-color: #FFFFFF;
     border: none;
     box-sizing: border-box;
+    will-change: transform, opacity;
 }
 
 .camper-lineup-card--urban-escape,
@@ -157,6 +159,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    will-change: transform, opacity;
 }
 
 .camper-lineup-card--adventure-van .camper-lineup-card-image-wrap {
@@ -178,9 +181,16 @@
     will-change: transform;
 }
 
-.camper-lineup-detail-btn {
-    align-self: flex-end;
+.camper-lineup-card-actions {
+    width: 100%;
     margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.camper-lineup-action-btn {
     padding: 0;
     border: none;
     background: transparent;
@@ -190,6 +200,7 @@
     line-height: 1.4;
     letter-spacing: 0;
     color: var(--main-font-color, #22252A);
+    text-decoration: none;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
@@ -197,14 +208,14 @@
     transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.2s ease;
 }
 
-.camper-lineup-detail-btn:hover,
-.camper-lineup-detail-btn:focus-visible {
+.camper-lineup-action-btn:hover,
+.camper-lineup-action-btn:focus-visible {
     opacity: 0.72;
     transform: translateY(-4px);
 }
 
-.camper-lineup-card:has(.camper-lineup-detail-btn:hover) .camper-lineup-card-image,
-.camper-lineup-card:has(.camper-lineup-detail-btn:focus-visible) .camper-lineup-card-image {
+.camper-lineup-card:has(.camper-lineup-action-btn:hover) .camper-lineup-card-image,
+.camper-lineup-card:has(.camper-lineup-action-btn:focus-visible) .camper-lineup-card-image {
     transform: translateY(-8px);
 }
 
@@ -725,7 +736,7 @@
         margin-top: 56px;
     }
 
-    .camper-lineup-detail-btn {
+    .camper-lineup-card-actions {
         margin-top: 24px;
     }
 }

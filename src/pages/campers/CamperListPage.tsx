@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
+import { Link } from 'react-router-dom';
+import { ROUTES } from '@/constants/routes';
+import { useCamperListAnimations } from './useCamperListAnimations';
 import './CamperListPage.css';
 
 interface LineupCardItem {
@@ -131,34 +132,13 @@ const PACKAGE_ITEMS: PackageCardItem[] = [
 /**
  * [담당 영역: Campers] 차량 라인업 소개 페이지
  * - 상단 공통 Header는 MainLayout에서 KV 상단에 오버레이 렌더링됩니다.
- * - 전용 스타일은 `./CamperListPage.css`에서 분리 관리합니다.
+ * - 전용 스타일은 `./CamperListPage.css`, GSAP 애니메이션은 `./useCamperListAnimations.ts`에서 분리 관리합니다.
  */
 export const CamperListPage: React.FC = () => {
   const pageRef = useRef<HTMLDivElement>(null);
   const [activePackageId, setActivePackageId] = useState<string>('couple');
 
-  useGSAP(
-    () => {
-      const prefersReducedMotion =
-        window.matchMedia &&
-        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (prefersReducedMotion) return;
-
-      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-
-      tl.fromTo(
-        '.camper-list-kv-title',
-        { y: 28, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.85, delay: 0.1 }
-      ).fromTo(
-        '.camper-list-kv-subtitle',
-        { y: 22, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8 },
-        '-=0.55'
-      );
-    },
-    { scope: pageRef }
-  );
+  useCamperListAnimations(pageRef);
 
   return (
     <div ref={pageRef} className="camper-list-page">
@@ -198,9 +178,20 @@ export const CamperListPage: React.FC = () => {
                 />
               </div>
 
-              <button type="button" className="camper-lineup-detail-btn">
-                자세히 보기 →
-              </button>
+              <div className="camper-lineup-card-actions">
+                <button
+                  type="button"
+                  className="camper-lineup-action-btn camper-lineup-reserve-btn"
+                >
+                  예약하기 →
+                </button>
+                <Link
+                  to={`${ROUTES.CAMPERS_MELLOWAY}?car=${item.id}`}
+                  className="camper-lineup-action-btn camper-lineup-detail-btn"
+                >
+                  자세히 보기 →
+                </Link>
+              </div>
             </article>
           ))}
         </div>
