@@ -1,7 +1,11 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import magnifierIcon from '../../../../assets/images/Magnifier.svg';
+import magnifierIcon from '../../../../assets/images/icon/Magnifier.svg';
+import leftArrowIcon from '../../../../assets/images/icon/Left AB.svg';
+import rightArrowIcon from '../../../../assets/images/icon/Right AB.svg';
 
 export const NOTICE_MAGNIFIER_ICON = magnifierIcon;
+export const NOTICE_LEFT_ICON = leftArrowIcon;
+export const NOTICE_RIGHT_ICON = rightArrowIcon;
 
 export interface NoticeItem {
   id: number;
@@ -101,6 +105,14 @@ export const useNoticeBoard = () => {
     setCurrentPage(1);
   }, []);
 
+  const goToPrevPage = useCallback(() => {
+    setCurrentPage((prev) => Math.max(1, prev - 1));
+  }, []);
+
+  const goToNextPage = useCallback(() => {
+    setCurrentPage((prev) => Math.min(totalPages, prev + 1));
+  }, [totalPages]);
+
   return {
     searchQuery,
     currentPage,
@@ -108,6 +120,8 @@ export const useNoticeBoard = () => {
     totalCount: filteredNotices.length,
     paginatedNotices,
     setCurrentPage,
+    goToPrevPage,
+    goToNextPage,
     handleSearchChange,
   };
 };
