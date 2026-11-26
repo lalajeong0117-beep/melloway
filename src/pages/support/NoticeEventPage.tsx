@@ -6,6 +6,7 @@ import {
   NOTICE_CATEGORIES,
   useNoticeBoard,
 } from './scripts/notice';
+import { SUPPORT_KV_IMAGE } from './scripts/supportNav';
 import './styles/support-common.css';
 import './styles/notice.css';
 
@@ -38,6 +39,8 @@ export const NoticeEventPage: React.FC = () => {
             <SupportPageHeader
               title="공지 사항"
               description="멜로웨이의 새로운 소식, 지점 오픈 정보 및 서비스 이용 안내를 확인하실 수 있습니다."
+              kvImage={SUPPORT_KV_IMAGE}
+              kvAlt="멜로웨이 공지 사항 고객 지원 비주얼"
             />
 
             <div className="support-content">

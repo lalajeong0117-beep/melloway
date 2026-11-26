@@ -438,14 +438,49 @@
     gap: 8px;
 }
 
+@media (max-width: 1024px) {
+    .support-notice-head,
+    .support-notice-row-btn {
+        grid-template-columns: 68px 94px 1fr 108px 72px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .support-notice-search {
+        width: 260px;
+    }
+}
+
 @media (max-width: 768px) {
     .support-notice-toolbar {
         flex-direction: column;
         align-items: stretch;
+        gap: 12px;
+    }
+
+    .support-notice-tabs {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 4px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .support-notice-tabs::-webkit-scrollbar {
+        display: none;
+    }
+
+    .support-notice-tab {
+        flex-shrink: 0;
+        white-space: nowrap;
     }
 
     .support-notice-search {
         width: 100%;
+    }
+
+    .support-notice-board {
+        border-radius: 18px;
     }
 
     .support-notice-head {
@@ -490,6 +525,15 @@
         display: none;
     }
 
+    .support-notice-modal-backdrop {
+        padding: 16px;
+    }
+
+    .support-notice-modal {
+        max-height: 88vh;
+        border-radius: 20px;
+    }
+
     .support-notice-modal-header,
     .support-notice-modal-body,
     .support-notice-modal-footer {
@@ -508,5 +552,54 @@
 
     .support-notice-modal-nav {
         justify-content: space-between;
+    }
+}
+
+@media (max-width: 480px) {
+    .support-notice-tab {
+        padding: 8px 14px;
+        font-size: 13px;
+    }
+
+    .support-notice-row-btn {
+        padding: 16px;
+    }
+
+    .support-notice-title-text {
+        font-size: 15px;
+    }
+
+    .support-notice-pagination {
+        gap: 6px;
+        margin-top: 24px;
+    }
+
+    .support-notice-page-btn {
+        min-width: 34px;
+        height: 34px;
+        padding: 0 10px;
+        border-radius: 10px;
+        font-size: 13px;
+    }
+
+    .support-notice-modal-header {
+        padding-top: 22px;
+        padding-bottom: 16px;
+    }
+
+    .support-notice-modal-body {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        font-size: 15px;
+    }
+
+    .support-notice-modal-nav {
+        gap: 8px;
+    }
+
+    .support-notice-modal-nav .melloway-btn {
+        flex: 1;
+        padding: 12px 16px;
+        font-size: 14px;
     }
 }
