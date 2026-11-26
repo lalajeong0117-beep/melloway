@@ -17,7 +17,7 @@ export const FranchiseInfoPage: React.FC = () => {
         </p>
         <div className="subpage-actions">
           <Button variant="primary" to={ROUTES.BUSINESS_INQUIRY}>
-            창업 문의하기rl
+            창업 문의하기
           </Button>
           <Button variant="outline" to={ROUTES.HOME}>
             메인으로 돌아가기
