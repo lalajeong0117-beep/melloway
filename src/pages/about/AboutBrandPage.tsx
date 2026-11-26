@@ -124,9 +124,8 @@ export const AboutBrandPage: React.FC = () => {
         >
           <div className="brand-values-top-row">
             <article
-              className={`brand-value-card brand-value-card--freedom${
-                hoveredCard === 'freedom' ? ' is-active' : ''
-              }`}
+              className={`brand-value-card brand-value-card--freedom${hoveredCard === 'freedom' ? ' is-active' : ''
+                }`}
               onMouseEnter={() => setHoveredCard('freedom')}
               onFocus={() => setHoveredCard('freedom')}
               onBlur={() => setHoveredCard(null)}
@@ -153,9 +152,8 @@ export const AboutBrandPage: React.FC = () => {
             </article>
 
             <article
-              className={`brand-value-card brand-value-card--together${
-                hoveredCard === 'together' ? ' is-active' : ''
-              }`}
+              className={`brand-value-card brand-value-card--together${hoveredCard === 'together' ? ' is-active' : ''
+                }`}
               onMouseEnter={() => setHoveredCard('together')}
               onFocus={() => setHoveredCard('together')}
               onBlur={() => setHoveredCard(null)}
@@ -183,9 +181,8 @@ export const AboutBrandPage: React.FC = () => {
           </div>
 
           <article
-            className={`brand-value-card brand-value-card--possibility${
-              hoveredCard === 'possibility' ? ' is-active' : ''
-            }`}
+            className={`brand-value-card brand-value-card--possibility${hoveredCard === 'possibility' ? ' is-active' : ''
+              }`}
             onMouseEnter={() => setHoveredCard('possibility')}
             onFocus={() => setHoveredCard('possibility')}
             onBlur={() => setHoveredCard(null)}
@@ -347,7 +344,7 @@ export const AboutBrandPage: React.FC = () => {
         <div className="brand-cta-inner">
           <div className="brand-cta-text-wrap">
             <h2 className="h1-title brand-cta-title">
-              MELLOWAY와 함께 하는 새로운 여정의 시작
+              MELLOWAY와 함께 하는 새로운 여정의 시작작
             </h2>
             <p className="brand-cta-subtitle">
               멜로웨이의 창업 과정과 운영 지원 시스템을 살펴보고,
