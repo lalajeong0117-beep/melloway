@@ -10,6 +10,8 @@ interface LineupCardItem {
   image: string;
   imageWidth: number;
   imageHeight: number;
+  weekdayPrice: string;
+  weekendPrice: string;
 }
 
 const LINEUP_ITEMS: LineupCardItem[] = [
@@ -20,6 +22,8 @@ const LINEUP_ITEMS: LineupCardItem[] = [
     image: '/assets/images/Urbanescape-side.png',
     imageWidth: 586,
     imageHeight: 293,
+    weekdayPrice: '120,000~',
+    weekendPrice: '160,000~',
   },
   {
     id: 'adventure-van',
@@ -28,6 +32,8 @@ const LINEUP_ITEMS: LineupCardItem[] = [
     image: '/assets/images/Adventure-van-side.png',
     imageWidth: 586,
     imageHeight: 274,
+    weekdayPrice: '220,000~',
+    weekendPrice: '290,000~',
   },
   {
     id: 'retro-home',
@@ -36,6 +42,8 @@ const LINEUP_ITEMS: LineupCardItem[] = [
     image: '/assets/images/Retro-home-side.png',
     imageWidth: 586,
     imageHeight: 268,
+    weekdayPrice: '340,000~',
+    weekendPrice: '440,000~',
   },
   {
     id: 'grand-cruiser',
@@ -44,6 +52,8 @@ const LINEUP_ITEMS: LineupCardItem[] = [
     image: '/assets/images/Grand-cruiser-side.png',
     imageWidth: 586,
     imageHeight: 273,
+    weekdayPrice: '460,000~',
+    weekendPrice: '590,000~',
   },
 ];
 
@@ -121,6 +131,46 @@ export const CamperListPage: React.FC = () => {
               </button>
             </article>
           ))}
+        </div>
+      </section>
+
+      <section className="camper-price-section" aria-label="차량별 이용 요금표">
+        <div className="camper-price-table">
+          <div className="camper-price-labels" aria-hidden="true">
+            <span className="camper-price-badge">평일</span>
+            <span className="camper-price-badge">주말</span>
+          </div>
+
+          <img
+            src="/assets/images/icon/price-list-line.svg"
+            alt=""
+            className="camper-price-divider"
+            width={1146}
+            height={1}
+            aria-hidden="true"
+          />
+
+          <div className="camper-price-columns">
+            {LINEUP_ITEMS.map((item) => (
+              <div key={`price-${item.id}`} className="camper-price-col">
+                <h3 className="camper-price-vehicle-name">{item.name}</h3>
+                <div className="camper-price-values">
+                  <div className="camper-price-row">
+                    <span className="camper-price-badge camper-price-badge--mobile">
+                      평일
+                    </span>
+                    <span className="camper-price-value">{item.weekdayPrice}</span>
+                  </div>
+                  <div className="camper-price-row">
+                    <span className="camper-price-badge camper-price-badge--mobile">
+                      주말
+                    </span>
+                    <span className="camper-price-value">{item.weekendPrice}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </div>
