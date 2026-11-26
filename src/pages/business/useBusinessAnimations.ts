@@ -114,6 +114,29 @@ export const useBusinessAnimations = (pageRef: RefObject<HTMLDivElement | null>)
           }
         );
       }
+
+      // 4) How MELLOWAY Begins 섹션: 타이틀 그룹 등장
+      const beginsSection = pageRef.current?.querySelector(
+        '.business-begins-section'
+      ) as HTMLElement | null;
+
+      if (beginsSection) {
+        gsap.fromTo(
+          '.business-begins-title-wrap',
+          { y: 35, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.85,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: beginsSection,
+              start: 'top 80%',
+              toggleActions: 'play none none reverse',
+            },
+          }
+        );
+      }
     },
     { scope: pageRef }
   );

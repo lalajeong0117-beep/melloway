@@ -203,7 +203,7 @@
     max-width: 1920px;
     min-height: 418px;
     margin: 120px auto 0;
-    padding: 0 24px 120px;
+    padding: 0 24px;
     background-color: var(--bg-color, #F7F8FC);
     box-sizing: border-box;
     display: flex;
@@ -285,6 +285,46 @@
     font-weight: 400;
     color: var(--sub-font-color, #3E434C);
     line-height: 1.2;
+    letter-spacing: 0;
+    margin: 0;
+}
+
+/* ==========================================================================
+   How MELLOWAY Begins 섹션 (1920 * 568, 양옆 여백 240px, 이전 섹션에서 120px 아래)
+   ========================================================================== */
+.business-begins-section {
+    width: 100%;
+    max-width: 1920px;
+    min-height: 568px;
+    margin: 120px auto 0;
+    padding: 0 240px 120px;
+    background-color: var(--bg-color, #F7F8FC);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.business-begins-title-wrap {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    gap: 40px;
+}
+
+.h1-title.business-begins-main-title {
+    margin: 0;
+    color: var(--main-font-color, #22252A);
+}
+
+.business-begins-sub-title {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--sub-font-color, #3E434C);
+    line-height: 1.4;
     letter-spacing: 0;
     margin: 0;
 }
