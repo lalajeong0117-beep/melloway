@@ -70,19 +70,21 @@
 }
 
 /* ==========================================================================
-   WHY CHOOSE US ? 섹션 (메인 KV에서 120px 아래, 배경색 --bg-color)
+   WHY CHOOSE US ? 섹션 (1920 * 663, 양옆 여백 240px, 메인 KV에서 120px 아래)
    ========================================================================== */
 .business-why-section {
     width: 100%;
     max-width: 1920px;
-    margin: 0 auto;
-    padding: 120px 0;
+    height: 663px;
+    margin: 120px auto 0;
+    padding: 0 240px;
     background-color: var(--bg-color, #F7F8FC);
     box-sizing: border-box;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
 .h1-title.business-why-title {
@@ -91,17 +93,10 @@
     color: var(--main-font-color, #22252A);
 }
 
-/* 5종 카드 무한 자동 슬라이드 뷰포트 & 트랙 */
+/* 5종 카드 스크롤 슬라이드 뷰포트 & 트랙 */
 .business-why-marquee-viewport {
     width: 100%;
     overflow: hidden;
-    cursor: grab;
-    user-select: none;
-    touch-action: pan-y;
-}
-
-.business-why-marquee-viewport.is-dragging {
-    cursor: grabbing;
 }
 
 .business-why-marquee-track {
@@ -114,8 +109,7 @@
 .business-why-marquee-group {
     display: flex;
     align-items: stretch;
-    gap: 24px;
-    padding-right: 24px;
+    gap: 40px;
     box-sizing: border-box;
 }
 
@@ -201,6 +195,100 @@
     flex-shrink: 0;
 }
 
+/* ==========================================================================
+   숫자로 보는 MELLOWAY 섹션 (1920 * 418, 이전 섹션에서 120px 아래)
+   ========================================================================== */
+.business-numbers-section {
+    width: 100%;
+    max-width: 1920px;
+    min-height: 418px;
+    margin: 120px auto 0;
+    padding: 0 24px 120px;
+    background-color: var(--bg-color, #F7F8FC);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.h1-title.business-numbers-title {
+    margin: 0 0 80px 0;
+    text-align: center;
+    color: var(--main-font-color, #22252A);
+}
+
+/* 6개 콘텐츠 묶음 (gap 24px) */
+.business-numbers-grid {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 24px;
+    width: 100%;
+    max-width: 1440px;
+}
+
+/* 개별 지표 아이템 (원형 + 텍스트 gap 20px, 가운데 정렬) */
+.business-number-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+    width: 220px;
+    box-sizing: border-box;
+}
+
+/* 150 * 150 원형 아이콘 박스 (padding: 10px 35px, 내부 이미지 정중앙 정렬) */
+.business-number-circle {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+    border-radius: 50%;
+    padding: 10px 35px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.business-number-img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+}
+
+/* 메인/서브 텍스트 오토레이아웃 (gap 20px, 가운데 정렬) */
+.business-number-texts {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+}
+
+/* 메인 숫자/텍스트: H2 (36px, 700, --main-font-color) */
+.h2-title.business-number-value {
+    margin: 0;
+    line-height: 1.2;
+    color: var(--main-font-color, #22252A);
+}
+
+/* 서브 텍스트: 14px, 400, --sub-font-color (#3E434C) */
+.business-number-label {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--sub-font-color, #3E434C);
+    line-height: 1.2;
+    letter-spacing: 0;
+    margin: 0;
+}
+
 /* 반응형 대응 */
 @media (max-width: 1024px) {
     .business-kv-section {
@@ -216,7 +304,9 @@
     }
 
     .business-why-section {
-        padding: 90px 0;
+        height: auto;
+        margin-top: 90px;
+        padding: 40px 60px;
     }
 
     .h1-title.business-why-title {
@@ -239,7 +329,9 @@
     }
 
     .business-why-section {
-        padding: 72px 0;
+        height: auto;
+        margin-top: 72px;
+        padding: 32px 24px;
     }
 
     .h1-title.business-why-title {

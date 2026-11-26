@@ -46,3 +46,59 @@ export const WHY_CHOOSE_CARDS: WhyChooseCardItem[] = [
     icon: '/assets/images/icon/partner-card-icon-5.svg',
   },
 ];
+
+export interface NumberMetricItem {
+  id: number;
+  value: string;
+  label: string;
+  image: string;
+  circleBgColor: string;
+}
+
+/**
+ * Business(파트너스 안내) - 숫자로 보는 MELLOWAY 6종 지표 데이터
+ */
+export const MELLOWAY_NUMBERS: NumberMetricItem[] = [
+  {
+    id: 1,
+    value: '4종',
+    label: '캠퍼 라인업',
+    image: '/assets/images/partner-3d-camper-icon.png',
+    circleBgColor: '#E6F4FB',
+  },
+  {
+    id: 2,
+    value: '11곳',
+    label: '전국 운영 지점',
+    image: '/assets/images/partner-3d-store-icon.png',
+    circleBgColor: '#F2F4F5',
+  },
+  {
+    id: 3,
+    value: '120+',
+    label: '운영 캠퍼 수',
+    image: '/assets/images/partner-3d-icon-campingcar.png',
+    circleBgColor: '#E6F4FB',
+  },
+  {
+    id: 4,
+    value: '50+',
+    label: '연계 여행 · 액티비티',
+    image: '/assets/images/partner-3d-icon-activity.png',
+    circleBgColor: '#F2F4F5',
+  },
+  {
+    id: 5,
+    value: '98%',
+    label: '고객 만족도',
+    image: '/assets/images/partner03d-icon-customer.png',
+    circleBgColor: '#E6F4FB',
+  },
+  {
+    id: 6,
+    value: '150K+',
+    label: '누적 예약 건수',
+    image: '/assets/images/partner-3d-icon-booking.png',
+    circleBgColor: '#F2F4F5',
+  },
+];

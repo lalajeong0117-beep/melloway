@@ -1,11 +1,14 @@
 import { RefObject } from 'react';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
+
+gsap.registerPlugin(ScrollTrigger);
 
 /**
  * Business(파트너스 안내) 페이지 전용 GSAP 인터랙션 모듈
  * - 메인 KV 인트로 애니메이션
- * - WHY CHOOSE US 5종 카드: 오른쪽->왼쪽 천천히 무한 회전 + 마우스 호버 정지 + 클릭 드래그(관성 가속) 지원
+ * - WHY CHOOSE US 섹션: 전체 ScrollTrigger 고정(pin) 후 스크롤에 따라 5개 카드가 하나씩 넘겨지며, 5번째 카드 노출 완료 시 핀 해제
  */
 export const useBusinessAnimations = (pageRef: RefObject<HTMLDivElement | null>) => {
   useGSAP(
@@ -36,116 +39,81 @@ export const useBusinessAnimations = (pageRef: RefObject<HTMLDivElement | null>)
           '-=0.65'
         );
 
-      // 2) WHY CHOOSE US 무한 루프 + 호버 정지 + 클릭 드래그 관성 스크롤
+      // 2) WHY CHOOSE US 섹션: ScrollTrigger Pin + 카드 1개씩 순차 슬라이드
+      const whySection = pageRef.current?.querySelector(
+        '.business-why-section'
+      ) as HTMLElement | null;
       const viewport = pageRef.current?.querySelector(
         '.business-why-marquee-viewport'
       ) as HTMLElement | null;
       const track = pageRef.current?.querySelector(
         '.business-why-marquee-track'
       ) as HTMLElement | null;
-      const firstGroup = pageRef.current?.querySelector(
-        '.business-why-marquee-group'
+      const cards = pageRef.current?.querySelectorAll('.business-why-card');
+
+      if (!whySection || !viewport || !track || !cards || cards.length === 0) return;
+
+      const firstCard = cards[0] as HTMLElement;
+      const lastCard = cards[cards.length - 1] as HTMLElement;
+
+      const getStartX = () =>
+        viewport.offsetWidth / 2 - (firstCard.offsetLeft + firstCard.offsetWidth / 2);
+
+      const getEndX = () =>
+        viewport.offsetWidth / 2 - (lastCard.offsetLeft + lastCard.offsetWidth / 2);
+
+      const scrollTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: whySection,
+          start: 'top 110px',
+          end: () => `+=${Math.max(1800, (cards.length - 1) * 480)}`,
+          pin: true,
+          pinSpacing: true,
+          scrub: 0.5,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+          snap: {
+            snapTo: 1 / (cards.length - 1),
+            duration: { min: 0.2, max: 0.45 },
+            delay: 0.05,
+            ease: 'power2.out',
+          },
+        },
+      });
+
+      scrollTl.fromTo(
+        track,
+        { x: () => getStartX() },
+        {
+          x: () => getEndX(),
+          ease: 'none',
+          duration: 1,
+        }
+      );
+
+      // 3) 숫자로 보는 MELLOWAY 섹션: 6개 지표 아이템 순차 등장
+      const numbersSection = pageRef.current?.querySelector(
+        '.business-numbers-section'
       ) as HTMLElement | null;
 
-      if (!viewport || !track || !firstGroup) return;
-
-      let groupWidth = firstGroup.offsetWidth || 1830;
-      let currentX = 0;
-      let isHovered = false;
-      let isDragging = false;
-      let lastPointerX = 0;
-      let dragVelocity = 0; // px per frame during drag
-      let inertiaVelocity = 0;
-
-      const BASE_SPEED = -45; // px/sec (오른쪽 -> 왼쪽 천천히 자동 이동)
-      let currentAutoSpeed = BASE_SPEED;
-
-      const wrapX = (val: number) => gsap.utils.wrap(-groupWidth, 0, val);
-
-      const updateDimensions = () => {
-        groupWidth = firstGroup.offsetWidth || 1830;
-        currentX = wrapX(currentX);
-        gsap.set(track, { x: currentX });
-      };
-
-      const onTick = (_time: number, deltaTime: number) => {
-        const dt = Math.min(deltaTime, 50) / 1000;
-
-        if (!isDragging) {
-          // 관성 감속 적용
-          if (Math.abs(inertiaVelocity) > 0.2) {
-            currentX = wrapX(currentX + inertiaVelocity);
-            inertiaVelocity *= 0.93;
-          } else {
-            inertiaVelocity = 0;
-            // 호버 중이면 부드럽게 정지, 아니면 천천히 자동 흐름 복귀
-            const targetSpeed = isHovered ? 0 : BASE_SPEED;
-            currentAutoSpeed += (targetSpeed - currentAutoSpeed) * 0.08;
-            currentX = wrapX(currentX + currentAutoSpeed * dt);
+      if (numbersSection) {
+        gsap.fromTo(
+          '.business-number-item',
+          { y: 35, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.75,
+            stagger: 0.1,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: numbersSection,
+              start: 'top 78%',
+              toggleActions: 'play none none reverse',
+            },
           }
-
-          gsap.set(track, { x: currentX });
-        }
-      };
-
-      gsap.ticker.add(onTick);
-
-      const onMouseEnter = () => {
-        isHovered = true;
-      };
-
-      const onMouseLeave = () => {
-        isHovered = false;
-      };
-
-      const onPointerDown = (e: PointerEvent) => {
-        isDragging = true;
-        isHovered = true;
-        lastPointerX = e.clientX;
-        dragVelocity = 0;
-        inertiaVelocity = 0;
-        viewport.classList.add('is-dragging');
-        viewport.setPointerCapture?.(e.pointerId);
-      };
-
-      const onPointerMove = (e: PointerEvent) => {
-        if (!isDragging) return;
-        const dx = e.clientX - lastPointerX;
-        lastPointerX = e.clientX;
-        dragVelocity = dx;
-        currentX = wrapX(currentX + dx);
-        gsap.set(track, { x: currentX });
-      };
-
-      const onPointerUp = (e: PointerEvent) => {
-        if (!isDragging) return;
-        isDragging = false;
-        viewport.classList.remove('is-dragging');
-        if (viewport.hasPointerCapture?.(e.pointerId)) {
-          viewport.releasePointerCapture(e.pointerId);
-        }
-        // 드래그 방향으로 빠른 관성 이동
-        inertiaVelocity = dragVelocity * 1.15;
-      };
-
-      viewport.addEventListener('mouseenter', onMouseEnter);
-      viewport.addEventListener('mouseleave', onMouseLeave);
-      viewport.addEventListener('pointerdown', onPointerDown);
-      window.addEventListener('pointermove', onPointerMove);
-      window.addEventListener('pointerup', onPointerUp);
-      window.addEventListener('pointercancel', onPointerUp);
-      window.addEventListener('resize', updateDimensions);
-
-      return () => {
-        gsap.ticker.remove(onTick);
-        viewport.removeEventListener('mouseenter', onMouseEnter);
-        viewport.removeEventListener('mouseleave', onMouseLeave);
-        viewport.removeEventListener('pointerdown', onPointerDown);
-        window.removeEventListener('pointermove', onPointerMove);
-        window.removeEventListener('pointerup', onPointerUp);
-        window.removeEventListener('pointercancel', onPointerUp);
-        window.removeEventListener('resize', updateDimensions);
-      };
+        );
+      }
     },
     { scope: pageRef }
   );
