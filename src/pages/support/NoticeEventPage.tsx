@@ -1,6 +1,6 @@
 import React from 'react';
 import { SupportPageHeader } from './components/SupportPageHeader';
-import { NOTICE_MAGNIFIER_ICON, useNoticeSearch } from './scripts/notice';
+import { NOTICE_MAGNIFIER_ICON, useNoticeBoard } from './scripts/notice';
 import { SUPPORT_KV_IMAGE } from './scripts/supportNav';
 import './styles/support-common.css';
 import './styles/notice.css';
@@ -11,7 +11,8 @@ import './styles/notice.css';
  *   로직(./scripts/notice.ts)을 분리하여 관리합니다.
  */
 export const NoticeEventPage: React.FC = () => {
-  const { searchQuery, handleSearchChange } = useNoticeSearch();
+  const { searchQuery, totalCount, paginatedNotices, handleSearchChange } =
+    useNoticeBoard();
 
   return (
     <section className="support-page" aria-label="공지 사항">
@@ -45,6 +46,26 @@ export const NoticeEventPage: React.FC = () => {
               height={20}
             />
           </div>
+        </div>
+
+        <div className="support-notice-body">
+          <p className="support-notice-count">
+            총 <span className="support-notice-count-num">{totalCount}</span>건
+          </p>
+
+          {paginatedNotices.length > 0 ? (
+            <ul className="support-notice-list">
+              {paginatedNotices.map((item) => (
+                <li key={item.id} className="support-notice-item">
+                  <span className="support-notice-num">{item.id}</span>
+                  <p className="support-notice-title">{item.title}</p>
+                  <span className="support-notice-date">{item.date}</span>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="support-notice-empty">검색 결과가 없습니다.</p>
+          )}
         </div>
       </div>
     </section>
