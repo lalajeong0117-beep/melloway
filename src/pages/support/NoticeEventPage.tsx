@@ -1,8 +1,15 @@
 import React from 'react';
+import { SupportBanner } from './components/SupportBanner';
 import { SupportPageHeader } from './components/SupportPageHeader';
-import { NOTICE_MAGNIFIER_ICON, useNoticeBoard } from './scripts/notice';
+import {
+  NOTICE_LEFT_ICON,
+  NOTICE_MAGNIFIER_ICON,
+  NOTICE_RIGHT_ICON,
+  useNoticeBoard,
+} from './scripts/notice';
 import { SUPPORT_KV_IMAGE } from './scripts/supportNav';
 import './styles/support-common.css';
+import './styles/support-banner.css';
 import './styles/notice.css';
 
 /**
@@ -11,11 +18,23 @@ import './styles/notice.css';
  *   로직(./scripts/notice.ts)을 분리하여 관리합니다.
  */
 export const NoticeEventPage: React.FC = () => {
-  const { searchQuery, totalCount, paginatedNotices, handleSearchChange } =
-    useNoticeBoard();
+  const {
+    searchQuery,
+    currentPage,
+    totalPages,
+    totalCount,
+    paginatedNotices,
+    setCurrentPage,
+    goToPrevPage,
+    goToNextPage,
+    handleSearchChange,
+  } = useNoticeBoard();
 
   return (
-    <section className="support-page" aria-label="공지 사항">
+    <section
+      className="support-page support-page--with-banner"
+      aria-label="공지 사항"
+    >
       <SupportPageHeader
         title="Notice"
         subtitle="더 안전한 캠핑 여정을 위한 멜로웨이의 공식 안내를 확인하세요."
@@ -54,20 +73,66 @@ export const NoticeEventPage: React.FC = () => {
           </p>
 
           {paginatedNotices.length > 0 ? (
-            <ul className="support-notice-list">
-              {paginatedNotices.map((item) => (
-                <li key={item.id} className="support-notice-item">
-                  <span className="support-notice-num">{item.id}</span>
-                  <p className="support-notice-title">{item.title}</p>
-                  <span className="support-notice-date">{item.date}</span>
-                </li>
-              ))}
-            </ul>
+            <>
+              <ul className="support-notice-list">
+                {paginatedNotices.map((item) => (
+                  <li key={item.id} className="support-notice-item">
+                    <span className="support-notice-num">{item.id}</span>
+                    <p className="support-notice-title">{item.title}</p>
+                    <span className="support-notice-date">{item.date}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <nav
+                className="support-notice-pagination"
+                aria-label="공지 사항 페이지 이동"
+              >
+                <button
+                  type="button"
+                  className="support-notice-page-arrow"
+                  aria-label="이전 페이지"
+                  disabled={currentPage === 1}
+                  onClick={goToPrevPage}
+                >
+                  <img src={NOTICE_LEFT_ICON} alt="이전" width={8} height={9} />
+                </button>
+
+                {Array.from({ length: totalPages }, (_, idx) => idx + 1).map(
+                  (pageNum) => (
+                    <button
+                      key={pageNum}
+                      type="button"
+                      aria-label={`${pageNum}페이지`}
+                      aria-current={currentPage === pageNum ? 'page' : undefined}
+                      className={`support-notice-page-btn${
+                        currentPage === pageNum ? ' is-active' : ''
+                      }`}
+                      onClick={() => setCurrentPage(pageNum)}
+                    >
+                      {pageNum}
+                    </button>
+                  )
+                )}
+
+                <button
+                  type="button"
+                  className="support-notice-page-arrow"
+                  aria-label="다음 페이지"
+                  disabled={currentPage === totalPages}
+                  onClick={goToNextPage}
+                >
+                  <img src={NOTICE_RIGHT_ICON} alt="다음" width={8} height={9} />
+                </button>
+              </nav>
+            </>
           ) : (
             <p className="support-notice-empty">검색 결과가 없습니다.</p>
           )}
         </div>
       </div>
+
+      <SupportBanner />
     </section>
   );
 };

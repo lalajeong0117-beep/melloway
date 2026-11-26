@@ -11,6 +11,10 @@
     box-sizing: border-box;
 }
 
+.support-page.support-page--with-banner {
+    padding-bottom: 0;
+}
+
 .support-kv {
     position: relative;
     width: 100%;
