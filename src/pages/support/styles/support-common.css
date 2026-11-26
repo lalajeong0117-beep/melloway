@@ -1,0 +1,133 @@
+/* ==========================================
+   Support 영역 공통 레이아웃 및 서브 네비게이션 스타일
+   - 전역 스타일과 충돌하지 않도록 .support-* 접두사를 사용합니다.
+   ========================================== */
+.support-page {
+    width: 100%;
+    min-height: calc(100vh - 435px);
+    background-color: var(--bg-color, #F7F8FC);
+    color: var(--main-font-color, #22252A);
+    padding-bottom: 120px;
+    box-sizing: border-box;
+}
+
+.support-hero {
+    width: 100%;
+    padding: 168px 24px 48px;
+    background: linear-gradient(180deg, #EAF3FD 0%, var(--bg-color, #F7F8FC) 100%);
+    box-sizing: border-box;
+}
+
+.support-hero-inner {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.support-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background-color: #C2E4FC;
+    color: var(--main-font-color, #22252A);
+    font-family: 'Pretendard', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.support-hero-title {
+    margin: 0;
+    word-break: keep-all;
+}
+
+.support-hero-desc {
+    margin: 0;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: #3E434C;
+    word-break: keep-all;
+}
+
+.support-subnav {
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.support-subnav-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    border-radius: 999px;
+    background-color: #FFFFFF;
+    border: 1px solid #DCE2EC;
+    color: #3E434C;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.support-subnav-link:hover {
+    border-color: #1C84E8;
+    color: #1C84E8;
+    transform: translateY(-1px);
+}
+
+.support-subnav-link.is-active {
+    background-color: var(--main-font-color, #22252A);
+    border-color: var(--main-font-color, #22252A);
+    color: #F7F8FC;
+}
+
+.support-content {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 24px 0;
+    box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+    .support-page {
+        padding-bottom: 80px;
+    }
+
+    .support-hero {
+        padding: 136px 20px 32px;
+    }
+
+    .support-hero-title {
+        font-size: 34px;
+    }
+
+    .support-hero-desc {
+        font-size: 16px;
+    }
+
+    .support-subnav {
+        gap: 8px;
+    }
+
+    .support-subnav-link {
+        padding: 10px 18px;
+        font-size: 14px;
+    }
+
+    .support-content {
+        padding: 12px 20px 0;
+    }
+}
