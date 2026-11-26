@@ -1,53 +1,17 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useGSAP } from '@gsap/react';
 import { FOOTER_MENU } from '@/data/navigation';
 import { Logo } from '@/components/common';
-
-gsap.registerPlugin(ScrollTrigger);
 
 /**
  * MELLOWAY 전역 푸터 컴포넌트 (1920*435)
  */
 export const Footer: React.FC = () => {
-  const footerRef = useRef<HTMLElement>(null);
-
-  useGSAP(
-    () => {
-      const prefersReducedMotion =
-        window.matchMedia &&
-        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (prefersReducedMotion) return;
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: footerRef.current,
-          start: 'top 90%',
-          toggleActions: 'play none none reverse',
-        },
-      });
-
-      tl.fromTo(
-        '.footer-left',
-        { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.75, ease: 'power2.out' }
-      ).fromTo(
-        '.footer-menu-col',
-        { y: 25, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.65, stagger: 0.08, ease: 'power2.out' },
-        '-=0.5'
-      );
-    },
-    { scope: footerRef }
-  );
-
   return (
-    <footer ref={footerRef} className="footer">
+    <footer className="footer">
       <div className="footer-container">
         {/* 푸터 좌측 정보 영역 */}
-        <div className="footer-left" data-aos="fade-up" data-aos-duration="800">
+        <div className="footer-left">
           <Logo variant="footer" />
 
           {/* information 오토레이아웃 */}
@@ -101,14 +65,8 @@ export const Footer: React.FC = () => {
 
         {/* 푸터 우측 4열 메뉴 영역 */}
         <nav className="footer-nav" aria-label="푸터 내비게이션">
-          {FOOTER_MENU.map((group, idx) => (
-            <div
-              key={group.id}
-              className="footer-menu-col"
-              data-aos="fade-up"
-              data-aos-delay={idx * 100}
-              data-aos-duration="800"
-            >
+          {FOOTER_MENU.map((group) => (
+            <div key={group.id} className="footer-menu-col">
               <h4 className="footer-menu-title">{group.label}</h4>
               <ul className="footer-sub-menu">
                 {group.subItems.map((sub) => (
