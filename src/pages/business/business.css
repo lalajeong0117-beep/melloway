@@ -69,18 +69,159 @@
     margin: 0;
 }
 
+/* ==========================================================================
+   WHY CHOOSE US ? 섹션 (메인 KV에서 120px 아래, 배경색 --bg-color)
+   ========================================================================== */
+.business-why-section {
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+    padding: 120px 0;
+    background-color: var(--bg-color, #F7F8FC);
+    box-sizing: border-box;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.h1-title.business-why-title {
+    margin: 0 0 80px 0;
+    text-align: center;
+    color: var(--main-font-color, #22252A);
+}
+
+/* 5종 카드 무한 자동 슬라이드 뷰포트 & 트랙 */
+.business-why-marquee-viewport {
+    width: 100%;
+    overflow: hidden;
+    cursor: grab;
+    user-select: none;
+    touch-action: pan-y;
+}
+
+.business-why-marquee-viewport.is-dragging {
+    cursor: grabbing;
+}
+
+.business-why-marquee-track {
+    display: flex;
+    align-items: stretch;
+    width: max-content;
+    will-change: transform;
+}
+
+.business-why-marquee-group {
+    display: flex;
+    align-items: stretch;
+    gap: 24px;
+    padding-right: 24px;
+    box-sizing: border-box;
+}
+
+/* 개별 카드: 342 * 444, radius 20px, 배경 #22252A */
+.business-why-card {
+    width: 342px;
+    height: 444px;
+    border-radius: 20px;
+    background-color: var(--main-font-color, #22252A);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+
+/* 카드 상단 이미지 박스: 342 * 222, 위쪽 양옆만 radius 20px */
+.business-why-card-img-wrap {
+    width: 342px;
+    height: 222px;
+    border-radius: 20px 20px 0 0;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.business-why-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* 카드 하단 본문 (이미지 아래 40px, 카드 하단 40px, 텍스트-아이콘 gap 20px, 가운데 정렬) */
+.business-why-card-body {
+    flex: 1;
+    padding: 40px 24px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+/* 메인/서브 텍스트 오토레이아웃 (gap 40px, 가운데 정렬) */
+.business-why-card-texts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    text-align: center;
+}
+
+/* 카드 메인 타이틀: 24px, 600, bg-color */
+.business-why-card-title {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--bg-color, #F7F8FC);
+    line-height: 1.2;
+    letter-spacing: 0;
+    margin: 0;
+}
+
+/* 카드 서브 텍스트: 14px, 300, bg-color */
+.business-why-card-desc {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--bg-color, #F7F8FC);
+    line-height: 1.35;
+    letter-spacing: 0;
+    margin: 0;
+}
+
+/* 카드 하단 아이콘: 50 * 25 */
+.business-why-card-icon {
+    width: 50px;
+    height: 25px;
+    display: block;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
 /* 반응형 대응 */
 @media (max-width: 1024px) {
     .business-kv-section {
         height: 680px;
     }
 
-    .business-kv-main-title {
+    .h1-title.business-kv-main-title {
         font-size: 38px;
     }
 
-    .business-kv-sub-title {
+    .h2-title.business-kv-sub-title {
         font-size: 28px;
+    }
+
+    .business-why-section {
+        padding: 90px 0;
+    }
+
+    .h1-title.business-why-title {
+        font-size: 38px;
+        margin-bottom: 60px;
     }
 }
 
@@ -89,11 +230,20 @@
         height: 540px;
     }
 
-    .business-kv-main-title {
+    .h1-title.business-kv-main-title {
         font-size: 30px;
     }
 
-    .business-kv-sub-title {
+    .h2-title.business-kv-sub-title {
         font-size: 20px;
+    }
+
+    .business-why-section {
+        padding: 72px 0;
+    }
+
+    .h1-title.business-why-title {
+        font-size: 30px;
+        margin-bottom: 48px;
     }
 }
