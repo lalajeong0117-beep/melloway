@@ -77,7 +77,7 @@
 }
 
 .btn {
-    gap: 20px;
+    gap: 30px;
 }
 
 .btn button,
@@ -94,6 +94,8 @@
     font-weight: 600;
     color: #f7f8fc;
     text-decoration: none;
+    white-space: nowrap;
+    flex-shrink: 0;
     cursor: pointer;
 }
 
@@ -1075,11 +1077,13 @@ html.scroll-up .road-badge.badge-right {
     .earth-section {
         height: 580px;
     }
+
     .earth-image-wrap {
         width: 1244px;
         height: 483px;
         bottom: -2px;
     }
+
     .earth-text-svg {
         width: 1593px;
         height: 580px;
@@ -1090,11 +1094,13 @@ html.scroll-up .road-badge.badge-right {
     .earth-section {
         height: 450px;
     }
+
     .earth-image-wrap {
         width: 966px;
         height: 375px;
         bottom: -2px;
     }
+
     .earth-text-svg {
         width: 1234px;
         height: 450px;
@@ -1105,11 +1111,13 @@ html.scroll-up .road-badge.badge-right {
     .earth-section {
         height: 340px;
     }
+
     .earth-image-wrap {
         width: 729px;
         height: 283px;
         bottom: -2px;
     }
+
     .earth-text-svg {
         width: 933px;
         height: 340px;
@@ -2354,6 +2362,3 @@ html.scroll-up .road-badge.badge-right {
 .brand-cta-btn:hover .brand-cta-btn-arrow {
     transform: translateX(6px);
 }
-
-
-

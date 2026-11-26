@@ -4,7 +4,7 @@ import { Button, Logo, Menu } from '@/components/common';
 
 /**
  * MELLOWAY 전역 상단 헤더 컴포넌트
- * - Logo, Menu(GNB + 드롭다운), 창업 문의 Button 조합
+ * - Logo, Menu(GNB + 드롭다운), 실시간 예약 / 창업 문의 Button 조합
  */
 export const Header: React.FC = () => {
   return (
@@ -13,6 +13,9 @@ export const Header: React.FC = () => {
         <Logo variant="header" />
         <Menu />
         <div className="btn d-flex">
+          <Button variant="nav-cta">
+            실시간 예약
+          </Button>
           <Button variant="nav-cta" to={ROUTES.BUSINESS_INQUIRY}>
             창업 문의
           </Button>
