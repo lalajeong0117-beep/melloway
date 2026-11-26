@@ -1,61 +1,49 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { SUPPORT_TABS } from '../scripts/supportNav';
+import React, { useRef } from 'react';
+import { useSupportKvAnimation } from '../scripts/supportKv';
 
 export interface SupportPageHeaderProps {
   title: string;
-  description: string;
-  eyebrow?: string;
+  subtitle: string;
   kvImage?: string;
   kvAlt?: string;
+  ariaLabel?: string;
 }
 
 /**
- * [Support 공통] 상단 KV 배너 및 하위 메뉴 탭 네비게이션
+ * [Support 공통] 상단 KV 섹션
+ * - KV 이미지 + #22252A 40% 오버레이 + 정중앙 2줄 텍스트 순차 등장
  */
 export const SupportPageHeader: React.FC<SupportPageHeaderProps> = ({
   title,
-  description,
-  eyebrow = 'Support Center',
+  subtitle,
   kvImage,
-  kvAlt = '멜로웨이 고객 지원 키비주얼',
+  kvAlt = '멜로웨이 고객 지원 비주얼',
+  ariaLabel = '페이지 메인 비주얼',
 }) => {
-  const hasKv = Boolean(kvImage);
+  const kvRef = useRef<HTMLElement>(null);
+
+  useSupportKvAnimation(kvRef, `${title}-${subtitle}`);
 
   return (
-    <header className={`support-hero${hasKv ? ' support-hero--with-kv' : ''}`}>
-      {hasKv && (
+    <section ref={kvRef} className="support-kv" aria-label={ariaLabel}>
+      {kvImage && (
         <>
           <img
             src={kvImage}
             alt={kvAlt}
-            className="support-hero-bg"
+            className="support-kv-img"
             width={1920}
             height={850}
           />
-          <div className="support-hero-overlay" aria-hidden="true" />
+          <div className="support-kv-overlay" aria-hidden="true" />
         </>
       )}
-
-      <div className="support-hero-inner">
-        <span className="support-eyebrow">{eyebrow}</span>
-        <h1 className="h1-title support-hero-title">{title}</h1>
-        <p className="support-hero-desc">{description}</p>
-
-        <nav className="support-subnav" aria-label="고객 지원 하위 메뉴">
-          {SUPPORT_TABS.map((tab) => (
-            <NavLink
-              key={tab.path}
-              to={tab.path}
-              className={({ isActive }) =>
-                `support-subnav-link${isActive ? ' is-active' : ''}`
-              }
-            >
-              {tab.label}
-            </NavLink>
-          ))}
-        </nav>
+      <div className="support-kv-content-wrap">
+        <div className="support-kv-content">
+          <h1 className="support-kv-title">{title}</h1>
+          <p className="support-kv-subtitle">{subtitle}</p>
+        </div>
       </div>
-    </header>
+    </section>
   );
 };
