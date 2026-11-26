@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import './business.css';
-import { WHY_CHOOSE_CARDS } from './businessData';
+import { MELLOWAY_NUMBERS, WHY_CHOOSE_CARDS } from './businessData';
 import { useBusinessAnimations } from './useBusinessAnimations';
 
 /**
@@ -12,41 +12,6 @@ export const FranchiseInfoPage: React.FC = () => {
   const pageRef = useRef<HTMLDivElement>(null);
 
   useBusinessAnimations(pageRef);
-
-  const renderCardGroup = (groupKey: string) => (
-    <div className="business-why-marquee-group" key={groupKey}>
-      {WHY_CHOOSE_CARDS.map((card) => (
-        <article key={`${groupKey}-${card.id}`} className="business-why-card">
-          <div className="business-why-card-img-wrap">
-            <img
-              src={card.image}
-              alt={card.title}
-              className="business-why-card-img"
-              width={342}
-              height={222}
-              draggable={false}
-            />
-          </div>
-
-          <div className="business-why-card-body">
-            <div className="business-why-card-texts">
-              <h3 className="business-why-card-title">{card.title}</h3>
-              <p className="business-why-card-desc">{card.description}</p>
-            </div>
-
-            <img
-              src={card.icon}
-              alt=""
-              aria-hidden="true"
-              className="business-why-card-icon"
-              width={50}
-              height={25}
-            />
-          </div>
-        </article>
-      ))}
-    </div>
-  );
 
   return (
     <div ref={pageRef} className="business-page">
@@ -71,15 +36,72 @@ export const FranchiseInfoPage: React.FC = () => {
         </div>
       </section>
 
-      {/* WHY CHOOSE US ? 섹션 */}
+      {/* WHY CHOOSE US ? 섹션 (ScrollTrigger 고정 + 스크롤 시 카드 1개씩 전환) */}
       <section className="business-why-section">
         <h2 className="h1-title business-why-title">WHY CHOOSE US ?</h2>
 
         <div className="business-why-marquee-viewport">
           <div className="business-why-marquee-track">
-            {renderCardGroup('set-a')}
-            {renderCardGroup('set-b')}
+            <div className="business-why-marquee-group">
+              {WHY_CHOOSE_CARDS.map((card) => (
+                <article key={card.id} className="business-why-card">
+                  <div className="business-why-card-img-wrap">
+                    <img
+                      src={card.image}
+                      alt={card.title}
+                      className="business-why-card-img"
+                      width={342}
+                      height={222}
+                      draggable={false}
+                    />
+                  </div>
+
+                  <div className="business-why-card-body">
+                    <div className="business-why-card-texts">
+                      <h3 className="business-why-card-title">{card.title}</h3>
+                      <p className="business-why-card-desc">{card.description}</p>
+                    </div>
+
+                    <img
+                      src={card.icon}
+                      alt=""
+                      aria-hidden="true"
+                      className="business-why-card-icon"
+                      width={50}
+                      height={25}
+                    />
+                  </div>
+                </article>
+              ))}
+            </div>
           </div>
+        </div>
+      </section>
+
+      {/* 숫자로 보는 MELLOWAY 섹션 */}
+      <section className="business-numbers-section">
+        <h2 className="h1-title business-numbers-title">숫자로 보는 MELLOWAY</h2>
+
+        <div className="business-numbers-grid">
+          {MELLOWAY_NUMBERS.map((item) => (
+            <div key={item.id} className="business-number-item">
+              <div
+                className="business-number-circle"
+                style={{ backgroundColor: item.circleBgColor }}
+              >
+                <img
+                  src={item.image}
+                  alt={item.label}
+                  className="business-number-img"
+                />
+              </div>
+
+              <div className="business-number-texts">
+                <h3 className="h2-title business-number-value">{item.value}</h3>
+                <p className="business-number-label">{item.label}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
     </div>
