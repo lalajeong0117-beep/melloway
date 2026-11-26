@@ -344,7 +344,7 @@ export const AboutBrandPage: React.FC = () => {
         <div className="brand-cta-inner">
           <div className="brand-cta-text-wrap">
             <h2 className="h1-title brand-cta-title">
-              MELLOWAY와 함께 하는 새로운 여정의 시작작
+              MELLOWAY와 함께 하는 새로운 여정의 시작
             </h2>
             <p className="brand-cta-subtitle">
               멜로웨이의 창업 과정과 운영 지원 시스템을 살펴보고,
