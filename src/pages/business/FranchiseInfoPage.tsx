@@ -104,6 +104,16 @@ export const FranchiseInfoPage: React.FC = () => {
           ))}
         </div>
       </section>
+
+      {/* How MELLOWAY Begins 섹션 (1920 * 568, 양옆 여백 240px) */}
+      <section className="business-begins-section">
+        <div className="business-begins-title-wrap">
+          <h2 className="h1-title business-begins-main-title">How MELLOWAY Begins</h2>
+          <p className="business-begins-sub-title">
+            멜로웨이와 함께 새로운 여행의 거점을 만들어가는 과정
+          </p>
+        </div>
+      </section>
     </div>
   );
 };
