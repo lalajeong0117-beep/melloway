@@ -64,12 +64,14 @@ interface PackageSpecRow {
 
 interface PackageCardItem {
   id: string;
-  enTitle?: string;
-  koTitle?: string;
-  specs?: PackageSpecRow[];
-  priceLabel?: string;
-  priceAmount?: string;
-  isPlaceholder?: boolean;
+  enTitle: string;
+  koTitle: string;
+  collapsedImage: string;
+  collapsedImageWidth: number;
+  collapsedImageHeight: number;
+  specs: PackageSpecRow[];
+  priceLabel: string;
+  priceAmount: string;
 }
 
 const PACKAGE_ITEMS: PackageCardItem[] = [
@@ -77,6 +79,9 @@ const PACKAGE_ITEMS: PackageCardItem[] = [
     id: 'couple',
     enTitle: 'Couple',
     koTitle: '커플 로맨틱 패키지',
+    collapsedImage: '/assets/images/Urbanescape-side.png',
+    collapsedImageWidth: 586,
+    collapsedImageHeight: 293,
     specs: [
       { label: '추천 차량', value: 'URBAN ESCAPE' },
       { label: '기본 구성', value: '2인 침구 세트 + 감성 릴렉스 체어 2개' },
@@ -87,8 +92,40 @@ const PACKAGE_ITEMS: PackageCardItem[] = [
     priceLabel: '1박 기준(예상)',
     priceAmount: '159,000원~',
   },
-  { id: 'package-2', isPlaceholder: true },
-  { id: 'package-3', isPlaceholder: true },
+  {
+    id: 'family',
+    enTitle: 'Family',
+    koTitle: '패밀리 올인원 패키지',
+    collapsedImage: '/assets/images/Grand-cruiser-side.png',
+    collapsedImageWidth: 586,
+    collapsedImageHeight: 273,
+    specs: [
+      { label: '추천 차량', value: 'RETRO HOME(4인승)' },
+      { label: '기본 구성', value: '패밀리 4인 침구 + 접이식 체어 4개' },
+      { label: '다이닝 키트', value: '대형 4인 테이블 + 2구 화로대·조리풀세트' },
+      { label: '무드 옵션', value: '확장형 어닝 타프 + 야외 대형 매트' },
+      { label: '추가 혜택', value: '불멍 장작 세트 + 어린이 안전 랜턴 증정' },
+    ],
+    priceLabel: '1박 기준(예상)',
+    priceAmount: '515,000원~',
+  },
+  {
+    id: 'with-pet',
+    enTitle: 'With Pet',
+    koTitle: '펫 프렌들리 패키지',
+    collapsedImage: '/assets/images/Adventure-van-side.png',
+    collapsedImageWidth: 586,
+    collapsedImageHeight: 274,
+    specs: [
+      { label: '추천 차량', value: 'ADVENTURE VAN (펫 케어 차량)' },
+      { label: '기본 구성', value: '방수·방오 전용 침구 + 논슬립 계단(슬라이드)' },
+      { label: '다이닝 키트', value: '접이식 펫 텐트(울타리) + 식기·배변패드 세트' },
+      { label: '무드 옵션', value: '반려견 전용 캠핑 체어 + 롱리드줄·펙 세트' },
+      { label: '추가 혜택', value: '펫 전용 웰컴 간식 박스 + 차량 내 탈취 케어 포함' },
+    ],
+    priceLabel: '1박 기준(예상)',
+    priceAmount: '414,000원~',
+  },
 ];
 
 /**
@@ -219,21 +256,6 @@ export const CamperListPage: React.FC = () => {
           {PACKAGE_ITEMS.map((pkg) => {
             const isActive = activePackageId === pkg.id;
 
-            if (pkg.isPlaceholder) {
-              return (
-                <article
-                  key={pkg.id}
-                  className={`camper-package-card camper-package-card--placeholder${
-                    isActive ? ' is-active' : ''
-                  }`}
-                  onMouseEnter={() => setActivePackageId(pkg.id)}
-                  onFocus={() => setActivePackageId(pkg.id)}
-                  tabIndex={0}
-                  aria-label="패키지 준비 중"
-                />
-              );
-            }
-
             return (
               <article
                 key={pkg.id}
@@ -249,7 +271,20 @@ export const CamperListPage: React.FC = () => {
                   <p className="camper-package-card-ko">{pkg.koTitle}</p>
                 </div>
 
-                <div className="camper-package-card-inner">
+                <div
+                  className="camper-package-card-collapsed"
+                  aria-hidden={isActive}
+                >
+                  <img
+                    src={pkg.collapsedImage}
+                    alt={`${pkg.enTitle} 추천 차량`}
+                    className="camper-package-card-collapsed-img"
+                    width={pkg.collapsedImageWidth}
+                    height={pkg.collapsedImageHeight}
+                  />
+                </div>
+
+                <div className="camper-package-card-inner" aria-hidden={!isActive}>
                   <div className="camper-package-spec-list">
                     {pkg.specs?.map((row, idx, arr) => (
                       <React.Fragment key={`${pkg.id}-${row.label}`}>
