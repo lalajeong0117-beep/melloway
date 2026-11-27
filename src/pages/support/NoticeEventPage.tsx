@@ -20,6 +20,7 @@ import './notice-detail.css';
  */
 export const NoticeEventPage: React.FC = () => {
   const {
+    listSectionRef,
     searchQuery,
     currentPage,
     totalPages,
@@ -67,7 +68,7 @@ export const NoticeEventPage: React.FC = () => {
         ariaLabel="공지 사항 메인 비주얼"
       />
 
-      <div className="support-content">
+      <div ref={listSectionRef} className="support-content">
         <div className="support-notice-header">
           <h2 className="support-notice-heading">공지사항</h2>
 

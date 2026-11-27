@@ -151,11 +151,6 @@
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.about-branches-card-media:hover .about-branches-card-img {
-    transform: scale(1.05);
 }
 
 .about-branches-card-info {

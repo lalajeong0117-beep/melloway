@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import AOS from 'aos';
 import gsap from 'gsap';
@@ -183,6 +183,8 @@ export const useNoticeBoard = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const listSectionRef = useRef<HTMLDivElement>(null);
+  const shouldScrollToListRef = useRef<boolean>(false);
 
   const selectedNoticeId = useMemo(() => {
     const idParam = searchParams.get('id');
@@ -262,11 +264,32 @@ export const useNoticeBoard = () => {
   );
 
   const closeNotice = useCallback(() => {
+    shouldScrollToListRef.current = true;
     setSearchParams({});
-    window.scrollTo(0, 0);
   }, [setSearchParams]);
 
+  useEffect(() => {
+    if (activeNotice !== null || !shouldScrollToListRef.current) return;
+    shouldScrollToListRef.current = false;
+
+    const rafId = window.requestAnimationFrame(() => {
+      const targetEl = listSectionRef.current;
+      if (targetEl) {
+        const top = Math.max(
+          0,
+          targetEl.getBoundingClientRect().top + window.scrollY - 60
+        );
+        window.scrollTo({ top, behavior: 'auto' });
+      }
+      ScrollTrigger.refresh();
+      AOS.refresh();
+    });
+
+    return () => window.cancelAnimationFrame(rafId);
+  }, [activeNotice]);
+
   return {
+    listSectionRef,
     searchQuery,
     currentPage,
     totalPages,
