@@ -58,6 +58,11 @@ export const BranchesPage: React.FC = () => {
                 <div className="about-branches-coming-soon">
                   <p className="about-branches-coming-soon-text">Coming Soon</p>
                 </div>
+                {branch.name && (
+                  <div className="about-branches-card-info">
+                    <h3 className="about-branches-card-name">{branch.name}</h3>
+                  </div>
+                )}
               </article>
             ) : (
               <article key={branch.id} className="about-branches-card">
@@ -70,6 +75,26 @@ export const BranchesPage: React.FC = () => {
                     height={464}
                   />
                 </div>
+
+                {branch.name && (
+                  <div className="about-branches-card-info">
+                    <h3 className="about-branches-card-name">{branch.name}</h3>
+                    <dl className="about-branches-card-details">
+                      <dt className="about-branches-card-label">주소</dt>
+                      <dd className="about-branches-card-value">
+                        {branch.address}
+                      </dd>
+                      <dt className="about-branches-card-label">연락처</dt>
+                      <dd className="about-branches-card-value">
+                        {branch.phone}
+                      </dd>
+                      <dt className="about-branches-card-label">운영시간</dt>
+                      <dd className="about-branches-card-value">
+                        {branch.hours}
+                      </dd>
+                    </dl>
+                  </div>
+                )}
               </article>
             )
           )}

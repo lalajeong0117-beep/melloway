@@ -34,22 +34,120 @@ export interface BranchItem {
   id: string;
   image?: string;
   alt?: string;
+  name?: string;
+  address?: string;
+  phone?: string;
+  hours?: string;
   isComingSoon?: boolean;
 }
 
+const DEFAULT_BRANCH_HOURS = '매일 09:00~18:00 / 차량 인수·반납 09:00~20:00';
+
 export const BRANCH_LIST: BranchItem[] = [
-  { id: 'paju', image: pajuStoreImg, alt: '멜로웨이 파주점' },
-  { id: 'suwon', image: suwonStoreImg, alt: '멜로웨이 수원점' },
-  { id: 'chuncheon', image: chuncheonStoreImg, alt: '멜로웨이 춘천점' },
-  { id: 'gangneung', image: gangneungStoreImg, alt: '멜로웨이 강릉점' },
-  { id: 'yeongwol', image: yeongwolStoreImg, alt: '멜로웨이 영월점' },
-  { id: 'taean', image: taeanStoreImg, alt: '멜로웨이 태안점' },
-  { id: 'daejeon', image: daejeonStoreImg, alt: '멜로웨이 대전점' },
-  { id: 'gwangju', image: gwangjuStoreImg, alt: '멜로웨이 광주점' },
-  { id: 'daegu', image: daeguStoreImg, alt: '멜로웨이 대구점' },
-  { id: 'busan', image: busanStoreImg, alt: '멜로웨이 부산점' },
-  { id: 'jeju', image: jejuStoreImg, alt: '멜로웨이 제주점' },
-  { id: 'coming-soon', isComingSoon: true },
+  {
+    id: 'paju',
+    image: pajuStoreImg,
+    alt: '멜로웨이 파주점',
+    name: '파주점',
+    address: '경기도 파주시 가람로 128, 1층',
+    phone: '031-947-0181',
+    hours: DEFAULT_BRANCH_HOURS,
+  },
+  {
+    id: 'suwon',
+    image: suwonStoreImg,
+    alt: '멜로웨이 수원점',
+    name: '수원점',
+    address: '경기도 수원시 영통구 광교중앙로 180, 1층',
+    phone: '031-217-0182',
+    hours: DEFAULT_BRANCH_HOURS,
+  },
+  {
+    id: 'chuncheon',
+    image: chuncheonStoreImg,
+    alt: '멜로웨이 춘천점',
+    name: '춘천점',
+    address: '강원특별자치도 춘천시 스포츠타운길 214',
+    phone: '033-241-0183',
+    hours: DEFAULT_BRANCH_HOURS,
+  },
+  {
+    id: 'gangneung',
+    image: gangneungStoreImg,
+    alt: '멜로웨이 강릉점',
+    name: '강릉점',
+    address: '강원특별자치도 강릉시 초당순두부길 58',
+    phone: '033-642-0184',
+    hours: DEFAULT_BRANCH_HOURS,
+  },
+  {
+    id: 'yeongwol',
+    image: yeongwolStoreImg,
+    alt: '멜로웨이 영월점',
+    name: '영월점',
+    address: '강원특별자치도 영월군 영월읍 동강로 126',
+    phone: '033-375-0185',
+    hours: DEFAULT_BRANCH_HOURS,
+  },
+  {
+    id: 'taean',
+    image: taeanStoreImg,
+    alt: '멜로웨이 태안점',
+    name: '태안점',
+    address: '충청남도 태안군 남면 몽산포길 82',
+    phone: '041-672-0186',
+    hours: DEFAULT_BRANCH_HOURS,
+  },
+  {
+    id: 'daejeon',
+    image: daejeonStoreImg,
+    alt: '멜로웨이 대전점',
+    name: '대전점',
+    address: '대전광역시 유성구 대덕대로 510, 1층',
+    phone: '042-825-0187',
+    hours: DEFAULT_BRANCH_HOURS,
+  },
+  {
+    id: 'gwangju',
+    image: gwangjuStoreImg,
+    alt: '멜로웨이 광주점',
+    name: '광주점',
+    address: '광주광역시 동구 문화전당로 34, 1층',
+    phone: '062-225-0188',
+    hours: DEFAULT_BRANCH_HOURS,
+  },
+  {
+    id: 'daegu',
+    image: daeguStoreImg,
+    alt: '멜로웨이 대구점',
+    name: '대구점',
+    address: '대구광역시 달서구 달구벌대로 1786, 1층',
+    phone: '053-621-0189',
+    hours: DEFAULT_BRANCH_HOURS,
+  },
+  {
+    id: 'busan',
+    image: busanStoreImg,
+    alt: '멜로웨이 부산점',
+    name: '부산점',
+    address: '부산광역시 동구 중앙대로 214, 1층',
+    phone: '051-469-0190',
+    hours: DEFAULT_BRANCH_HOURS,
+  },
+  {
+    id: 'jeju',
+    image: jejuStoreImg,
+    alt: '멜로웨이 제주점',
+    name: '제주점',
+    address: '제주특별자치도 제주시 애월읍 애월해안로 472',
+    phone: '064-799-0191',
+    hours: DEFAULT_BRANCH_HOURS,
+  },
+  {
+    id: 'coming-soon',
+    name: '신규 지점 오픈 예정',
+    isComingSoon: true,
+  },
 ];
 
 /**
