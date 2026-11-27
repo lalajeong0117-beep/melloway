@@ -2,6 +2,7 @@ import React from 'react';
 import { ROUTES } from '@/constants/routes';
 import { Button } from '@/components/common';
 import { SupportBanner } from './components/SupportBanner';
+import { useSupportLayoutRefresh } from './scripts/supportNav';
 import './styles/support-common.css';
 import './styles/support-banner.css';
 
@@ -10,6 +11,8 @@ import './styles/support-banner.css';
  * - 하단 문의하기 배너(푸터 상단 고정 배치) 구조를 포함합니다.
  */
 export const EventsPage: React.FC = () => {
+  useSupportLayoutRefresh();
+
   return (
     <section
       className="support-page support-page--with-banner"

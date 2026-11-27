@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
+  scrollToBusinessInquiryForm,
   SUPPORT_BANNER_ARROW_ICON,
   SUPPORT_BANNER_CONTENT,
   SUPPORT_BANNER_IMAGE,
@@ -54,6 +55,7 @@ export const SupportBanner: React.FC = () => {
           <Link
             to={SUPPORT_BANNER_CONTENT.secondaryButton.to}
             className="support-banner-btn support-banner-btn--outline"
+            onClick={scrollToBusinessInquiryForm}
           >
             <span>{SUPPORT_BANNER_CONTENT.secondaryButton.label}</span>
             <img
