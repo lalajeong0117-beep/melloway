@@ -295,18 +295,19 @@
 .business-begins-section {
     width: 100%;
     max-width: 1920px;
-    min-height: 568px;
     margin: 120px auto 0;
-    padding: 0 240px 120px;
+    padding: 0 240px;
     background-color: var(--bg-color, #F7F8FC);
     box-sizing: border-box;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start;
+    gap: 177px;
 }
 
 .business-begins-title-wrap {
-    width: 100%;
+    width: fit-content;
+    flex-shrink: 0;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -329,7 +330,115 @@
     margin: 0;
 }
 
+.business-begins-steps-grid {
+    flex: 1;
+    min-width: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: 24px;
+    row-gap: 60px;
+}
+
+.business-begins-step {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 40px;
+    text-align: left;
+}
+
+.business-begins-step-num {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 64px;
+    font-weight: 700;
+    color: #1C84E8;
+    line-height: 1;
+    letter-spacing: 0;
+}
+
+.business-begins-step-texts {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.business-begins-step-title {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--main-font-color, #22252A);
+    line-height: 1.25;
+    letter-spacing: 0;
+    margin: 0;
+}
+
+.business-begins-step-desc {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--sub-font-color, #3E434C);
+    line-height: 1.5;
+    letter-spacing: 0;
+    margin: 0;
+    word-break: keep-all;
+}
+
+/* ==========================================================================
+   맞춤형 창업 플랜 섹션 (1920 * 1239, 이전 섹션에서 120px 아래)
+   ========================================================================== */
+.business-plans-section {
+    width: 100%;
+    max-width: 1920px;
+    min-height: 1239px;
+    margin: 120px auto 0;
+    padding: 0 24px 120px;
+    background-color: var(--bg-color, #F7F8FC);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.business-plans-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 40px;
+}
+
+.h1-title.business-plans-main-title {
+    margin: 0;
+    color: var(--main-font-color, #22252A);
+    word-break: keep-all;
+}
+
+.h3-title.business-plans-sub-title {
+    margin: 0;
+    color: var(--sub-font-color, #3E434C);
+    word-break: keep-all;
+}
+
 /* 반응형 대응 */
+@media (max-width: 1440px) {
+    .business-begins-section {
+        padding: 0 80px;
+        gap: 60px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .business-begins-section {
+        flex-direction: column;
+        gap: 60px;
+    }
+
+    .business-begins-steps-grid {
+        width: 100%;
+    }
+}
+
 @media (max-width: 1024px) {
     .business-kv-section {
         height: 680px;
@@ -377,5 +486,14 @@
     .h1-title.business-why-title {
         font-size: 30px;
         margin-bottom: 48px;
+    }
+
+    .business-begins-section {
+        padding: 0 24px 80px;
+    }
+
+    .business-begins-steps-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        row-gap: 40px;
     }
 }

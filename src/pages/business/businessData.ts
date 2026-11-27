@@ -102,3 +102,52 @@ export const MELLOWAY_NUMBERS: NumberMetricItem[] = [
     circleBgColor: '#F2F4F5',
   },
 ];
+
+export interface BeginsStepItem {
+  id: number;
+  number: string;
+  title: string;
+  lines: [string, string];
+}
+
+/**
+ * Business(파트너스 안내) - How MELLOWAY Begins 6단계 창업 절차 데이터
+ */
+export const BEGINS_STEPS: BeginsStepItem[] = [
+  {
+    id: 1,
+    number: '01',
+    title: '창업 문의',
+    lines: ['창업 희망 지역과 관심 내용을', '전달하고 상담을 신청합니다.'],
+  },
+  {
+    id: 2,
+    number: '02',
+    title: '브랜드 상담',
+    lines: ['MELLOWAY 브랜드와 캠퍼 렌탈', '사업 구조를 안내합니다.'],
+  },
+  {
+    id: 3,
+    number: '03',
+    title: '지역 검토',
+    lines: ['지역 수요와 입지 여건을', '함께 살펴봅니다.'],
+  },
+  {
+    id: 4,
+    number: '04',
+    title: '가맹 협의',
+    lines: ['운영 방향과 주요 조건을 확인하고', '가맹 계약을 진행합니다.'],
+  },
+  {
+    id: 5,
+    number: '05',
+    title: '오픈 준비',
+    lines: ['캠퍼 구성과 예약·운영 환경 등', '지점 오픈을 준비합니다.'],
+  },
+  {
+    id: 6,
+    number: '06',
+    title: '지점 오픈',
+    lines: ['최종 점검을 마치고 새로운', '여행 거점을 시작합니다.'],
+  },
+];

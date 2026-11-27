@@ -136,6 +136,46 @@ export const useBusinessAnimations = (pageRef: RefObject<HTMLDivElement | null>)
             },
           }
         );
+
+        gsap.fromTo(
+          '.business-begins-step',
+          { y: 30, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.7,
+            stagger: 0.08,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: beginsSection,
+              start: 'top 78%',
+              toggleActions: 'play none none reverse',
+            },
+          }
+        );
+      }
+
+      // 5) 맞춤형 창업 플랜 섹션: 타이틀 그룹 등장
+      const plansSection = pageRef.current?.querySelector(
+        '.business-plans-section'
+      ) as HTMLElement | null;
+
+      if (plansSection) {
+        gsap.fromTo(
+          '.business-plans-header',
+          { y: 35, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.85,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: plansSection,
+              start: 'top 80%',
+              toggleActions: 'play none none reverse',
+            },
+          }
+        );
       }
     },
     { scope: pageRef }

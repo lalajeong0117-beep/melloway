@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import './business.css';
-import { MELLOWAY_NUMBERS, WHY_CHOOSE_CARDS } from './businessData';
+import { BEGINS_STEPS, MELLOWAY_NUMBERS, WHY_CHOOSE_CARDS } from './businessData';
 import { useBusinessAnimations } from './useBusinessAnimations';
 
 /**
@@ -111,6 +111,34 @@ export const FranchiseInfoPage: React.FC = () => {
           <h2 className="h1-title business-begins-main-title">How MELLOWAY Begins</h2>
           <p className="business-begins-sub-title">
             멜로웨이와 함께 새로운 여행의 거점을 만들어가는 과정
+          </p>
+        </div>
+
+        <div className="business-begins-steps-grid">
+          {BEGINS_STEPS.map((step) => (
+            <div key={step.id} className="business-begins-step">
+              <span className="business-begins-step-num">{step.number}</span>
+              <div className="business-begins-step-texts">
+                <h3 className="business-begins-step-title">{step.title}</h3>
+                <p className="business-begins-step-desc">
+                  {step.lines[0]}
+                  <br />
+                  {step.lines[1]}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 맞춤형 창업 플랜 섹션 (1920 * 1239, 이전 섹션에서 120px 아래) */}
+      <section className="business-plans-section">
+        <div className="business-plans-header">
+          <h2 className="h1-title business-plans-main-title">
+            내 예산과 부지에 맞춘 가장 합리적인 시작
+          </h2>
+          <p className="h3-title business-plans-sub-title">
+            불필요한 고정 비용 없이 최적의 규모로 시작하는 MELLOWAY만의 맞춤형 창업 플랜을 확인하세요.
           </p>
         </div>
       </section>
