@@ -11,7 +11,7 @@
     width: 100%;
     max-width: 1920px;
     margin: 0 auto;
-    padding: 181px 240px 120px;
+    padding: 181px 240px 80px;
     box-sizing: border-box;
 }
 
@@ -111,25 +111,23 @@
     word-break: keep-all;
 }
 
-/* 키워드 2종 + 예약하기 버튼 묶음 (버튼 가로폭을 키워드 2개 전체 길이에 맞춤) */
+/* 키워드 + 예약하기 버튼 묶음 (버튼 가로폭을 앞 2개 키워드 길이에 맞춤) */
 .camper-detail-cta-group {
     margin-top: 20px;
-    display: inline-flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 40px;
+    display: inline-grid;
+    grid-auto-columns: max-content;
+    row-gap: 40px;
+    column-gap: 20px;
     max-width: 100%;
 }
 
-/* 키워드 2종 (승차 / 취침) */
+/* 키워드 목록 (승차 / 취침 / 추가 키워드) */
 .camper-detail-keywords {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 20px;
+    display: contents;
 }
 
 .camper-detail-keyword {
+    grid-row: 1;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -146,8 +144,10 @@
     box-sizing: border-box;
 }
 
-/* 예약하기 CTA 버튼 */
+/* 예약하기 CTA 버튼 (1~2번째 키워드 너비에만 정렬) */
 .camper-detail-reserve-btn {
+    grid-row: 2;
+    grid-column: 1 / 3;
     width: 100%;
     padding: 15px 24px;
     border: none;
@@ -175,12 +175,221 @@
     transform: translateY(-2px);
 }
 
+/* 하단 전체 배경 박스 (width 100%, height 895px, #22252A) */
+.camper-detail-showcase {
+    width: 100%;
+    height: 895px;
+    background-color: var(--main-font-color, #22252A);
+    box-sizing: border-box;
+}
+
+.camper-detail-showcase-inner {
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+    padding: 40px 240px;
+    box-sizing: border-box;
+}
+
+.camper-detail-features-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, auto));
+    justify-content: space-between;
+    row-gap: 40px;
+    column-gap: 24px;
+}
+
+.camper-detail-feature-item {
+    display: flex;
+    align-items: flex-end;
+    gap: 20px;
+    min-width: 0;
+}
+
+.camper-detail-feature-icon-wrap {
+    width: 28px;
+    height: 28px;
+    display: inline-flex;
+    align-items: flex-end;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.camper-detail-feature-icon {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.camper-detail-feature-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    text-align: left;
+    min-width: 0;
+}
+
+.camper-detail-feature-label {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0;
+    color: var(--bg-color, #F7F8FC);
+    margin: 0;
+    word-break: keep-all;
+}
+
+.camper-detail-feature-value {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.3;
+    letter-spacing: 0;
+    color: var(--bg-color, #F7F8FC);
+    margin: 0;
+    word-break: keep-all;
+}
+
+/* 캠핑카 내부 이미지 슬라이드 (1440*500, 좌우 40px gap 아이콘, 7*7 앵커) */
+.camper-detail-gallery {
+    width: 100%;
+    margin-top: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.camper-detail-slider-stage {
+    position: relative;
+    width: 100%;
+    max-width: 1440px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.camper-detail-slider-viewport {
+    width: 100%;
+    height: 500px;
+    border-radius: 20px;
+    overflow: hidden;
+    user-select: none;
+    touch-action: pan-y;
+}
+
+.camper-detail-slider-track {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+}
+
+.camper-detail-slider-track[data-active-index='0'] {
+    transform: translateX(0%);
+}
+
+.camper-detail-slider-track[data-active-index='1'] {
+    transform: translateX(-100%);
+}
+
+.camper-detail-slider-track[data-active-index='2'] {
+    transform: translateX(-200%);
+}
+
+.camper-detail-slider-track[data-active-index='3'] {
+    transform: translateX(-300%);
+}
+
+.camper-detail-slide-item {
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+}
+
+.camper-detail-slide-img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    -webkit-user-drag: none;
+}
+
+.camper-detail-slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 13px;
+    height: 22px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.camper-detail-slider-btn::after {
+    content: '';
+    position: absolute;
+    inset: -14px;
+}
+
+.camper-detail-slider-btn--prev {
+    left: -53px;
+}
+
+.camper-detail-slider-btn--next {
+    right: -53px;
+}
+
+.camper-detail-slider-btn:hover,
+.camper-detail-slider-btn:focus-visible {
+    opacity: 0.72;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.camper-detail-anchors {
+    margin-top: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.camper-detail-anchor {
+    width: 7px;
+    height: 7px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background-color: rgba(247, 248, 252, 0.35);
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.camper-detail-anchor.is-active {
+    background-color: #85C9F9;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .camper-detail-slider-track {
+        transition: none;
+    }
+}
+
 /* ==========================================
    반응형 브레이크포인트
    ========================================== */
 @media (max-width: 1680px) {
     .camper-detail-section {
-        padding: 181px 120px 120px;
+        padding: 181px 120px 80px;
     }
 
     .camper-detail-overview {
@@ -191,15 +400,52 @@
         width: 52%;
         max-width: 707px;
     }
+
+    .camper-detail-showcase-inner {
+        padding: 40px 120px;
+    }
+
+    .camper-detail-slider-stage {
+        gap: 40px;
+    }
+
+    .camper-detail-slider-viewport {
+        flex: 1;
+        min-width: 0;
+        height: 440px;
+    }
+
+    .camper-detail-slider-btn {
+        position: static;
+        transform: none;
+        flex-shrink: 0;
+    }
+
+    .camper-detail-slider-btn:hover,
+    .camper-detail-slider-btn:focus-visible {
+        transform: scale(1.1);
+    }
 }
 
 @media (max-width: 1440px) {
     .camper-detail-section {
-        padding: 161px 80px 100px;
+        padding: 161px 80px 80px;
     }
 
     .camper-detail-overview {
         gap: 56px;
+    }
+
+    .camper-detail-showcase-inner {
+        padding: 40px 80px;
+    }
+
+    .camper-detail-slider-stage {
+        gap: 28px;
+    }
+
+    .camper-detail-slider-viewport {
+        height: 380px;
     }
 }
 
@@ -230,11 +476,39 @@
     .camper-detail-desc {
         margin-top: 40px;
     }
+
+    .camper-detail-showcase {
+        height: auto;
+        min-height: 600px;
+    }
+
+    .camper-detail-showcase-inner {
+        padding: 40px 40px;
+    }
+
+    .camper-detail-features-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        justify-content: stretch;
+        row-gap: 32px;
+    }
+
+    .camper-detail-gallery {
+        margin-top: 56px;
+    }
+
+    .camper-detail-slider-stage {
+        gap: 20px;
+    }
+
+    .camper-detail-slider-viewport {
+        height: 320px;
+        border-radius: 16px;
+    }
 }
 
 @media (max-width: 768px) {
     .camper-detail-section {
-        padding: 124px 20px 64px;
+        padding: 124px 20px 60px;
     }
 
     .camper-detail-tabs {
@@ -264,11 +538,8 @@
     }
 
     .camper-detail-cta-group {
-        gap: 32px;
-    }
-
-    .camper-detail-keywords {
-        gap: 12px;
+        row-gap: 32px;
+        column-gap: 12px;
     }
 
     .camper-detail-keyword {
@@ -279,6 +550,31 @@
     .camper-detail-reserve-btn {
         padding: 15px 24px;
         font-size: 18px;
+    }
+
+    .camper-detail-showcase {
+        min-height: 480px;
+    }
+
+    .camper-detail-showcase-inner {
+        padding: 36px 20px;
+    }
+
+    .camper-detail-features-grid {
+        gap: 24px 16px;
+    }
+
+    .camper-detail-gallery {
+        margin-top: 40px;
+    }
+
+    .camper-detail-slider-stage {
+        gap: 14px;
+    }
+
+    .camper-detail-slider-viewport {
+        height: 230px;
+        border-radius: 14px;
     }
 }
 
@@ -292,6 +588,25 @@
     }
 
     .camper-detail-cta-group {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 28px;
         width: 100%;
+    }
+
+    .camper-detail-keywords {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .camper-detail-features-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .camper-detail-slider-viewport {
+        height: 190px;
     }
 }
