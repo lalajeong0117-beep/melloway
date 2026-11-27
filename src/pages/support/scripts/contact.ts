@@ -1,6 +1,7 @@
 import { FormEvent, useCallback, useEffect, useRef, useState } from 'react';
 import downChevronIcon from '../../../../assets/images/icon/Down chevron.svg';
 import radioButtonIcon from '../../../../assets/images/icon/Radio button.svg';
+import { useSupportLayoutRefresh } from './supportNav';
 
 export const CONTACT_DOWN_CHEVRON_ICON = downChevronIcon;
 export const CONTACT_RADIO_ICON = radioButtonIcon;
@@ -39,6 +40,8 @@ const INITIAL_FORM_STATE: ContactFormState = {
  * 1:1 문의하기 페이지 폼 상태, 드롭다운, 유효성 검사 제어 훅
  */
 export const useContactForm = () => {
+  useSupportLayoutRefresh();
+
   const [form, setForm] = useState<ContactFormState>(INITIAL_FORM_STATE);
   const [openDropdown, setOpenDropdown] = useState<'phone' | 'type' | null>(null);
   const [statusMessage, setStatusMessage] = useState<{
