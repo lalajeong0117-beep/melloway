@@ -48,11 +48,11 @@
     color: var(--main-font-color, #22252A);
 }
 
-/* 차량 상세 개요 영역 (이미지 707*353 + gap 147px + 텍스트 박스) */
+/* 차량 상세 개요 영역 (이미지 707*353 + gap 147px + 텍스트 박스, 상단 정렬) */
 .camper-detail-overview {
     margin-top: 80px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 147px;
 }
 
@@ -107,8 +107,72 @@
     line-height: 1.6;
     letter-spacing: 0;
     color: #3E434C;
-    margin: 80px 0 0;
+    margin: 40px 0 0;
     word-break: keep-all;
+}
+
+/* 키워드 2종 + 예약하기 버튼 묶음 (버튼 가로폭을 키워드 2개 전체 길이에 맞춤) */
+.camper-detail-cta-group {
+    margin-top: 20px;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 40px;
+    max-width: 100%;
+}
+
+/* 키워드 2종 (승차 / 취침) */
+.camper-detail-keywords {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.camper-detail-keyword {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 30px;
+    border: 1px solid var(--main-font-color, #22252A);
+    border-radius: 50px;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0;
+    color: var(--main-font-color, #22252A);
+    white-space: nowrap;
+    box-sizing: border-box;
+}
+
+/* 예약하기 CTA 버튼 */
+.camper-detail-reserve-btn {
+    width: 100%;
+    padding: 15px 24px;
+    border: none;
+    border-radius: 50px;
+    background-color: var(--main-font-color, #22252A);
+    color: var(--bg-color, #F7F8FC);
+    font-family: 'Pretendard', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    white-space: nowrap;
+    box-sizing: border-box;
+    transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+.camper-detail-reserve-btn:hover,
+.camper-detail-reserve-btn:focus-visible {
+    background-color: #3E434C;
+    transform: translateY(-2px);
 }
 
 /* ==========================================
@@ -198,6 +262,24 @@
     .camper-detail-desc {
         margin-top: 28px;
     }
+
+    .camper-detail-cta-group {
+        gap: 32px;
+    }
+
+    .camper-detail-keywords {
+        gap: 12px;
+    }
+
+    .camper-detail-keyword {
+        padding: 15px 24px;
+        font-size: 15px;
+    }
+
+    .camper-detail-reserve-btn {
+        padding: 15px 24px;
+        font-size: 18px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -207,5 +289,9 @@
 
     .camper-detail-name {
         font-size: 26px;
+    }
+
+    .camper-detail-cta-group {
+        width: 100%;
     }
 }
