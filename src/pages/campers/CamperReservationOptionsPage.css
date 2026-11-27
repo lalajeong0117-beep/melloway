@@ -1,0 +1,275 @@
+/* ==========================================
+   캠핑카 예약 2단계 - 옵션 선택 페이지 전용 스타일
+   ========================================== */
+.camper-reservation-options-page {
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+.camper-reservation-options-divider {
+    margin-top: 80px;
+}
+
+.camper-options-layout {
+    margin-top: 80px;
+    width: 100%;
+    max-width: 1440px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.camper-options-main {
+    width: 830px;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+}
+
+.camper-options-group {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.camper-options-divider {
+    margin-top: 80px;
+    width: 100%;
+    height: 1px;
+    background-color: var(--main-font-color, #22252A);
+}
+
+/* 패키지 제목 + 상세 보기 버튼 행 (830*43) */
+.camper-options-section-head {
+    width: 100%;
+    height: 43px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.camper-options-section-title {
+    margin: 0;
+    color: var(--main-font-color, #22252A);
+    line-height: 1.2;
+}
+
+.camper-options-detail-btn {
+    padding: 0;
+    border: none;
+    background: transparent;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.3;
+    letter-spacing: 0;
+    color: var(--sub-font-color, #3E434C);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.camper-options-detail-btn:hover,
+.camper-options-detail-btn:focus-visible {
+    color: var(--main-font-color, #22252A);
+    transform: translateX(4px);
+}
+
+/* 패키지 옵션 목록 */
+.camper-options-list {
+    margin-top: 40px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.camper-options-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.camper-options-item-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    min-width: 0;
+}
+
+.camper-options-item-name {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.3;
+    letter-spacing: 0;
+    color: var(--main-font-color, #22252A);
+    margin: 0;
+    word-break: keep-all;
+}
+
+.camper-options-item-desc {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.3;
+    letter-spacing: 0;
+    color: var(--sub-font-color, #3E434C);
+    margin: 0;
+    word-break: keep-all;
+}
+
+.camper-options-item-controls {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-shrink: 0;
+}
+
+.camper-options-item-price {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.3;
+    letter-spacing: 0;
+    color: var(--main-font-color, #22252A);
+    white-space: nowrap;
+}
+
+.camper-options-stepper {
+    display: inline-flex;
+    align-items: center;
+}
+
+.camper-options-stepper-btn {
+    width: 41px;
+    height: 38px;
+    padding: 0;
+    border: none;
+    background-color: #C2E4FC;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1;
+    color: var(--main-font-color, #22252A);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease, opacity 0.2s ease;
+}
+
+.camper-options-stepper-btn:hover:not(:disabled),
+.camper-options-stepper-btn:focus-visible:not(:disabled) {
+    background-color: #85C9F9;
+}
+
+.camper-options-stepper-btn:disabled {
+    cursor: default;
+    color: rgba(34, 37, 42, 0.4);
+}
+
+.camper-options-stepper-value {
+    min-width: 40px;
+    height: 38px;
+    padding: 0 8px;
+    border-top: 1px solid #C2E4FC;
+    border-bottom: 1px solid #C2E4FC;
+    background-color: var(--bg-color, #F7F8FC);
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1;
+    color: var(--main-font-color, #22252A);
+}
+
+/* 유의 사항 목록 (아이콘+텍스트 6개 그룹, 그룹 간 20px gap, 아이콘-텍스트 20px gap) */
+.camper-options-notices {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.camper-options-notice-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.camper-options-notice-icon {
+    width: 5px;
+    height: 5px;
+    margin-top: 8px;
+    display: block;
+    flex-shrink: 0;
+}
+
+.camper-options-notice-text {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.35;
+    letter-spacing: 0;
+    color: var(--sub-font-color, #3E434C);
+    word-break: keep-all;
+}
+
+@media (max-width: 1024px) {
+    .camper-options-layout {
+        flex-direction: column;
+    }
+
+    .camper-options-main {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .camper-reservation-options-divider {
+        margin-top: 56px;
+    }
+
+    .camper-options-layout {
+        margin-top: 56px;
+    }
+
+    .camper-options-main {
+        gap: 56px;
+    }
+
+    .camper-options-divider {
+        margin-top: 56px;
+    }
+
+    .camper-options-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .camper-options-item-controls {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .camper-options-item-name,
+    .camper-options-item-price {
+        font-size: 20px;
+    }
+}
