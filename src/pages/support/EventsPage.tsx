@@ -17,7 +17,19 @@ import './styles/events.css';
  *   로직/데이터(./scripts/events.ts)를 분리하여 관리합니다.
  */
 export const EventsPage: React.FC = () => {
-  const { activeTab, setActiveTab, visibleEvents } = useEventTabs('all');
+  const {
+    activeTab,
+    setActiveTab,
+    visibleEvents,
+    currentPage,
+    totalPages,
+    setCurrentPage,
+    goToPrevPage,
+    goToNextPage,
+    selectedEvent,
+    openEventModal,
+    closeEventModal,
+  } = useEventTabs('all');
 
   return (
     <section className="support-page events-page" aria-label="이벤트 · 혜택">
@@ -60,22 +72,137 @@ export const EventsPage: React.FC = () => {
               </article>
             ) : (
               <article key={item.id} className="events-card">
-                <div className="events-card-img-wrap">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="events-card-img"
-                    width={342}
-                    height={500}
-                    draggable={false}
-                  />
-                </div>
-                <h3 className="events-card-title">{item.title}</h3>
+                <button
+                  type="button"
+                  className="events-card-trigger"
+                  onClick={() => openEventModal(item)}
+                  aria-label={`${item.title} 상세 보기`}
+                >
+                  <div className="events-card-img-wrap">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="events-card-img"
+                      width={342}
+                      height={500}
+                      draggable={false}
+                    />
+                  </div>
+                  <h3 className="events-card-title">{item.title}</h3>
+                </button>
               </article>
             )
           )}
         </div>
+
+        <nav className="events-pagination" aria-label="이벤트 페이지 이동">
+          <button
+            type="button"
+            className="events-page-arrow"
+            aria-label="이전 페이지"
+            disabled={currentPage === 1}
+            onClick={goToPrevPage}
+          >
+            <svg width="8" height="9" viewBox="0 0 8 9" fill="none" aria-hidden="true">
+              <path
+                d="M0 4.5625V3.625L7.14062 0V1.45312L1.73438 4.04688V4.14062L7.14062 6.71875V8.17188L0 4.5625Z"
+                fill="currentColor"
+              />
+            </svg>
+          </button>
+
+          {Array.from({ length: totalPages }, (_, idx) => idx + 1).map(
+            (pageNum) => (
+              <button
+                key={pageNum}
+                type="button"
+                aria-label={`${pageNum}페이지`}
+                aria-current={currentPage === pageNum ? 'page' : undefined}
+                className={`events-page-btn${
+                  currentPage === pageNum ? ' is-active' : ''
+                }`}
+                onClick={() => setCurrentPage(pageNum)}
+              >
+                {pageNum}
+              </button>
+            )
+          )}
+
+          <button
+            type="button"
+            className="events-page-arrow"
+            aria-label="다음 페이지"
+            disabled={currentPage === totalPages}
+            onClick={goToNextPage}
+          >
+            <svg width="8" height="9" viewBox="0 0 8 9" fill="none" aria-hidden="true">
+              <path
+                d="M7.14062 4.5625L0 8.17188V6.71875L5.40625 4.14062V4.04688L0 1.45312V0L7.14062 3.625V4.5625Z"
+                fill="currentColor"
+              />
+            </svg>
+          </button>
+        </nav>
       </div>
+
+      {selectedEvent && (
+        <div
+          className="events-modal-backdrop"
+          role="dialog"
+          aria-modal="true"
+          aria-label={selectedEvent.title ?? '이벤트 상세 정보'}
+          onClick={closeEventModal}
+        >
+          <div
+            className="events-modal-shell"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              className="events-modal-close"
+              onClick={closeEventModal}
+              aria-label="이벤트 상세 모달 닫기"
+            >
+              <img
+                src="/assets/images/icon/close-btn.svg"
+                alt=""
+                width={24}
+                height={24}
+                aria-hidden="true"
+              />
+            </button>
+
+            <div className="events-modal-card">
+              <div className="events-modal-img-wrap">
+                <img
+                  src={selectedEvent.image}
+                  alt={selectedEvent.title}
+                  className="events-modal-img"
+                  width={424}
+                  height={573}
+                  draggable={false}
+                />
+              </div>
+
+              <div className="events-modal-info">
+                <h3 className="events-modal-title">
+                  {selectedEvent.modalTitle ?? selectedEvent.title}
+                </h3>
+                {selectedEvent.modalLines && (
+                  <p className="events-modal-desc">
+                    {selectedEvent.modalLines.map((line, index) => (
+                      <React.Fragment key={line}>
+                        {index > 0 && <br />}
+                        {line}
+                      </React.Fragment>
+                    ))}
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
