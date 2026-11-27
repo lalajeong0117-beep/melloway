@@ -1,6 +1,11 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
 import { ROUTES } from '@/constants/routes';
+
+gsap.registerPlugin(ScrollTrigger);
 
 type ValueCardId = 'freedom' | 'together' | 'possibility' | null;
 
@@ -46,12 +51,237 @@ const HERITAGE_ITEMS: HeritageItem[] = [
  * - MELLOWAY’s HERITAGE 섹션
  */
 export const AboutBrandPage: React.FC = () => {
+  const pageRef = useRef<HTMLDivElement>(null);
   const [hoveredCard, setHoveredCard] = useState<ValueCardId>(null);
 
   const gridHoverClass = hoveredCard ? ` is-hovered-${hoveredCard}` : '';
 
+  useGSAP(
+    () => {
+      const prefersReducedMotion =
+        window.matchMedia &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReducedMotion) return;
+
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+      tl.fromTo(
+        '.brand-intro-kv-img',
+        { scale: 1.06 },
+        { scale: 1, duration: 1.4, ease: 'power2.out' }
+      )
+        .fromTo(
+          '.brand-intro-kv-title',
+          { y: 36, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.9 },
+          '-=1.0'
+        )
+        .fromTo(
+          '.brand-intro-kv-subtitle',
+          { y: 28, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.9 },
+          '-=0.65'
+        );
+
+      // MELLOWAY’s HERITAGE 섹션: 스크롤 트리거 고정 + 자동차 주행 + 텍스트 순차 페이드 다운
+      const heritageSection = pageRef.current?.querySelector(
+        '.brand-heritage-section'
+      ) as HTMLElement | null;
+      const carEl = pageRef.current?.querySelector(
+        '.brand-heritage-car'
+      ) as HTMLElement | null;
+      const flagEl = pageRef.current?.querySelector(
+        '.brand-heritage-flag'
+      ) as HTMLElement | null;
+      const heritageItems = gsap.utils.toArray<HTMLElement>(
+        '.brand-heritage-item',
+        pageRef.current ?? undefined
+      );
+      const valuesSection = pageRef.current?.querySelector(
+        '.brand-values-section'
+      ) as HTMLElement | null;
+
+      if (heritageSection && carEl && flagEl) {
+        const getCarTargetX = () => {
+          const carEndEdge = carEl.offsetLeft + carEl.offsetWidth;
+          const flagPoleX = flagEl.offsetLeft + 14;
+          return Math.max(0, flagPoleX - carEndEdge - 8);
+        };
+
+        const toggleNextSectionVisibility = (hide: boolean) => {
+          if (!valuesSection) return;
+          gsap.to(valuesSection, {
+            autoAlpha: hide ? 0 : 1,
+            duration: 0.25,
+            overwrite: true,
+          });
+        };
+
+        const heritageTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: heritageSection,
+            start: 'top top',
+            end: '+=1600',
+            pin: true,
+            pinSpacing: true,
+            scrub: 0.6,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+            onEnter: () => toggleNextSectionVisibility(true),
+            onEnterBack: () => toggleNextSectionVisibility(true),
+            onLeave: () => toggleNextSectionVisibility(false),
+            onLeaveBack: () => toggleNextSectionVisibility(false),
+          },
+        });
+
+        // 0 -> 1 구간 동안 자동차가 왼쪽에서 오른쪽 깃발 앞까지 이동
+        heritageTl.fromTo(
+          carEl,
+          { x: 0 },
+          {
+            x: () => getCarTargetX(),
+            ease: 'none',
+            duration: 1,
+          },
+          0
+        );
+
+        // 자동차가 각 텍스트 위치를 지날 때 위에서 아래로 페이드 다운
+        heritageItems.forEach((item, idx) => {
+          const triggerAt = () => {
+            const targetX = getCarTargetX() || 1;
+            const itemCenter = item.offsetLeft + item.offsetWidth / 2;
+            const carFrontStart = carEl.offsetLeft + carEl.offsetWidth;
+            const raw = (itemCenter - carFrontStart) / targetX;
+            return Math.min(0.72, Math.max(0.06, raw));
+          };
+
+          const position =
+            idx === heritageItems.length - 1 ? 0.88 : triggerAt();
+
+          heritageTl.fromTo(
+            item,
+            { y: -28, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.12,
+              ease: 'power2.out',
+            },
+            position
+          );
+        });
+      }
+
+      // WHAT DRIVE US 섹션: 이전 섹션 핀 해제 후 자연스럽게 등장
+      if (valuesSection) {
+        gsap.fromTo(
+          '.brand-values-header',
+          { y: 30, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: valuesSection,
+              start: 'top 80%',
+              toggleActions: 'play none none reverse',
+            },
+          }
+        );
+      }
+
+      // 창업 전, MELLOWAY에게 물어보세요! 섹션: 스크롤 트리거 고정 + 메신저 대화 순차 전환
+      const askSection = pageRef.current?.querySelector(
+        '.brand-ask-section'
+      ) as HTMLElement | null;
+      const chatPage1 = pageRef.current?.querySelector(
+        '.brand-ask-chat-page--1'
+      ) as HTMLElement | null;
+      const chatPage1Bubbles = gsap.utils.toArray<HTMLElement>(
+        '.brand-ask-chat-page--1 .brand-ask-bubble',
+        pageRef.current ?? undefined
+      );
+      const chatPage2Bubbles = gsap.utils.toArray<HTMLElement>(
+        '.brand-ask-chat-page--2 .brand-ask-bubble',
+        pageRef.current ?? undefined
+      );
+
+      if (
+        askSection &&
+        chatPage1 &&
+        chatPage1Bubbles.length > 0 &&
+        chatPage2Bubbles.length > 0
+      ) {
+        const askTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: askSection,
+            start: 'top 60px',
+            end: '+=4200',
+            pin: true,
+            pinSpacing: true,
+            scrub: 0.85,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+          },
+        });
+
+        // 1) 첫 번째 대화 묶음 (Q1 -> A1 -> Q2 -> A2) 순차 등장
+        chatPage1Bubbles.forEach((bubble, idx) => {
+          askTl.fromTo(
+            bubble,
+            { y: 20, scale: 0.96, opacity: 0 },
+            {
+              y: 0,
+              scale: 1,
+              opacity: 1,
+              duration: 0.14,
+              ease: 'power2.out',
+            },
+            idx * 0.16
+          );
+        });
+
+        // 2) 첫 번째 대화 묶음 위로 사라지고 두 번째 대화 묶음 시작
+        askTl.to(
+          chatPage1,
+          {
+            y: -28,
+            opacity: 0,
+            duration: 0.12,
+            ease: 'power2.in',
+          },
+          0.72
+        );
+
+        // 3) 두 번째 대화 묶음 (Q3 -> A3 -> Q4 -> A4) 순차 등장
+        chatPage2Bubbles.forEach((bubble, idx) => {
+          askTl.fromTo(
+            bubble,
+            { y: 20, scale: 0.96, opacity: 0 },
+            {
+              y: 0,
+              scale: 1,
+              opacity: 1,
+              duration: 0.14,
+              ease: 'power2.out',
+            },
+            0.84 + idx * 0.16
+          );
+        });
+
+        // 마지막 답변 확인을 위한 여유 구간 후 핀 해제
+        askTl.to({}, { duration: 0.14 }, 1.46);
+      }
+
+      ScrollTrigger.refresh();
+    },
+    { scope: pageRef }
+  );
+
   return (
-    <div className="brand-intro-page">
+    <div ref={pageRef} className="brand-intro-page">
       <section className="brand-intro-kv" aria-label="브랜드 소개 메인 비주얼">
         <img
           src="/assets/images/brand-intro-kv.jpg"
@@ -277,25 +507,53 @@ export const AboutBrandPage: React.FC = () => {
               </div>
 
               <div className="brand-ask-chat-messages">
-                <div className="brand-ask-chat-pair">
-                  <div className="brand-ask-bubble brand-ask-bubble--question">
-                    내 지역에서도 창업이 가능할까?
+                <div className="brand-ask-chat-page brand-ask-chat-page--1">
+                  <div className="brand-ask-chat-pair">
+                    <div className="brand-ask-bubble brand-ask-bubble--question">
+                      내 지역에서도 창업이 가능할까?
+                    </div>
+                    <div className="brand-ask-bubble brand-ask-bubble--answer">
+                      상권 보호를 위해 지역별 지점 수를 체계적으로 제한하여
+                      운영하고 있어요! 희망하시는 지역의 입점 가능 여부와 예상
+                      수익성 분석을 무료로 도와드릴게요.
+                    </div>
                   </div>
-                  <div className="brand-ask-bubble brand-ask-bubble--answer">
-                    상권 보호를 위해 지역별 지점 수를 체계적으로 제한하여
-                    운영하고 있어요! 희망하시는 지역의 입점 가능 여부와 예상
-                    수익성 분석을 무료로 도와드릴게요.
+
+                  <div className="brand-ask-chat-pair">
+                    <div className="brand-ask-bubble brand-ask-bubble--question">
+                      캠핑카 관리가 처음인데 괜찮을까요?
+                    </div>
+                    <div className="brand-ask-bubble brand-ask-bubble--answer">
+                      초보 점주님도 걱정 없도록 본사에서 차량 정비와 정기 점검을
+                      전담 지원해요! 체계적인 운영 매뉴얼과 전담 매니저의 밀착
+                      케어로 안정적인 운영을 돕겠습니다.
+                    </div>
                   </div>
                 </div>
 
-                <div className="brand-ask-chat-pair">
-                  <div className="brand-ask-bubble brand-ask-bubble--question">
-                    캠핑카 관리가 처음인데 괜찮을까요?
+                <div className="brand-ask-chat-page brand-ask-chat-page--2">
+                  <div className="brand-ask-chat-pair">
+                    <div className="brand-ask-bubble brand-ask-bubble--question">
+                      차량에 문제가 생기면 어떡하지?
+                    </div>
+                    <div className="brand-ask-bubble brand-ask-bubble--answer">
+                      차량에 문제가 생겨도 걱정하지 마세요! 멜로웨이는 차량 점검과
+                      정비 연계, 사고 발생 시 대응 절차 등 운영에 필요한 관리
+                      체계를 마련하고 있어요. 예상치 못한 상황에도 가맹점이
+                      신속하게 대응할 수 있도록 지원하겠습니다.
+                    </div>
                   </div>
-                  <div className="brand-ask-bubble brand-ask-bubble--answer">
-                    초보 점주님도 걱정 없도록 본사에서 차량 정비와 정기 점검을
-                    전담 지원해요! 체계적인 운영 매뉴얼과 전담 매니저의 밀착
-                    케어로 안정적인 운영을 돕겠습니다.
+
+                  <div className="brand-ask-chat-pair">
+                    <div className="brand-ask-bubble brand-ask-bubble--question">
+                      믿을 수 있는 브랜드일까?
+                    </div>
+                    <div className="brand-ask-bubble brand-ask-bubble--answer">
+                      멜로웨이는 가맹점과의 신뢰를 가장 중요하게 생각해요! 체계적인
+                      운영 시스템과 지속적인 교육, 투명한 정보 공유를 바탕으로
+                      가맹점과 함께 성장하고자 합니다. 창업 이후에도 든든한
+                      파트너가 되겠습니다.
+                    </div>
                   </div>
                 </div>
               </div>
@@ -303,7 +561,7 @@ export const AboutBrandPage: React.FC = () => {
               <div className="brand-ask-chat-footer">
                 <div className="brand-ask-chat-mic" aria-hidden="true">
                   <img
-                    src="/assets/images/brand-intro-speaker-icon.svg"
+                    src="/assets/images/icon/brand-intro-speaker-icon.svg"
                     alt=""
                     width={16}
                     height={19}
@@ -356,7 +614,7 @@ export const AboutBrandPage: React.FC = () => {
           <Link to={ROUTES.BUSINESS_INFO} className="brand-cta-btn">
             <span className="brand-cta-btn-label">창업 알아보기</span>
             <img
-              src="/assets/images/right-arrow.icon.svg"
+              src="/assets/images/icon/right-arrow.icon.svg"
               alt=""
               className="brand-cta-btn-arrow"
               width={33}
