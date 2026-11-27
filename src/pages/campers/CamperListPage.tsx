@@ -143,13 +143,18 @@ export const CamperListPage: React.FC = () => {
   return (
     <div ref={pageRef} className="camper-list-page">
       <section className="camper-list-kv" aria-label="차량 라인업 메인 비주얼">
-        {/* 추후 KV 배경 이미지(<img className="camper-list-kv-img" />) 추가 영역 */}
+        <img
+          src="/assets/images/campers-kv.jpg"
+          alt="숲속 도로를 달리는 캠핑카"
+          className="camper-list-kv-img"
+        />
+        <div className="camper-list-kv-overlay" aria-hidden="true" />
         <div className="camper-list-kv-inner">
-          <h1 className="h1-title camper-list-kv-title">
-            MELLOWAY와 함께 새로운 길을 열어보세요
+          <h1 className="camper-list-kv-title">
+            당신의 여행을 완성할 완벽한 파트너
           </h1>
-          <p className="h2-title camper-list-kv-subtitle">
-            여행의 즐거움을 새로운 비즈니스의 기회로
+          <p className="camper-list-kv-subtitle">
+            가벼운 차박부터 온 가족 캠핑까지, 딱 맞는 캠핑카를 찾아보세요.
           </p>
         </div>
       </section>
