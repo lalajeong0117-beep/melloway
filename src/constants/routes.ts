@@ -19,6 +19,7 @@ export const ROUTES = {
   CAMPERS_RESERVATION: '/campers/reservation',
   CAMPERS_RESERVATION_OPTIONS: '/campers/reservation/options',
   CAMPERS_RESERVATION_INFO: '/campers/reservation/info',
+  CAMPERS_RESERVATION_COMPLETE: '/campers/reservation/complete',
 
   // Support
   SUPPORT_NOTICE: '/support/notice',
