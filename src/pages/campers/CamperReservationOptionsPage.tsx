@@ -8,6 +8,7 @@ interface OptionItem {
   id: string;
   name: string;
   description: string;
+  unitPrice: number;
   priceText: string;
   min: number;
   max: number;
@@ -18,6 +19,7 @@ const PACKAGE_OPTIONS: OptionItem[] = [
     id: 'couple-romantic',
     name: '커플 로맨틱 패키지',
     description: '우드 테이블 · 빔프로젝터 · 바베큐 그릴 세트',
+    unitPrice: 39000,
     priceText: '+ 39,000 KRW',
     min: 0,
     max: 1,
@@ -26,6 +28,7 @@ const PACKAGE_OPTIONS: OptionItem[] = [
     id: 'family-all-in-one',
     name: '패밀리 올인원 패키지',
     description: '대형 테이블 · 어닝 타프 · 불멍 화로대 세트',
+    unitPrice: 55000,
     priceText: '+ 55,000 KRW',
     min: 0,
     max: 1,
@@ -34,6 +37,7 @@ const PACKAGE_OPTIONS: OptionItem[] = [
     id: 'pet-friendly',
     name: '펫 프렌들리 패키지',
     description: '방수 침구 · 슬라이드 계단 · 펫 텐트 · 전용 웰컴 간식 박스',
+    unitPrice: 70000,
     priceText: '+ 70,000 KRW',
     min: 0,
     max: 1,
@@ -45,6 +49,7 @@ const EXTRA_OPTIONS: OptionItem[] = [
     id: 'bbq-grill-set',
     name: '바베큐 숯 그릴 세트',
     description: '그릴 + 숯 + 토치 + 집게 풀세트 / 1회 기준',
+    unitPrice: 25000,
     priceText: '+ 25,000 KRW',
     min: 0,
     max: 1,
@@ -53,6 +58,7 @@ const EXTRA_OPTIONS: OptionItem[] = [
     id: 'fire-pit-set',
     name: '불멍 화로대 세트',
     description: '화로대 + 장작 10kg + 오로라 가루 증정',
+    unitPrice: 15000,
     priceText: '+ 15,000 KRW',
     min: 0,
     max: 1,
@@ -61,6 +67,7 @@ const EXTRA_OPTIONS: OptionItem[] = [
     id: 'beam-projector',
     name: '감성 빔프로젝터',
     description: '미니 빔 + 삼각대 + 전용 스크린 포함',
+    unitPrice: 15000,
     priceText: '+ 15,000 KRW',
     min: 0,
     max: 1,
@@ -69,6 +76,7 @@ const EXTRA_OPTIONS: OptionItem[] = [
     id: 'camping-chair',
     name: '추가 캠핑 체어',
     description: '릴렉스 체어 1개 기준 / 성인·어린이 공용',
+    unitPrice: 5000,
     priceText: '+ 5,000 KRW',
     min: 0,
     max: 1,
@@ -77,6 +85,7 @@ const EXTRA_OPTIONS: OptionItem[] = [
     id: 'bedding-set',
     name: '침구류 세트 추가',
     description: '1인 기준 / 이불 + 베개 + 패드',
+    unitPrice: 10000,
     priceText: '+ 10,000 KRW',
     min: 0,
     max: 2,
@@ -163,12 +172,14 @@ const OptionsSectionBlock: React.FC<OptionsSectionBlockProps> = ({
 
 const ALL_OPTIONS = [...PACKAGE_OPTIONS, ...EXTRA_OPTIONS];
 
-const CAR_NAME_MAP: Record<string, string> = {
-  'urban-escape': 'URBAN ESCAPE',
-  'adventure-van': 'ADVENTURE VAN',
-  'retro-home': 'RETRO HOME',
-  'grand-cruiser': 'GRAND CRUISER',
+const CAR_INFO_MAP: Record<string, { name: string; basePrice: number }> = {
+  'urban-escape': { name: 'URBAN ESCAPE', basePrice: 120000 },
+  'adventure-van': { name: 'ADVENTURE VAN', basePrice: 220000 },
+  'retro-home': { name: 'RETRO HOME', basePrice: 340000 },
+  'grand-cruiser': { name: 'GRAND CRUISER', basePrice: 460000 },
 };
+
+const formatKrw = (amount: number): string => `${amount.toLocaleString('ko-KR')} KRW`;
 
 const OPTION_NOTICES: readonly string[] = [
   '모든 옵션 및 패키지는 사전 예약 및 결제 완료 후 이용 가능합니다.',
@@ -188,13 +199,22 @@ export const CamperReservationOptionsPage: React.FC = () => {
   const startDateText = searchParams.get('start') ?? '2026.11.25';
   const endDateText = searchParams.get('end') ?? searchParams.get('start') ?? '2026.12.26';
   const carId = searchParams.get('car') ?? 'urban-escape';
-  const selectedCarName = CAR_NAME_MAP[carId] ?? 'URBAN ESCAPE';
+  const selectedCar = CAR_INFO_MAP[carId] ?? CAR_INFO_MAP['urban-escape'];
   const selectedPassengers = searchParams.get('passengers') ?? '2';
   const selectedBranch = searchParams.get('branch') ?? '강남점';
 
   const [optionCounts, setOptionCounts] = useState<Record<string, number>>(() =>
     Object.fromEntries(ALL_OPTIONS.map((item) => [item.id, item.min]))
   );
+
+  const selectedOptions = ALL_OPTIONS.filter((item) => (optionCounts[item.id] ?? 0) > 0);
+  const optionsTotal = selectedOptions.reduce(
+    (sum, item) => sum + item.unitPrice * (optionCounts[item.id] ?? 0),
+    0
+  );
+  const subtotalAmount = selectedCar.basePrice + optionsTotal;
+  const taxAmount = Math.round(subtotalAmount * 0.1);
+  const totalAmount = subtotalAmount + taxAmount;
 
   const updateOptionCount = (item: OptionItem, delta: number) => {
     setOptionCounts((prev) => {
@@ -259,7 +279,7 @@ export const CamperReservationOptionsPage: React.FC = () => {
 
             <div className="camper-receipt-body">
               <span className="camper-receipt-car-label">Car</span>
-              <h2 className="h2-title camper-receipt-car-name">{selectedCarName}</h2>
+              <h2 className="h2-title camper-receipt-car-name">{selectedCar.name}</h2>
               <div className="camper-receipt-meta">
                 <span className="camper-receipt-meta-item">
                   탑승 인원: {selectedPassengers}
@@ -268,6 +288,52 @@ export const CamperReservationOptionsPage: React.FC = () => {
                   대여지점: {selectedBranch}
                 </span>
               </div>
+
+              <div className="camper-receipt-base-row">
+                <span className="camper-receipt-base-label">기본금</span>
+                <span className="camper-receipt-base-price">
+                  {formatKrw(selectedCar.basePrice)}
+                </span>
+              </div>
+
+              <div className="camper-receipt-dashed-line" aria-hidden="true" />
+
+              <span className="camper-receipt-option-heading">Option</span>
+              <div className="camper-receipt-option-list">
+                {selectedOptions.length > 0 ? (
+                  selectedOptions.map((item) => {
+                    const count = optionCounts[item.id] ?? 0;
+                    return (
+                      <div key={item.id} className="camper-receipt-option-row">
+                        <span className="camper-receipt-option-name">
+                          {item.name} x{count}
+                        </span>
+                        <span className="camper-receipt-option-price">
+                          {formatKrw(item.unitPrice * count)}
+                        </span>
+                      </div>
+                    );
+                  })
+                ) : (
+                  <p className="camper-receipt-option-empty">선택된 옵션이 없습니다.</p>
+                )}
+              </div>
+
+              <div className="camper-receipt-dashed-line" aria-hidden="true" />
+
+              <div className="camper-receipt-tax-row">
+                <span className="camper-receipt-tax-label">세금(10%)</span>
+                <span className="camper-receipt-tax-price">{formatKrw(taxAmount)}</span>
+              </div>
+
+              <div className="camper-receipt-total-row">
+                <span className="camper-receipt-total-label">Total</span>
+                <span className="camper-receipt-total-price">{formatKrw(totalAmount)}</span>
+              </div>
+
+              <button type="button" className="camper-receipt-reserve-btn">
+                예약하기
+              </button>
             </div>
           </aside>
         </div>
