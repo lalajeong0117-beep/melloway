@@ -38,7 +38,7 @@ export const Header: React.FC = () => {
         <Logo variant="header" />
         <Menu />
         <div className="btn d-flex">
-          <Button variant="nav-cta">
+          <Button variant="nav-cta" to={ROUTES.CAMPERS_RESERVATION}>
             실시간 예약
           </Button>
           <Button variant="nav-cta" to={ROUTES.BUSINESS_INQUIRY}>
@@ -92,7 +92,11 @@ export const Header: React.FC = () => {
           </ul>
 
           <div className="mobile-nav-actions">
-            <Button variant="nav-cta" onClick={closeMobileMenu}>
+            <Button
+              variant="nav-cta"
+              to={ROUTES.CAMPERS_RESERVATION}
+              onClick={closeMobileMenu}
+            >
               실시간 예약
             </Button>
             <Button

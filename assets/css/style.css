@@ -122,8 +122,8 @@
     left: 0;
     width: 1440px;
     /* 기존 헤더의 좌우 너비와 동일하게 정렬 */
-    background-color: rgba(247, 248, 252, 0.5);
-    /* 배경색에만 50% 투명도 적용 */
+    background-color: rgba(247, 248, 252, 0.8);
+    /* 배경색에만 80% 투명도 적용 */
     border-top: 1px solid #ebeef2;
     /* 헤더 영역과 드롭다운 간 은은한 구분선 */
     border-radius: 0 0 50px 50px;
@@ -150,7 +150,7 @@
 .gnb-dropdown-inner {
     position: relative;
     width: 100%;
-    min-height: 110px;
+    min-height: 160px;
 }
 
 /* 각 상위 메뉴 하위의 세로 메뉴 목록 (Left Alignment) */

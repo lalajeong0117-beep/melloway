@@ -50,6 +50,7 @@ export const GNB_MENU: NavGroup[] = [
       { label: '공지 사항', path: ROUTES.SUPPORT_NOTICE },
       { label: '자주 묻는 질문', path: ROUTES.SUPPORT_FAQ },
       { label: '이벤트 · 혜택', path: ROUTES.SUPPORT_EVENTS },
+      { label: '1:1 문의', path: ROUTES.SUPPORT_CONTACT },
     ],
   },
 ];
@@ -92,6 +93,7 @@ export const FOOTER_MENU: NavGroup[] = [
     subItems: [
       { label: '문의하기', path: ROUTES.SUPPORT_CONTACT },
       { label: '창업·가맹 안내', path: ROUTES.BUSINESS_INFO },
+      { label: '1:1 문의하기', path: ROUTES.SUPPORT_CONTACT },
     ],
   },
 ];

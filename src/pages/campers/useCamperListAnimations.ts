@@ -20,19 +20,27 @@ export const useCamperListAnimations = (
         window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (prefersReducedMotion) return;
 
-      // 1. KV 인트로 등장 애니메이션
+      // 1. KV 인트로 등장 애니메이션 (파트너스 안내 페이지와 동일)
       const kvTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-      kvTl.fromTo(
-        '.camper-list-kv-title',
-        { y: 28, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.85, delay: 0.1 }
-      ).fromTo(
-        '.camper-list-kv-subtitle',
-        { y: 22, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8 },
-        '-=0.55'
-      );
+      kvTl
+        .fromTo(
+          '.camper-list-kv-img',
+          { scale: 1.06 },
+          { scale: 1, duration: 1.4, ease: 'power2.out' }
+        )
+        .fromTo(
+          '.camper-list-kv-title',
+          { y: 36, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.9 },
+          '-=1.0'
+        )
+        .fromTo(
+          '.camper-list-kv-subtitle',
+          { y: 28, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.9 },
+          '-=0.65'
+        );
 
       // 2. 차량 라인업 섹션 타이틀 등장
       gsap.fromTo(
