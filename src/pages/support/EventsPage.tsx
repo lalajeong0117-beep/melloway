@@ -1,16 +1,16 @@
 import React from 'react';
-import { SupportBanner } from './components/SupportBanner';
-import { SupportPageHeader } from './components/SupportPageHeader';
+import { SupportBanner } from './SupportBanner';
+import { SupportPageHeader } from './SupportPageHeader';
 import {
   EVENT_TABS,
   EVENTS_KV_IMAGE,
   EVENTS_KV_SUBTITLE,
   EVENTS_KV_TITLE,
   useEventTabs,
-} from './scripts/events';
-import './styles/support-common.css';
-import './styles/support-banner.css';
-import './styles/events.css';
+} from './events';
+import './support-common.css';
+import './support-banner.css';
+import './events.css';
 
 /**
  * [담당 영역: Support] 이벤트 · 혜택 페이지
@@ -177,6 +177,7 @@ export const EventsPage: React.FC = () => {
           </button>
         </nav>
       </div>
+      <SupportBanner />
 
 
       {selectedEvent && (
