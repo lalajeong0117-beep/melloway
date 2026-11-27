@@ -249,3 +249,108 @@ export const BEGINS_STEPS: BeginsStepItem[] = [
     lines: ['최종 점검을 마치고 새로운', '여행 거점을 시작합니다.'],
   },
 ];
+
+export interface CollabBrandLogo {
+  id: number;
+  name: string;
+  image: string;
+  width: number;
+  height: number;
+}
+
+/**
+ * Business(가맹·제휴 문의) - POTENTIAL COLLABORATION BRANDS 로고 목록
+ */
+export const COLLAB_BRAND_LOGOS: CollabBrandLogo[] = [
+  {
+    id: 1,
+    name: 'CAMPFUL',
+    image: '/assets/images/col-logo-1.png',
+    width: 326,
+    height: 56,
+  },
+  {
+    id: 2,
+    name: '협력 브랜드 2',
+    image: '/assets/images/col-logo-2.png',
+    width: 245,
+    height: 42,
+  },
+  {
+    id: 3,
+    name: 'RIVACUP',
+    image: '/assets/images/col-logo-3.png',
+    width: 187,
+    height: 93,
+  },
+  {
+    id: 4,
+    name: '협력 브랜드 4',
+    image: '/assets/images/col-logo-4.png',
+    width: 461,
+    height: 56,
+  },
+];
+
+export interface HowItWorksStep {
+  id: number;
+  image: string;
+  title: string;
+  lines: [string, string];
+}
+
+/**
+ * Business(가맹·제휴 문의) - HOW IT WORKS 4단계 진행 절차 데이터
+ */
+export const INQUIRY_HOW_STEPS: HowItWorksStep[] = [
+  {
+    id: 1,
+    image: '/assets/images/franchise-work-1.jpg',
+    title: '문의 접수',
+    lines: [
+      '멜로웨이 창업에 관심 있다면 희망하는',
+      '지역과 창업 계획을 편하게 남겨주세요.',
+    ],
+  },
+  {
+    id: 2,
+    image: '/assets/images/franchise-work-2.jpg',
+    title: '내용 검토',
+    lines: [
+      '희망 지역과 창업 조건을 꼼꼼하게 살펴보고',
+      '적합한 방향을 제안합니다',
+    ],
+  },
+  {
+    id: 3,
+    image: '/assets/images/franchise-work-3.jpg',
+    title: '담당자 상담',
+    lines: [
+      '창업부터 운영까지 필요한 정보를 안내하고',
+      '든든한 시작을 돕습니다',
+    ],
+  },
+  {
+    id: 4,
+    image: '/assets/images/franchise-work-4.jpg',
+    title: '후속 안내',
+    lines: [
+      '상담 이후의 준비 과정도 함께 고민하며',
+      '성공적인 출발을 지원합니다.',
+    ],
+  },
+];
+
+/**
+ * Business(가맹·제휴 문의) - 문의 유형 선택 아코디언 옵션
+ */
+export const INQUIRY_TYPE_OPTIONS: string[] = [
+  '가맹 창업 문의',
+  '제휴 · 협업 문의',
+  '입점 · 부지 제안',
+  '기타 문의',
+];
+
+export const PHONE_PREFIX_OPTIONS: string[] = ['010', '011', '016', '017', '018', '019'];
+
+export const CALENDAR_WEEKDAYS: string[] = ['일', '월', '화', '수', '목', '금', '토'];
