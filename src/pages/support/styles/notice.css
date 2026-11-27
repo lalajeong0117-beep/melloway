@@ -121,13 +121,26 @@
     flex: 1;
     min-width: 0;
     padding-right: 24px;
+}
+
+.support-notice-title-btn {
+    padding: 0;
+    border: none;
+    background: transparent;
     font-family: 'Pretendard', sans-serif;
     font-size: 18px;
     font-weight: 600;
     color: #22252A;
     line-height: 1.4;
     letter-spacing: 0;
+    text-align: left;
     word-break: keep-all;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.support-notice-title-btn:hover {
+    color: #2B8CE6;
 }
 
 .support-notice-date {
@@ -235,7 +248,7 @@
         font-size: 18px;
     }
 
-    .support-notice-title {
+    .support-notice-title-btn {
         font-size: 17px;
     }
 
@@ -295,8 +308,11 @@
     .support-notice-title {
         flex: 0 0 100%;
         padding-right: 0;
-        font-size: 16px;
         order: 3;
+    }
+
+    .support-notice-title-btn {
+        font-size: 16px;
     }
 
     .support-notice-pagination {
@@ -336,7 +352,7 @@
         padding: 18px 0;
     }
 
-    .support-notice-title {
+    .support-notice-title-btn {
         font-size: 15px;
     }
 
