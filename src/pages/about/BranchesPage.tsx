@@ -1,29 +1,80 @@
-import React from 'react';
-import { ROUTES } from '@/constants/routes';
-import { Button } from '@/components/common';
+import React, { useRef } from 'react';
+import {
+  BRANCH_LIST,
+  BRANCHES_HEADER_DATA,
+  BRANCHES_KV_DATA,
+  useBranchesPage,
+} from './branches';
+import './branches.css';
 
 /**
  * [담당 영역: About Us] 전국 지점 안내 페이지
- * - 이 파일은 About Us 담당자가 독립적으로 개발/수정하는 공간입니다.
+ * - CSS(./branches.css)와 로직/데이터(./branches.ts)를 분리하여 관리합니다.
  */
 export const BranchesPage: React.FC = () => {
+  const kvRef = useRef<HTMLElement>(null);
+
+  useBranchesPage(kvRef);
+
   return (
-    <section className="subpage-container">
-      <div className="subpage-inner">
-        <span className="subpage-badge">About Us</span>
-        <h1 className="h1-title subpage-title">전국 지점 안내</h1>
-        <p className="subpage-desc">
-          가까운 MELLOWAY 지점 위치와 운영 시간, 보유 캠핑카 현황을 확인할 수 있는 페이지입니다.
-        </p>
-        <div className="subpage-actions">
-          <Button variant="primary" to={ROUTES.CAMPERS_LIST}>
-            캠핑카 둘러보기
-          </Button>
-          <Button variant="outline" to={ROUTES.HOME}>
-            메인으로 돌아가기
-          </Button>
+    <div className="about-branches-page">
+      <section
+        ref={kvRef}
+        className="about-branches-kv"
+        aria-label="전국 지점 안내 메인 비주얼"
+      >
+        <img
+          src={BRANCHES_KV_DATA.image}
+          alt={BRANCHES_KV_DATA.alt}
+          className="about-branches-kv-img"
+          width={1920}
+          height={850}
+        />
+        <div className="about-branches-kv-overlay" aria-hidden="true" />
+        <div className="about-branches-kv-content-wrap">
+          <div className="about-branches-kv-content">
+            <h1 className="about-branches-kv-title">
+              {BRANCHES_KV_DATA.title}
+            </h1>
+            <p className="about-branches-kv-subtitle">
+              {BRANCHES_KV_DATA.subtitle}
+            </p>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <section className="about-branches-content" aria-label="전국 지점 소개">
+        <div className="about-branches-header">
+          <h2 className="about-branches-title">{BRANCHES_HEADER_DATA.title}</h2>
+          <p className="about-branches-subtitle">
+            {BRANCHES_HEADER_DATA.subtitle}
+          </p>
+        </div>
+
+        <div className="about-branches-grid">
+          {BRANCH_LIST.map((branch) =>
+            branch.isComingSoon ? (
+              <article key={branch.id} className="about-branches-card">
+                <div className="about-branches-coming-soon">
+                  <p className="about-branches-coming-soon-text">Coming Soon</p>
+                </div>
+              </article>
+            ) : (
+              <article key={branch.id} className="about-branches-card">
+                <div className="about-branches-card-media">
+                  <img
+                    src={branch.image}
+                    alt={branch.alt}
+                    className="about-branches-card-img"
+                    width={464}
+                    height={464}
+                  />
+                </div>
+              </article>
+            )
+          )}
+        </div>
+      </section>
+    </div>
   );
 };
