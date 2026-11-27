@@ -184,12 +184,12 @@ export const CamperListPage: React.FC = () => {
               </div>
 
               <div className="camper-lineup-card-actions">
-                <button
-                  type="button"
+                <Link
+                  to={`${ROUTES.CAMPERS_RESERVATION}?car=${item.id}`}
                   className="camper-lineup-action-btn camper-lineup-reserve-btn"
                 >
                   예약하기 →
-                </button>
+                </Link>
                 <Link
                   to={`${ROUTES.CAMPERS_MELLOWAY}?car=${item.id}`}
                   className="camper-lineup-action-btn camper-lineup-detail-btn"

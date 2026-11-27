@@ -16,6 +16,7 @@ export const ROUTES = {
   // Campers
   CAMPERS_LIST: '/campers/list',
   CAMPERS_MELLOWAY: '/campers/melloway',
+  CAMPERS_RESERVATION: '/campers/reservation',
 
   // Support
   SUPPORT_NOTICE: '/support/notice',
