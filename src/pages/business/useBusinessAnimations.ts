@@ -298,6 +298,86 @@ export const useBusinessAnimations = (pageRef: RefObject<HTMLDivElement | null>)
             },
           }
         );
+
+        const compareWrap = plansSection.querySelector(
+          '.business-plans-compare-wrap'
+        ) as HTMLElement | null;
+        const vsCol = plansSection.querySelector(
+          '.business-plan-vs-col'
+        ) as HTMLElement | null;
+
+        if (compareWrap) {
+          const mm = gsap.matchMedia();
+
+          mm.add('(min-width: 1201px)', () => {
+            const getHalfGap = () => (vsCol ? vsCol.offsetWidth / 2 : 134);
+
+            const doorTl = gsap.timeline({
+              scrollTrigger: {
+                trigger: compareWrap,
+                start: 'top 80%',
+                once: true,
+                invalidateOnRefresh: true,
+              },
+            });
+
+            doorTl
+              .fromTo(
+                ['.business-plan-card--melloway', '.business-plan-total-pill--melloway'],
+                { x: () => getHalfGap() },
+                {
+                  x: 0,
+                  duration: 0.95,
+                  ease: 'power3.out',
+                  clearProps: 'transform',
+                },
+                0
+              )
+              .fromTo(
+                ['.business-plan-card--competitor', '.business-plan-total-pill--competitor'],
+                { x: () => -getHalfGap() },
+                {
+                  x: 0,
+                  duration: 0.95,
+                  ease: 'power3.out',
+                  clearProps: 'transform',
+                },
+                0
+              )
+              .fromTo(
+                ['.business-plan-vs-col', '.business-plan-total-label'],
+                { opacity: 0, scale: 0.92 },
+                {
+                  opacity: 1,
+                  scale: 1,
+                  duration: 0.7,
+                  ease: 'power2.out',
+                  clearProps: 'transform',
+                },
+                0.22
+              );
+          });
+
+          mm.add('(max-width: 1200px)', () => {
+            gsap.fromTo(
+              ['.business-plan-card', '.business-plan-total-pill'],
+              { y: 30, opacity: 0 },
+              {
+                y: 0,
+                opacity: 1,
+                duration: 0.75,
+                stagger: 0.12,
+                ease: 'power2.out',
+                clearProps: 'transform',
+                scrollTrigger: {
+                  trigger: compareWrap,
+                  start: 'top 82%',
+                  once: true,
+                },
+              }
+            );
+          });
+        }
       }
     },
     { scope: pageRef }

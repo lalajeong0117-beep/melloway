@@ -345,15 +345,48 @@
     align-items: flex-start;
     gap: 40px;
     text-align: left;
+    cursor: pointer;
 }
 
 .business-begins-step-num {
+    position: relative;
+    display: inline-block;
     font-family: 'Pretendard', sans-serif;
     font-size: 64px;
     font-weight: 700;
     color: #1C84E8;
     line-height: 1;
     letter-spacing: 0;
+    transform-origin: left center;
+    transition:
+        transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+        color 0.3s ease,
+        text-shadow 0.35s ease;
+    will-change: transform;
+}
+
+.business-begins-step-num::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 100%;
+    height: 3px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #1C84E8 0%, #85C9F9 100%);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.business-begins-step:hover .business-begins-step-num {
+    transform: translateY(-6px) scale(1.14);
+    color: #0E6FD4;
+    text-shadow: 0 10px 24px rgba(28, 132, 232, 0.25);
+}
+
+.business-begins-step:hover .business-begins-step-num::after {
+    transform: scaleX(1);
 }
 
 .business-begins-step-texts {
@@ -371,6 +404,11 @@
     line-height: 1.25;
     letter-spacing: 0;
     margin: 0;
+    transition: color 0.28s ease;
+}
+
+.business-begins-step:hover .business-begins-step-title {
+    color: #1C84E8;
 }
 
 .business-begins-step-desc {
@@ -489,22 +527,18 @@
 
 @keyframes businessPlanBoxSwitch {
     0% {
-        opacity: 0.72;
-        transform: scale(0.985);
-        box-shadow: 0 0 0 4px rgba(133, 201, 249, 0.35), 0 14px 32px rgba(28, 132, 232, 0.16);
+        opacity: 0;
     }
 
     100% {
         opacity: 1;
-        transform: scale(1);
-        box-shadow: 0 8px 24px rgba(28, 132, 232, 0.08);
     }
 }
 
 .business-plan-card--melloway.is-switching,
 .business-plan-total-pill--melloway.is-switching {
-    animation: businessPlanBoxSwitch 0.36s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    will-change: transform, opacity;
+    animation: businessPlanBoxSwitch 0.42s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    will-change: opacity;
 }
 
 @media (prefers-reduced-motion: reduce) {
