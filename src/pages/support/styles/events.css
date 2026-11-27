@@ -3,7 +3,7 @@
    ========================================== */
 .support-page.events-page {
     background-color: var(--bg-color, #F7F8FC);
-    padding-bottom: 80px;
+    padding-bottom: 0;
 }
 
 .events-page .support-kv-title,
@@ -82,6 +82,7 @@
 }
 
 .events-card-img-wrap {
+    position: relative;
     width: 100%;
     max-width: 342px;
     height: 500px;
@@ -98,8 +99,27 @@
     transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.events-card:hover .events-card-img {
+.events-card:hover .events-card-img:not(.events-card-img--closed) {
     transform: scale(1.04);
+}
+
+/* 마감된 이벤트 오버레이 (#22252A 80% + EVENT 마감 H1) */
+.events-closed-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(34, 37, 42, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 24px;
+    box-sizing: border-box;
+}
+
+.h1-title.events-closed-text {
+    margin: 0;
+    color: var(--bg-color, #F7F8FC);
+    text-align: center;
 }
 
 .events-card-title {

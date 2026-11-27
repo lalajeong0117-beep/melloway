@@ -1,4 +1,5 @@
 import React from 'react';
+import { SupportBanner } from './components/SupportBanner';
 import { SupportPageHeader } from './components/SupportPageHeader';
 import {
   EVENT_TABS,
@@ -8,6 +9,7 @@ import {
   useEventTabs,
 } from './scripts/events';
 import './styles/support-common.css';
+import './styles/support-banner.css';
 import './styles/events.css';
 
 /**
@@ -32,7 +34,10 @@ export const EventsPage: React.FC = () => {
   } = useEventTabs('all');
 
   return (
-    <section className="support-page events-page" aria-label="이벤트 · 혜택">
+    <section
+      className="support-page support-page--with-banner events-page"
+      aria-label="이벤트 · 혜택"
+    >
       <SupportPageHeader
         title={EVENTS_KV_TITLE}
         subtitle={EVENTS_KV_SUBTITLE}
@@ -59,18 +64,47 @@ export const EventsPage: React.FC = () => {
         </div>
 
         <div className="events-grid" role="tabpanel">
-          {visibleEvents.map((item) =>
-            item.status === 'upcoming' ? (
-              <article key={item.id} className="events-card events-card--upcoming">
-                <div className="events-upcoming-box">
-                  <p className="h1-title events-upcoming-text">
-                    EVENT
-                    <br />
-                    준비중
-                  </p>
-                </div>
-              </article>
-            ) : (
+          {visibleEvents.map((item) => {
+            if (item.status === 'upcoming') {
+              return (
+                <article key={item.id} className="events-card events-card--upcoming">
+                  <div className="events-upcoming-box">
+                    <p className="h1-title events-upcoming-text">
+                      EVENT
+                      <br />
+                      준비중
+                    </p>
+                  </div>
+                </article>
+              );
+            }
+
+            if (item.status === 'closed') {
+              return (
+                <article key={item.id} className="events-card events-card--closed">
+                  <div className="events-card-img-wrap">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="events-card-img events-card-img--closed"
+                      width={342}
+                      height={500}
+                      draggable={false}
+                    />
+                    <div className="events-closed-overlay" aria-hidden="true">
+                      <p className="h1-title events-closed-text">
+                        EVENT
+                        <br />
+                        마감
+                      </p>
+                    </div>
+                  </div>
+                  <h3 className="events-card-title">{item.title}</h3>
+                </article>
+              );
+            }
+
+            return (
               <article key={item.id} className="events-card">
                 <button
                   type="button"
@@ -91,8 +125,8 @@ export const EventsPage: React.FC = () => {
                   <h3 className="events-card-title">{item.title}</h3>
                 </button>
               </article>
-            )
-          )}
+            );
+          })}
         </div>
 
         <nav className="events-pagination" aria-label="이벤트 페이지 이동">
@@ -144,6 +178,8 @@ export const EventsPage: React.FC = () => {
           </button>
         </nav>
       </div>
+
+      <SupportBanner />
 
       {selectedEvent && (
         <div

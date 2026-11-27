@@ -13,7 +13,7 @@ export const EVENT_LEFT_ICON = leftArrowIcon;
 export const EVENT_RIGHT_ICON = rightArrowIcon;
 export const EVENTS_PER_PAGE = 8;
 
-export type EventTabKey = 'all' | 'ongoing';
+export type EventTabKey = 'all' | 'ongoing' | 'closed';
 
 export interface EventTabItem {
   key: EventTabKey;
@@ -26,12 +26,13 @@ export interface EventCardItem {
   title?: string;
   modalTitle?: string;
   modalLines?: string[];
-  status: 'ongoing' | 'upcoming';
+  status: 'ongoing' | 'upcoming' | 'closed';
 }
 
 export const EVENT_TABS: EventTabItem[] = [
   { key: 'all', label: '전체' },
   { key: 'ongoing', label: '진행중' },
+  { key: 'closed', label: '마감됨' },
 ];
 
 export const EVENT_ITEMS: EventCardItem[] = [
@@ -110,6 +111,18 @@ export const EVENT_ITEMS: EventCardItem[] = [
     id: 'event-coming-soon-2',
     status: 'upcoming',
   },
+  {
+    id: 'photo-event',
+    image: '/assets/images/photo-event.jpg',
+    title: '차박 인증샷 챌린지 이벤트',
+    status: 'closed',
+  },
+  {
+    id: 'fin-event',
+    image: '/assets/images/fin-event.jpg',
+    title: '이달의 차박 루트 가이드',
+    status: 'closed',
+  },
 ];
 
 export const useEventTabs = (initialTab: EventTabKey = 'all') => {
@@ -120,6 +133,9 @@ export const useEventTabs = (initialTab: EventTabKey = 'all') => {
   const filteredEvents = useMemo(() => {
     if (activeTab === 'ongoing') {
       return EVENT_ITEMS.filter((item) => item.status === 'ongoing');
+    }
+    if (activeTab === 'closed') {
+      return EVENT_ITEMS.filter((item) => item.status === 'closed');
     }
     return EVENT_ITEMS;
   }, [activeTab]);
