@@ -1,4 +1,5 @@
 import React from 'react';
+import { NoticeDetail } from './components/NoticeDetail';
 import { SupportBanner } from './components/SupportBanner';
 import { SupportPageHeader } from './components/SupportPageHeader';
 import {
@@ -11,11 +12,11 @@ import { SUPPORT_KV_IMAGE } from './scripts/supportNav';
 import './styles/support-common.css';
 import './styles/support-banner.css';
 import './styles/notice.css';
+import './styles/notice-detail.css';
 
 /**
  * [담당 영역: Support] 1단계 - 공지 사항 페이지
- * - CSS(./styles/support-common.css, ./styles/notice.css)와
- *   로직(./scripts/notice.ts)을 분리하여 관리합니다.
+ * - CSS(./styles/*.css)와 로직(./scripts/notice.ts)을 분리하여 관리합니다.
  */
 export const NoticeEventPage: React.FC = () => {
   const {
@@ -24,11 +25,34 @@ export const NoticeEventPage: React.FC = () => {
     totalPages,
     totalCount,
     paginatedNotices,
+    activeNotice,
+    prevNotice,
+    nextNotice,
     setCurrentPage,
     goToPrevPage,
     goToNextPage,
     handleSearchChange,
+    openNotice,
+    closeNotice,
   } = useNoticeBoard();
+
+  if (activeNotice) {
+    return (
+      <section
+        className="support-page support-page--with-banner"
+        aria-label="공지 사항 상세"
+      >
+        <NoticeDetail
+          notice={activeNotice}
+          prevNotice={prevNotice}
+          nextNotice={nextNotice}
+          onSelectNotice={openNotice}
+          onBackToList={closeNotice}
+        />
+        <SupportBanner />
+      </section>
+    );
+  }
 
   return (
     <section
@@ -45,7 +69,7 @@ export const NoticeEventPage: React.FC = () => {
 
       <div className="support-content">
         <div className="support-notice-header">
-          <h2 className="support-notice-heading">공지 사항</h2>
+          <h2 className="support-notice-heading">공지사항</h2>
 
           <div className="support-notice-search">
             <input
@@ -78,7 +102,15 @@ export const NoticeEventPage: React.FC = () => {
                 {paginatedNotices.map((item) => (
                   <li key={item.id} className="support-notice-item">
                     <span className="support-notice-num">{item.id}</span>
-                    <p className="support-notice-title">{item.title}</p>
+                    <div className="support-notice-title">
+                      <button
+                        type="button"
+                        className="support-notice-title-btn"
+                        onClick={() => openNotice(item.id)}
+                      >
+                        {item.title}
+                      </button>
+                    </div>
                     <span className="support-notice-date">{item.date}</span>
                   </li>
                 ))}

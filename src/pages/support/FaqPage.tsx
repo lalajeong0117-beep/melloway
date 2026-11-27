@@ -1,17 +1,22 @@
 import React from 'react';
 import { ROUTES } from '@/constants/routes';
 import { Button } from '@/components/common';
+import { SupportBanner } from './components/SupportBanner';
 import { SupportPageHeader } from './components/SupportPageHeader';
 import { SUPPORT_KV_IMAGE } from './scripts/supportNav';
 import './styles/support-common.css';
+import './styles/support-banner.css';
 
 /**
  * [담당 영역: Support] 2단계 - 자주 묻는 질문 (FAQ) 페이지
- * - 상단 KV는 공지 사항과 동일한 구조로 배치하며, 본문은 2단계 작업 시 확장합니다.
+ * - 상단 KV + 본문 + 하단 문의하기 배너(푸터 상단 고정 배치) 구조입니다.
  */
 export const FaqPage: React.FC = () => {
   return (
-    <section className="support-page" aria-label="자주 묻는 질문">
+    <section
+      className="support-page support-page--with-banner"
+      aria-label="자주 묻는 질문"
+    >
       <SupportPageHeader
         title="Your Questions, Our Answers."
         subtitle="당신의 궁금증에 멜로웨이가 답합니다."
@@ -36,6 +41,8 @@ export const FaqPage: React.FC = () => {
           </div>
         </div>
       </div>
+
+      <SupportBanner />
     </section>
   );
 };
