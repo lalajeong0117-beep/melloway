@@ -1,0 +1,17 @@
+/* ==========================================
+   캠핑카 예약 3단계 - 정보 입력 페이지 전용 스타일
+   ========================================== */
+.camper-reservation-info-page {
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+.camper-reservation-info-divider {
+    margin-top: 80px;
+}
+
+@media (max-width: 768px) {
+    .camper-reservation-info-divider {
+        margin-top: 56px;
+    }
+}

@@ -466,6 +466,7 @@
     font-weight: 700;
     line-height: 1.2;
     letter-spacing: 0;
+    text-decoration: none;
     white-space: nowrap;
     box-sizing: border-box;
     display: inline-flex;
@@ -479,6 +480,176 @@
 .camper-receipt-reserve-btn:focus-visible {
     background-color: #3E434C;
     transform: translateY(-2px);
+}
+
+/* ==========================================
+   패키지 상세 보기 팝업 (100vh, #22252A 70%)
+   ========================================== */
+.camper-package-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    padding: 40px 24px;
+    background-color: rgba(34, 37, 42, 0.7);
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-y: auto;
+    z-index: 1999;
+}
+
+.camper-package-modal-close-btn {
+    position: fixed;
+    top: 80px;
+    right: 80px;
+    width: 64px;
+    height: 64px;
+    padding: 20px;
+    border: none;
+    border-radius: 50px;
+    background-color: var(--main-font-color, #22252A);
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 2000;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.camper-package-modal-close-btn:hover,
+.camper-package-modal-close-btn:focus-visible {
+    transform: scale(1.06);
+}
+
+.camper-package-modal-close-icon {
+    width: 24px;
+    height: 24px;
+    display: block;
+    flex-shrink: 0;
+}
+
+.camper-package-modal-content {
+    width: 100%;
+    max-width: 1440px;
+}
+
+.camper-package-modal-grid {
+    width: 100%;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: 24px;
+}
+
+/* 패키지 카드 (464*476, #22252A, radius 30, padding 20px) */
+.camper-package-modal-card {
+    width: 464px;
+    max-width: 100%;
+    height: 476px;
+    padding: 20px;
+    border-radius: 30px;
+    background-color: var(--main-font-color, #22252A);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    flex-shrink: 0;
+}
+
+.camper-package-modal-card .camper-package-modal-en {
+    margin: 0;
+    line-height: 1.2;
+    color: var(--bg-color, #F7F8FC);
+}
+
+.camper-package-modal-ko {
+    margin: 10px 0 0;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0;
+    color: var(--bg-color, #F7F8FC);
+    word-break: keep-all;
+}
+
+/* 카드 내부 박스 (424*339, bg-color, radius 30, padding 40px) */
+.camper-package-modal-body {
+    margin-top: 20px;
+    width: 424px;
+    max-width: 100%;
+    height: 339px;
+    flex: 1;
+    min-height: 0;
+    padding: 40px;
+    border-radius: 30px;
+    background-color: var(--bg-color, #F7F8FC);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.camper-package-modal-divider {
+    margin: 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--main-font-color, #22252A);
+    flex-shrink: 0;
+}
+
+.camper-package-modal-spec-list {
+    width: 100%;
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 6px;
+}
+
+.camper-package-modal-spec-row {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.camper-package-modal-spec-label {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0;
+    color: var(--main-font-color, #22252A);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.camper-package-modal-spec-value {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 0;
+    color: var(--main-font-color, #22252A);
+    text-align: right;
+    word-break: keep-all;
+}
+
+@media (max-width: 1480px) {
+    .camper-package-modal-backdrop {
+        align-items: flex-start;
+    }
+
+    .camper-package-modal-grid {
+        flex-wrap: wrap;
+    }
 }
 
 @media (max-width: 1440px) {
@@ -543,5 +714,22 @@
 
     .camper-receipt-reserve-btn {
         padding: 15px 24px;
+    }
+
+    .camper-package-modal-close-btn {
+        top: 24px;
+        right: 24px;
+        padding: 14px;
+    }
+
+    .camper-package-modal-card {
+        height: auto;
+    }
+
+    .camper-package-modal-body {
+        width: 100%;
+        height: auto;
+        min-height: 280px;
+        padding: 28px 24px;
     }
 }

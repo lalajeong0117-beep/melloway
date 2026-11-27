@@ -34,11 +34,11 @@ export const ReservationHeader: React.FC<ReservationHeaderProps> = ({
               <span className="camper-reservation-step-badge">{item.step}</span>
               <span className="camper-reservation-step-label">{item.label}</span>
             </div>
-            {idx < RESERVATION_STEPS.length - 1 && (
-              <span className="camper-reservation-step-connector" aria-hidden="true">
-                <span className="camper-reservation-step-line" />
-              </span>
-            )}
+              {idx < RESERVATION_STEPS.length - 1 && (
+                <span className="camper-reservation-step-connector" aria-hidden="true">
+                  <span className="camper-reservation-step-line" />
+                </span>
+              )}
           </React.Fragment>
         );
       })}

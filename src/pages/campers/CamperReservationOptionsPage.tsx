@@ -1,6 +1,12 @@
-import React, { useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
+import { ROUTES } from '@/constants/routes';
 import { ReservationHeader } from './ReservationHeader';
+import {
+  CAR_INFO_MAP,
+  ReceiptSelectedOption,
+  ReservationReceipt,
+} from './ReservationReceipt';
 import './CamperReservationPage.css';
 import './CamperReservationOptionsPage.css';
 
@@ -92,11 +98,64 @@ const EXTRA_OPTIONS: OptionItem[] = [
   },
 ];
 
+interface PackageModalSpecItem {
+  label: string;
+  value: string;
+}
+
+interface PackageModalCardItem {
+  id: string;
+  enTitle: string;
+  koTitle: string;
+  recommendedCar: string;
+  specs: PackageModalSpecItem[];
+}
+
+const PACKAGE_MODAL_CARDS: PackageModalCardItem[] = [
+  {
+    id: 'couple',
+    enTitle: 'Couple',
+    koTitle: '커플 로맨틱 패키지',
+    recommendedCar: 'URBAN ESCAPE (2인승)',
+    specs: [
+      { label: '기본 구성', value: '2인 침구 세트 + 감성 릴렉스 체어 2개' },
+      { label: '다이닝 키트', value: '우드 롤테이블 + 트윈 버너·코펠 세트' },
+      { label: '무드 옵션', value: 'LED 스트링 전구 + 빔프로젝터·스크린' },
+      { label: '추가 혜택', value: '바비큐 숯·그릴 1회 제공' },
+    ],
+  },
+  {
+    id: 'family',
+    enTitle: 'Family',
+    koTitle: '패밀리 올인원 패키지',
+    recommendedCar: 'RETRO HOME (4~6인승)',
+    specs: [
+      { label: '기본 구성', value: '패밀리 침구 + 접이식 체어 4개' },
+      { label: '다이닝 키트', value: 'L 테이블 + 화로대 풀세트' },
+      { label: '무드 옵션', value: '확장형 어닝 + 야외 대형 매트' },
+      { label: '추가 혜택', value: '불멍 장작 세트 + 안전 랜턴' },
+    ],
+  },
+  {
+    id: 'with-pet',
+    enTitle: 'With Pet',
+    koTitle: '펫 프렌들리 패키지',
+    recommendedCar: 'ADVENTURE VAN(펫 프렌들리)',
+    specs: [
+      { label: '기본 구성', value: '방수·방오 전용 침구 + 논슬립 계단' },
+      { label: '다이닝 키트', value: '접이식 펫 텐트 + 식기·배변패드' },
+      { label: '무드 옵션', value: '반려견 전용 캠핑 체어 + 롱리드줄·펙' },
+      { label: '추가 혜택', value: '펫 전용 웰컴 간식 박스 + 탈취 케어' },
+    ],
+  },
+];
+
 interface OptionsSectionBlockProps {
   title: string;
   items: OptionItem[];
   counts: Record<string, number>;
   showDetailButton?: boolean;
+  onDetailClick?: () => void;
   onUpdateCount: (item: OptionItem, delta: number) => void;
 }
 
@@ -108,13 +167,18 @@ const OptionsSectionBlock: React.FC<OptionsSectionBlockProps> = ({
   items,
   counts,
   showDetailButton = true,
+  onDetailClick,
   onUpdateCount,
 }) => (
   <div className="camper-options-group">
     <div className="camper-options-section-head">
       <h2 className="h2-title camper-options-section-title">{title}</h2>
       {showDetailButton && (
-        <button type="button" className="camper-options-detail-btn">
+        <button
+          type="button"
+          className="camper-options-detail-btn"
+          onClick={onDetailClick}
+        >
           상세 보기 →
         </button>
       )}
@@ -172,15 +236,6 @@ const OptionsSectionBlock: React.FC<OptionsSectionBlockProps> = ({
 
 const ALL_OPTIONS = [...PACKAGE_OPTIONS, ...EXTRA_OPTIONS];
 
-const CAR_INFO_MAP: Record<string, { name: string; basePrice: number }> = {
-  'urban-escape': { name: 'URBAN ESCAPE', basePrice: 120000 },
-  'adventure-van': { name: 'ADVENTURE VAN', basePrice: 220000 },
-  'retro-home': { name: 'RETRO HOME', basePrice: 340000 },
-  'grand-cruiser': { name: 'GRAND CRUISER', basePrice: 460000 },
-};
-
-const formatKrw = (amount: number): string => `${amount.toLocaleString('ko-KR')} KRW`;
-
 const OPTION_NOTICES: readonly string[] = [
   '모든 옵션 및 패키지는 사전 예약 및 결제 완료 후 이용 가능합니다.',
   '선택하신 차량 모델 및 대여 일정에 따라 선택 가능한 옵션이 상이할 수 있습니다.',
@@ -206,10 +261,31 @@ export const CamperReservationOptionsPage: React.FC = () => {
   const [optionCounts, setOptionCounts] = useState<Record<string, number>>(() =>
     Object.fromEntries(ALL_OPTIONS.map((item) => [item.id, item.min]))
   );
+  const [isPackageModalOpen, setIsPackageModalOpen] = useState<boolean>(false);
 
-  const selectedOptions = ALL_OPTIONS.filter((item) => (optionCounts[item.id] ?? 0) > 0);
+  useEffect(() => {
+    if (!isPackageModalOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsPackageModalOpen(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isPackageModalOpen]);
+
+  const selectedOptions: ReceiptSelectedOption[] = ALL_OPTIONS.filter(
+    (item) => (optionCounts[item.id] ?? 0) > 0
+  ).map((item) => ({
+    id: item.id,
+    name: item.name,
+    count: optionCounts[item.id] ?? 0,
+    unitPrice: item.unitPrice,
+  }));
   const optionsTotal = selectedOptions.reduce(
-    (sum, item) => sum + item.unitPrice * (optionCounts[item.id] ?? 0),
+    (sum, item) => sum + item.unitPrice * item.count,
     0
   );
   const subtotalAmount = selectedCar.basePrice + optionsTotal;
@@ -239,6 +315,7 @@ export const CamperReservationOptionsPage: React.FC = () => {
               title="패키지"
               items={PACKAGE_OPTIONS}
               counts={optionCounts}
+              onDetailClick={() => setIsPackageModalOpen(true)}
               onUpdateCount={updateOptionCount}
             />
             <OptionsSectionBlock
@@ -266,78 +343,106 @@ export const CamperReservationOptionsPage: React.FC = () => {
             </ul>
           </div>
 
-          <aside className="camper-options-receipt" aria-label="최종 가격 영수증">
-            <div className="camper-receipt-top">
-              <div className="camper-receipt-date-group">
-                <span className="camper-receipt-date-text">{startDateText}</span>
-                <span className="camper-receipt-date-text" aria-hidden="true">
-                  -
-                </span>
-                <span className="camper-receipt-date-text">{endDateText}</span>
-              </div>
-            </div>
-
-            <div className="camper-receipt-body">
-              <span className="camper-receipt-car-label">Car</span>
-              <h2 className="h2-title camper-receipt-car-name">{selectedCar.name}</h2>
-              <div className="camper-receipt-meta">
-                <span className="camper-receipt-meta-item">
-                  탑승 인원: {selectedPassengers}
-                </span>
-                <span className="camper-receipt-meta-item">
-                  대여지점: {selectedBranch}
-                </span>
-              </div>
-
-              <div className="camper-receipt-base-row">
-                <span className="camper-receipt-base-label">기본금</span>
-                <span className="camper-receipt-base-price">
-                  {formatKrw(selectedCar.basePrice)}
-                </span>
-              </div>
-
-              <div className="camper-receipt-dashed-line" aria-hidden="true" />
-
-              <span className="camper-receipt-option-heading">Option</span>
-              <div className="camper-receipt-option-list">
-                {selectedOptions.length > 0 ? (
-                  selectedOptions.map((item) => {
-                    const count = optionCounts[item.id] ?? 0;
-                    return (
-                      <div key={item.id} className="camper-receipt-option-row">
-                        <span className="camper-receipt-option-name">
-                          {item.name} x{count}
-                        </span>
-                        <span className="camper-receipt-option-price">
-                          {formatKrw(item.unitPrice * count)}
-                        </span>
-                      </div>
-                    );
-                  })
-                ) : (
-                  <p className="camper-receipt-option-empty">선택된 옵션이 없습니다.</p>
-                )}
-              </div>
-
-              <div className="camper-receipt-dashed-line" aria-hidden="true" />
-
-              <div className="camper-receipt-tax-row">
-                <span className="camper-receipt-tax-label">세금(10%)</span>
-                <span className="camper-receipt-tax-price">{formatKrw(taxAmount)}</span>
-              </div>
-
-              <div className="camper-receipt-total-row">
-                <span className="camper-receipt-total-label">Total</span>
-                <span className="camper-receipt-total-price">{formatKrw(totalAmount)}</span>
-              </div>
-
-              <button type="button" className="camper-receipt-reserve-btn">
+          <ReservationReceipt
+            startDateText={startDateText}
+            endDateText={endDateText}
+            carName={selectedCar.name}
+            passengers={selectedPassengers}
+            branch={selectedBranch}
+            basePrice={selectedCar.basePrice}
+            selectedOptions={selectedOptions}
+            taxAmount={taxAmount}
+            totalAmount={totalAmount}
+            actionButton={
+              <Link
+                to={`${ROUTES.CAMPERS_RESERVATION_INFO}?${searchParams.toString()}`}
+                state={{
+                  carId,
+                  carName: selectedCar.name,
+                  basePrice: selectedCar.basePrice,
+                  startDate: startDateText,
+                  endDate: endDateText,
+                  passengers: selectedPassengers,
+                  branch: selectedBranch,
+                  selectedOptions,
+                  optionsTotal,
+                  taxAmount,
+                  totalAmount,
+                }}
+                className="camper-receipt-reserve-btn"
+              >
                 예약하기
-              </button>
-            </div>
-          </aside>
+              </Link>
+            }
+          />
         </div>
       </section>
+
+      {isPackageModalOpen && (
+        <>
+          <div
+            className="camper-package-modal-backdrop"
+            role="dialog"
+            aria-modal="true"
+            aria-label="패키지 상세 안내"
+            onClick={() => setIsPackageModalOpen(false)}
+          >
+            <div
+              className="camper-package-modal-content"
+              onClick={(event) => event.stopPropagation()}
+            >
+              <div className="camper-package-modal-grid">
+                {PACKAGE_MODAL_CARDS.map((pkg) => (
+                  <article key={pkg.id} className="camper-package-modal-card">
+                    <h2 className="h2-title camper-package-modal-en">{pkg.enTitle}</h2>
+                    <p className="camper-package-modal-ko">{pkg.koTitle}</p>
+                    <div className="camper-package-modal-body">
+                      <div className="camper-package-modal-spec-list">
+                        <div className="camper-package-modal-spec-row">
+                          <span className="camper-package-modal-spec-label">추천 차량</span>
+                          <span className="camper-package-modal-spec-value">
+                            {pkg.recommendedCar}
+                          </span>
+                        </div>
+
+                        {pkg.specs.map((spec) => (
+                          <React.Fragment key={spec.label}>
+                            <div className="camper-package-modal-divider" aria-hidden="true" />
+                            <div className="camper-package-modal-spec-row">
+                              <span className="camper-package-modal-spec-label">
+                                {spec.label}
+                              </span>
+                              <span className="camper-package-modal-spec-value">
+                                {spec.value}
+                              </span>
+                            </div>
+                          </React.Fragment>
+                        ))}
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            className="camper-package-modal-close-btn"
+            aria-label="패키지 상세 팝업 닫기"
+            onClick={() => setIsPackageModalOpen(false)}
+          >
+            <img
+              src="/assets/images/icon/close-btn.svg"
+              alt=""
+              className="camper-package-modal-close-icon"
+              width={24}
+              height={24}
+              aria-hidden="true"
+            />
+          </button>
+        </>
+      )}
     </div>
   );
 };

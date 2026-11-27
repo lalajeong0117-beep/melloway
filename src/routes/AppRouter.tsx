@@ -11,6 +11,7 @@ import { CamperListPage } from '@/pages/campers/CamperListPage';
 import { MellowayCampersPage } from '@/pages/campers/MellowayCampersPage';
 import { CamperReservationPage } from '@/pages/campers/CamperReservationPage';
 import { CamperReservationOptionsPage } from '@/pages/campers/CamperReservationOptionsPage';
+import { CamperReservationInfoPage } from '@/pages/campers/CamperReservationInfoPage';
 import { NoticeEventPage } from '@/pages/support/NoticeEventPage';
 import { FaqPage } from '@/pages/support/FaqPage';
 import { EventsPage } from '@/pages/support/EventsPage';
@@ -42,6 +43,10 @@ export const AppRouter: React.FC = () => {
           <Route
             path={ROUTES.CAMPERS_RESERVATION_OPTIONS}
             element={<CamperReservationOptionsPage />}
+          />
+          <Route
+            path={ROUTES.CAMPERS_RESERVATION_INFO}
+            element={<CamperReservationInfoPage />}
           />
 
           {/* Support */}
