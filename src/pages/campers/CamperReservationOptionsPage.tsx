@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { ReservationHeader } from './ReservationHeader';
 import './CamperReservationPage.css';
 import './CamperReservationOptionsPage.css';
@@ -162,6 +163,13 @@ const OptionsSectionBlock: React.FC<OptionsSectionBlockProps> = ({
 
 const ALL_OPTIONS = [...PACKAGE_OPTIONS, ...EXTRA_OPTIONS];
 
+const CAR_NAME_MAP: Record<string, string> = {
+  'urban-escape': 'URBAN ESCAPE',
+  'adventure-van': 'ADVENTURE VAN',
+  'retro-home': 'RETRO HOME',
+  'grand-cruiser': 'GRAND CRUISER',
+};
+
 const OPTION_NOTICES: readonly string[] = [
   '모든 옵션 및 패키지는 사전 예약 및 결제 완료 후 이용 가능합니다.',
   '선택하신 차량 모델 및 대여 일정에 따라 선택 가능한 옵션이 상이할 수 있습니다.',
@@ -176,6 +184,14 @@ const OPTION_NOTICES: readonly string[] = [
  * - 상단 공통 Header는 MainLayout에서 렌더링됩니다.
  */
 export const CamperReservationOptionsPage: React.FC = () => {
+  const [searchParams] = useSearchParams();
+  const startDateText = searchParams.get('start') ?? '2026.11.25';
+  const endDateText = searchParams.get('end') ?? searchParams.get('start') ?? '2026.12.26';
+  const carId = searchParams.get('car') ?? 'urban-escape';
+  const selectedCarName = CAR_NAME_MAP[carId] ?? 'URBAN ESCAPE';
+  const selectedPassengers = searchParams.get('passengers') ?? '2';
+  const selectedBranch = searchParams.get('branch') ?? '강남점';
+
   const [optionCounts, setOptionCounts] = useState<Record<string, number>>(() =>
     Object.fromEntries(ALL_OPTIONS.map((item) => [item.id, item.min]))
   );
@@ -229,6 +245,31 @@ export const CamperReservationOptionsPage: React.FC = () => {
               ))}
             </ul>
           </div>
+
+          <aside className="camper-options-receipt" aria-label="최종 가격 영수증">
+            <div className="camper-receipt-top">
+              <div className="camper-receipt-date-group">
+                <span className="camper-receipt-date-text">{startDateText}</span>
+                <span className="camper-receipt-date-text" aria-hidden="true">
+                  -
+                </span>
+                <span className="camper-receipt-date-text">{endDateText}</span>
+              </div>
+            </div>
+
+            <div className="camper-receipt-body">
+              <span className="camper-receipt-car-label">Car</span>
+              <h2 className="h2-title camper-receipt-car-name">{selectedCarName}</h2>
+              <div className="camper-receipt-meta">
+                <span className="camper-receipt-meta-item">
+                  탑승 인원: {selectedPassengers}
+                </span>
+                <span className="camper-receipt-meta-item">
+                  대여지점: {selectedBranch}
+                </span>
+              </div>
+            </div>
+          </aside>
         </div>
       </section>
     </div>

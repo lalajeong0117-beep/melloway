@@ -230,6 +230,100 @@
     word-break: keep-all;
 }
 
+/* 우측 최종 가격 영수증 카드 (464*729, #C2E4FC, radius 10) */
+.camper-options-receipt {
+    width: 464px;
+    max-width: 100%;
+    background-color: #C2E4FC;
+    border-radius: 10px;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 영수증 상단 날짜 박스 (height 60px, #85C9F9, 상단 radius 10, padding 20px 39px) */
+.camper-receipt-top {
+    width: 100%;
+    height: 60px;
+    padding: 20px 39px;
+    background-color: #85C9F9;
+    border-radius: 10px 10px 0 0;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+}
+
+.camper-receipt-date-group {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.camper-receipt-date-text {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: 0;
+    color: var(--main-font-color, #22252A);
+    white-space: nowrap;
+}
+
+/* 영수증 메인 영역 (height 665px, padding 40px) */
+.camper-receipt-body {
+    width: 100%;
+    min-height: 665px;
+    padding: 40px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.camper-receipt-car-label {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 0;
+    color: var(--main-font-color, #22252A);
+}
+
+.camper-receipt-car-name {
+    margin: 20px 0 0;
+    color: var(--main-font-color, #22252A);
+    word-break: keep-all;
+}
+
+.camper-receipt-meta {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.camper-receipt-meta-item {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.3;
+    letter-spacing: 0;
+    color: var(--main-font-color, #22252A);
+    white-space: nowrap;
+}
+
+@media (max-width: 1440px) {
+    .camper-options-main {
+        flex: 1;
+        min-width: 0;
+        width: auto;
+    }
+}
+
 @media (max-width: 1024px) {
     .camper-options-layout {
         flex-direction: column;
@@ -237,6 +331,15 @@
 
     .camper-options-main {
         width: 100%;
+    }
+
+    .camper-options-receipt {
+        width: 100%;
+        max-width: 464px;
+    }
+
+    .camper-receipt-body {
+        min-height: auto;
     }
 }
 

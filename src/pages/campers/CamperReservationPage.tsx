@@ -471,7 +471,13 @@ export const CamperReservationPage: React.FC = () => {
                     </div>
 
                     <Link
-                      to={`${ROUTES.CAMPERS_RESERVATION_OPTIONS}?car=${camper.id}`}
+                      to={`${ROUTES.CAMPERS_RESERVATION_OPTIONS}?car=${camper.id}&branch=${encodeURIComponent(
+                        selectedBranch
+                      )}&passengers=${encodeURIComponent(
+                        selectedPassengers.replace(/[^0-9]/g, '')
+                      )}&count=${encodeURIComponent(selectedCount.replace(/[^0-9]/g, ''))}${
+                        startDate ? `&start=${formatFullDate(startDate)}` : ''
+                      }${endDate ? `&end=${formatFullDate(endDate)}` : ''}`}
                       className="camper-reservation-item-reserve-btn"
                     >
                       예약하기
