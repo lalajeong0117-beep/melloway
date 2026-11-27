@@ -5,6 +5,7 @@
     width: 100%;
     min-height: calc(100vh - 435px);
     background-color: var(--bg-color, #F7F8FC);
+    overflow-x: clip;
 }
 
 .camper-detail-section {
