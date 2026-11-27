@@ -39,6 +39,128 @@ export const useBusinessAnimations = (pageRef: RefObject<HTMLDivElement | null>)
           '-=0.65'
         );
 
+      // 0) 가맹·제휴 문의 페이지 협업 브랜드 박스: 스크롤 시 메인 KV 아래에서 서랍처럼 내려오는 리빌
+      const inquiryKvSection = pageRef.current?.querySelector(
+        '.inquiry-kv-section'
+      ) as HTMLElement | null;
+      const collabSection = pageRef.current?.querySelector(
+        '.inquiry-collab-section'
+      ) as HTMLElement | null;
+
+      if (inquiryKvSection && collabSection) {
+        gsap.fromTo(
+          collabSection,
+          { yPercent: -100 },
+          {
+            yPercent: 0,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: inquiryKvSection,
+              start: 'top top',
+              end: '+=280',
+              scrub: 0.6,
+              invalidateOnRefresh: true,
+            },
+          }
+        );
+      }
+
+      // 0-1) 가맹·제휴 문의 페이지 HOW IT WORKS 섹션: 타이틀 + 4개 카드 순차 등장
+      const howSection = pageRef.current?.querySelector(
+        '.inquiry-how-section'
+      ) as HTMLElement | null;
+
+      if (howSection) {
+        gsap.fromTo(
+          '.inquiry-how-header',
+          { y: 30, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: howSection,
+              start: 'top 82%',
+              toggleActions: 'play none none reverse',
+            },
+          }
+        );
+
+        gsap.fromTo(
+          '.inquiry-how-card',
+          { y: 40, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            stagger: 0.12,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: '.inquiry-how-grid',
+              start: 'top 82%',
+              toggleActions: 'play none none reverse',
+            },
+          }
+        );
+
+        gsap.fromTo(
+          '.inquiry-how-img-wrap',
+          { clipPath: 'inset(12% 0% 12% 0% round 15px)' },
+          {
+            clipPath: 'inset(0% 0% 0% 0% round 15px)',
+            duration: 0.85,
+            stagger: 0.12,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: '.inquiry-how-grid',
+              start: 'top 82%',
+              toggleActions: 'play none none reverse',
+            },
+          }
+        );
+
+        gsap.fromTo(
+          '.inquiry-how-img',
+          { scale: 1.1 },
+          {
+            scale: 1,
+            duration: 1.0,
+            stagger: 0.12,
+            ease: 'power2.out',
+            clearProps: 'transform',
+            scrollTrigger: {
+              trigger: '.inquiry-how-grid',
+              start: 'top 82%',
+              toggleActions: 'play none none reverse',
+            },
+          }
+        );
+      }
+
+      // 0-2) 가맹·제휴 문의 페이지 폼 섹션 등장
+      const inquiryFormSection = pageRef.current?.querySelector(
+        '.inquiry-form-section'
+      ) as HTMLElement | null;
+
+      if (inquiryFormSection) {
+        gsap.fromTo(
+          '.inquiry-form-title',
+          { y: 28, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.75,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: inquiryFormSection,
+              start: 'top 84%',
+              toggleActions: 'play none none reverse',
+            },
+          }
+        );
+      }
+
       // 2) WHY CHOOSE US 섹션: ScrollTrigger Pin + 카드 1개씩 순차 슬라이드
       const whySection = pageRef.current?.querySelector(
         '.business-why-section'
