@@ -5,7 +5,7 @@ import {
   SUPPORT_BANNER_ARROW_ICON,
   SUPPORT_BANNER_CONTENT,
   SUPPORT_BANNER_IMAGE,
-} from '../scripts/supportBanner';
+} from './supportBannerData';
 
 /**
  * [Support 공통] 하단 문의 배너 섹션

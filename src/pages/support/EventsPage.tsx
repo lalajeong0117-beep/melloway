@@ -1,20 +1,20 @@
 import React from 'react';
-import { SupportPageHeader } from './components/SupportPageHeader';
+import { SupportPageHeader } from './SupportPageHeader';
 import {
   EVENT_TABS,
   EVENTS_KV_IMAGE,
   EVENTS_KV_SUBTITLE,
   EVENTS_KV_TITLE,
   useEventTabs,
-} from './scripts/events';
-import './styles/support-common.css';
-import './styles/events.css';
+} from './events';
+import './support-common.css';
+import './events.css';
 
 /**
  * [담당 영역: Support] 이벤트 · 혜택 페이지
  * - 공통 Header는 MainLayout에서 KV 상단에 표시됩니다.
- * - CSS(./styles/support-common.css, ./styles/events.css)와
- *   로직/데이터(./scripts/events.ts)를 분리하여 관리합니다.
+ * - CSS(./support-common.css, ./events.css)와
+ *   로직/데이터(./events.ts)를 분리하여 관리합니다.
  */
 export const EventsPage: React.FC = () => {
   const {

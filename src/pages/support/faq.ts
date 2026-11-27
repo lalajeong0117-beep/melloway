@@ -2,10 +2,10 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import AOS from 'aos';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import magnifierIcon from '../../../../assets/images/icon/Magnifier.svg';
-import downChevronIcon from '../../../../assets/images/icon/Down chevron.svg';
-import leftArrowIcon from '../../../../assets/images/icon/Left AB.svg';
-import rightArrowIcon from '../../../../assets/images/icon/Right AB.svg';
+import magnifierIcon from '../../../assets/images/icon/Magnifier.svg';
+import downChevronIcon from '../../../assets/images/icon/Down chevron.svg';
+import leftArrowIcon from '../../../assets/images/icon/Left AB.svg';
+import rightArrowIcon from '../../../assets/images/icon/Right AB.svg';
 import { useSupportLayoutRefresh } from './supportNav';
 
 gsap.registerPlugin(ScrollTrigger);

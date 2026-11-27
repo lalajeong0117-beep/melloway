@@ -1,6 +1,6 @@
 import { FormEvent, useCallback, useEffect, useRef, useState } from 'react';
-import downChevronIcon from '../../../../assets/images/icon/Down chevron.svg';
-import radioButtonIcon from '../../../../assets/images/icon/Radio button.svg';
+import downChevronIcon from '../../../assets/images/icon/Down chevron.svg';
+import radioButtonIcon from '../../../assets/images/icon/Radio button.svg';
 import { useSupportLayoutRefresh } from './supportNav';
 
 export const CONTACT_DOWN_CHEVRON_ICON = downChevronIcon;

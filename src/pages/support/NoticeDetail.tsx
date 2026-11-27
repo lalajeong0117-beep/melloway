@@ -3,7 +3,7 @@ import {
   NOTICE_LEFT_ICON,
   NOTICE_RIGHT_ICON,
   NoticeItem,
-} from '../scripts/notice';
+} from './notice';
 
 export interface NoticeDetailProps {
   notice: NoticeItem;

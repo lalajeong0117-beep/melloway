@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { useSupportKvAnimation } from '../scripts/supportKv';
+import { useSupportKvAnimation } from './supportKv';
 
 export interface SupportPageHeaderProps {
   title: string;

@@ -1,15 +1,15 @@
 import React from 'react';
-import { SupportPageHeader } from './components/SupportPageHeader';
+import { SupportPageHeader } from './SupportPageHeader';
 import {
   CONTACT_DOWN_CHEVRON_ICON,
   CONTACT_RADIO_ICON,
   INQUIRY_TYPE_OPTIONS,
   PHONE_PREFIX_OPTIONS,
   useContactForm,
-} from './scripts/contact';
-import { SUPPORT_KV_IMAGE } from './scripts/supportNav';
-import './styles/support-common.css';
-import './styles/contact.css';
+} from './contact';
+import { SUPPORT_KV_IMAGE } from './supportNav';
+import './support-common.css';
+import './contact.css';
 
 /**
  * [담당 영역: Support] 1:1 문의하기 페이지

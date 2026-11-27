@@ -1,6 +1,6 @@
 import React from 'react';
-import { SupportBanner } from './components/SupportBanner';
-import { SupportPageHeader } from './components/SupportPageHeader';
+import { SupportBanner } from './SupportBanner';
+import { SupportPageHeader } from './SupportPageHeader';
 import {
   FAQ_CATEGORIES,
   FAQ_CHEVRON_ICON,
@@ -8,16 +8,16 @@ import {
   FAQ_MAGNIFIER_ICON,
   FAQ_RIGHT_ICON,
   useFaqBoard,
-} from './scripts/faq';
-import { SUPPORT_KV_IMAGE } from './scripts/supportNav';
-import './styles/support-common.css';
-import './styles/support-banner.css';
-import './styles/faq.css';
+} from './faq';
+import { SUPPORT_KV_IMAGE } from './supportNav';
+import './support-common.css';
+import './support-banner.css';
+import './faq.css';
 
 /**
  * [담당 영역: Support] 2단계 - 자주 묻는 질문 (FAQ) 페이지
- * - CSS(./styles/support-common.css, ./styles/faq.css)와
- *   로직(./scripts/faq.ts)을 분리하여 관리합니다.
+ * - CSS(./support-common.css, ./faq.css)와
+ *   로직(./faq.ts)을 분리하여 관리합니다.
  */
 export const FaqPage: React.FC = () => {
   const {

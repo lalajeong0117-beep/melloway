@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import leftArrowIcon from '../../../../assets/images/icon/Left AB.svg';
-import rightArrowIcon from '../../../../assets/images/icon/Right AB.svg';
+import leftArrowIcon from '../../../assets/images/icon/Left AB.svg';
+import rightArrowIcon from '../../../assets/images/icon/Right AB.svg';
 
 /**
  * Events & Benefits (이벤트 · 혜택) 페이지 전용 데이터 및 스크립트

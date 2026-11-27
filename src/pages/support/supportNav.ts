@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import AOS from 'aos';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import supportKvImg from '../../../../assets/images/Support_KV.jpg';
+import supportKvImg from '../../../assets/images/Support_KV.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 

@@ -1,6 +1,6 @@
 import { ROUTES } from '@/constants/routes';
-import bannerImage from '../../../../assets/images/Banner.jpg';
-import northEastArrowIcon from '../../../../assets/images/icon/North East Arrow.svg';
+import bannerImage from '../../../assets/images/Banner.jpg';
+import northEastArrowIcon from '../../../assets/images/icon/North East Arrow.svg';
 
 export const SUPPORT_BANNER_IMAGE = bannerImage;
 export const SUPPORT_BANNER_ARROW_ICON = northEastArrowIcon;

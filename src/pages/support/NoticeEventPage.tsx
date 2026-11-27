@@ -1,22 +1,22 @@
 import React from 'react';
-import { NoticeDetail } from './components/NoticeDetail';
-import { SupportBanner } from './components/SupportBanner';
-import { SupportPageHeader } from './components/SupportPageHeader';
+import { NoticeDetail } from './NoticeDetail';
+import { SupportBanner } from './SupportBanner';
+import { SupportPageHeader } from './SupportPageHeader';
 import {
   NOTICE_LEFT_ICON,
   NOTICE_MAGNIFIER_ICON,
   NOTICE_RIGHT_ICON,
   useNoticeBoard,
-} from './scripts/notice';
-import { SUPPORT_KV_IMAGE } from './scripts/supportNav';
-import './styles/support-common.css';
-import './styles/support-banner.css';
-import './styles/notice.css';
-import './styles/notice-detail.css';
+} from './notice';
+import { SUPPORT_KV_IMAGE } from './supportNav';
+import './support-common.css';
+import './support-banner.css';
+import './notice.css';
+import './notice-detail.css';
 
 /**
  * [담당 영역: Support] 1단계 - 공지 사항 페이지
- * - CSS(./styles/*.css)와 로직(./scripts/notice.ts)을 분리하여 관리합니다.
+ * - CSS(./*.css)와 로직(./notice.ts)을 분리하여 관리합니다.
  */
 export const NoticeEventPage: React.FC = () => {
   const {
