@@ -37,9 +37,8 @@ export const EventsPage: React.FC = () => {
               type="button"
               role="tab"
               aria-selected={activeTab === tab.key}
-              className={`events-tab-btn${
-                activeTab === tab.key ? ' is-active' : ''
-              }`}
+              className={`events-tab-btn${activeTab === tab.key ? ' is-active' : ''
+                }`}
               onClick={() => setActiveTab(tab.key)}
             >
               {tab.label}
@@ -77,8 +76,6 @@ export const EventsPage: React.FC = () => {
           )}
         </div>
       </div>
-
-      <SupportBanner />
     </section>
   );
 };
