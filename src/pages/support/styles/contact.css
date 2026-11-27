@@ -1,13 +1,13 @@
 /* ==========================================
    1:1 문의하기 페이지 전용 스타일
-   - 헤더 하단(101px) 아래 간격 120px -> padding-top: 221px
+   - KV 하단 간격 120px -> padding-top: 120px
    - .support-contact-* 접두사로 클래스 격리
    ========================================== */
 .support-contact {
     width: 100%;
     max-width: 1408px;
     margin: 0 auto;
-    padding: 221px 24px 0;
+    padding: 120px 24px 0;
     box-sizing: border-box;
 }
 
@@ -384,7 +384,7 @@
 
 @media (max-width: 1024px) {
     .support-contact {
-        padding-top: 180px;
+        padding-top: 88px;
     }
 
     .support-contact-title {
@@ -411,7 +411,7 @@
 
 @media (max-width: 768px) {
     .support-contact {
-        padding: 156px 20px 0;
+        padding: 64px 20px 0;
     }
 
     .support-contact-title {
@@ -473,7 +473,7 @@
 
 @media (max-width: 480px) {
     .support-contact {
-        padding: 144px 16px 0;
+        padding: 48px 16px 0;
     }
 
     .support-contact-title {
