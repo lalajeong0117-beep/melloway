@@ -9,6 +9,7 @@ import { FranchiseInfoPage } from '@/pages/business/FranchiseInfoPage';
 import { FranchiseInquiryPage } from '@/pages/business/FranchiseInquiryPage';
 import { CamperListPage } from '@/pages/campers/CamperListPage';
 import { MellowayCampersPage } from '@/pages/campers/MellowayCampersPage';
+import { CamperReservationPage } from '@/pages/campers/CamperReservationPage';
 import { NoticeEventPage } from '@/pages/support/NoticeEventPage';
 import { FaqPage } from '@/pages/support/FaqPage';
 import { EventsPage } from '@/pages/support/EventsPage';
@@ -36,6 +37,7 @@ export const AppRouter: React.FC = () => {
           {/* Campers */}
           <Route path={ROUTES.CAMPERS_LIST} element={<CamperListPage />} />
           <Route path={ROUTES.CAMPERS_MELLOWAY} element={<MellowayCampersPage />} />
+          <Route path={ROUTES.CAMPERS_RESERVATION} element={<CamperReservationPage />} />
 
           {/* Support */}
           <Route path={ROUTES.SUPPORT_NOTICE} element={<NoticeEventPage />} />
