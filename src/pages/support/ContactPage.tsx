@@ -1,4 +1,5 @@
 import React from 'react';
+import { SupportPageHeader } from './components/SupportPageHeader';
 import {
   CONTACT_DOWN_CHEVRON_ICON,
   CONTACT_RADIO_ICON,
@@ -6,6 +7,7 @@ import {
   PHONE_PREFIX_OPTIONS,
   useContactForm,
 } from './scripts/contact';
+import { SUPPORT_KV_IMAGE } from './scripts/supportNav';
 import './styles/support-common.css';
 import './styles/contact.css';
 
@@ -32,6 +34,14 @@ export const ContactPage: React.FC = () => {
 
   return (
     <section className="support-page" aria-label="1:1 문의하기">
+      <SupportPageHeader
+        title="Contact Us"
+        subtitle="궁금한 점이나 도움이 필요하시면 언제든 멜로웨이에 문의해 주세요."
+        kvImage={SUPPORT_KV_IMAGE}
+        kvAlt="멜로웨이 1:1 문의하기 메인 비주얼"
+        ariaLabel="1:1 문의하기 메인 비주얼"
+      />
+
       <div className="support-contact">
         <h1 className="support-contact-title">MELLOWAY에게 물어보세요</h1>
 
