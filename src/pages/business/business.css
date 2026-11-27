@@ -392,15 +392,16 @@
     max-width: 1920px;
     min-height: 1239px;
     margin: 120px auto 0;
-    padding: 0 24px 120px;
+    padding: 0 240px 120px;
     background-color: var(--bg-color, #F7F8FC);
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .business-plans-header {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -420,11 +421,323 @@
     word-break: keep-all;
 }
 
+.business-plans-tabs {
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
+}
+
+.business-plan-tab-btn {
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: 1px solid var(--main-font-color, #22252A);
+    background-color: transparent;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--main-font-color, #22252A);
+    line-height: 1.2;
+    letter-spacing: 0;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.business-plan-tab-btn.is-active {
+    background-color: var(--main-font-color, #22252A);
+    color: var(--bg-color, #F7F8FC);
+}
+
+/* 플랜 비교 콘텐츠 (버튼 아래 20px) */
+.business-plans-compare-wrap {
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.business-plans-compare-grid {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+/* 좌/우 비교 메인 카드: 586 * 700, radius 20px */
+.business-plan-card {
+    width: 586px;
+    height: 700px;
+    border-radius: 20px;
+    padding: 32px 20px 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 40px;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+}
+
+.business-plan-card--melloway {
+    background-color: #85C9F9;
+}
+
+@keyframes businessPlanBoxSwitch {
+    0% {
+        opacity: 0.72;
+        transform: scale(0.985);
+        box-shadow: 0 0 0 4px rgba(133, 201, 249, 0.35), 0 14px 32px rgba(28, 132, 232, 0.16);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+        box-shadow: 0 8px 24px rgba(28, 132, 232, 0.08);
+    }
+}
+
+.business-plan-card--melloway.is-switching,
+.business-plan-total-pill--melloway.is-switching {
+    animation: businessPlanBoxSwitch 0.36s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .business-plan-card--melloway.is-switching,
+    .business-plan-total-pill--melloway.is-switching {
+        animation: none;
+    }
+}
+
+.business-plan-card--competitor {
+    background-color: #CECECE;
+}
+
+.business-plan-card-head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 4px;
+}
+
+.h2-title.business-plan-card-title {
+    margin: 0;
+    color: var(--main-font-color, #22252A);
+}
+
+.h3-title.business-plan-card-subtitle {
+    margin: 0;
+    color: var(--sub-font-color, #3E434C);
+}
+
+/* 카드 내부 5칸 박스: 546 * 528, radius 20px */
+.business-plan-rows-box {
+    width: 546px;
+    height: 528px;
+    border-radius: 20px;
+    box-sizing: border-box;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.business-plan-rows-box--melloway {
+    background-color: #F4F7FB;
+    border: 1.5px solid #1C84E8;
+}
+
+.business-plan-rows-box--competitor {
+    background-color: #EFEFEF;
+}
+
+.business-plan-row {
+    width: 100%;
+    height: 104px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-align: center;
+    padding: 0 20px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #D8DCE3;
+}
+
+.business-plan-row:last-child {
+    border-bottom: none;
+}
+
+.business-plan-row-amount {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--main-font-color, #22252A);
+    line-height: 1.25;
+    letter-spacing: 0;
+}
+
+.business-plan-row-note {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--sub-font-color, #3E434C);
+    line-height: 1.35;
+    letter-spacing: 0;
+}
+
+/* 중앙 VS 및 항목명 컬럼 */
+.business-plan-vs-col {
+    flex: 1;
+    min-width: 180px;
+    margin-top: 52px;
+    height: 628px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: relative;
+    z-index: 1;
+}
+
+.business-plan-vs-head {
+    flex: 1;
+    background-color: #E2E2E2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--main-font-color, #22252A);
+}
+
+.business-plan-vs-rows {
+    height: 528px;
+    background-color: #EBEBEB;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.business-plan-vs-row {
+    width: 100%;
+    height: 104px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--main-font-color, #22252A);
+    border-bottom: 1px solid #D5D5D5;
+    box-sizing: border-box;
+}
+
+.business-plan-vs-row:last-child {
+    border-bottom: none;
+}
+
+/* 하단 총 투자비(예상) 행 */
+.business-plans-total-row {
+    width: 100%;
+    margin-top: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.business-plan-total-pill {
+    width: 586px;
+    height: 68px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--main-font-color, #22252A);
+    flex-shrink: 0;
+}
+
+.business-plan-total-pill--melloway {
+    background-color: #85C9F9;
+}
+
+.business-plan-total-pill--competitor {
+    background-color: #CECECE;
+}
+
+.business-plan-total-label {
+    flex: 1;
+    text-align: center;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--main-font-color, #22252A);
+}
+
+/* 하단 창업 문의하기 CTA 버튼 */
+.business-plans-cta-wrap {
+    margin-top: 64px;
+    display: flex;
+    justify-content: center;
+}
+
+.business-plans-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 18px 36px;
+    border-radius: 50px;
+    background-color: var(--main-font-color, #22252A);
+    color: var(--bg-color, #F7F8FC);
+    font-family: 'Pretendard', sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.business-plans-cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(34, 37, 42, 0.2);
+}
+
 /* 반응형 대응 */
+@media (max-width: 1680px) {
+    .business-plans-section {
+        padding: 0 100px 100px;
+    }
+
+    .business-plan-card,
+    .business-plan-total-pill {
+        width: 42%;
+        max-width: 586px;
+    }
+
+    .business-plan-rows-box {
+        width: 100%;
+    }
+}
+
 @media (max-width: 1440px) {
     .business-begins-section {
         padding: 0 80px;
         gap: 60px;
+    }
+
+    .business-plans-section {
+        padding: 0 80px 100px;
     }
 }
 
@@ -436,6 +749,24 @@
 
     .business-begins-steps-grid {
         width: 100%;
+    }
+
+    .business-plans-compare-grid,
+    .business-plans-total-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .business-plan-card,
+    .business-plan-total-pill {
+        width: 100%;
+        max-width: 586px;
+        height: auto;
+    }
+
+    .business-plan-vs-col {
+        display: none;
     }
 }
 

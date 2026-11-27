@@ -103,6 +103,104 @@ export const MELLOWAY_NUMBERS: NumberMetricItem[] = [
   },
 ];
 
+export type PlanTabId = 'A' | 'B' | 'C';
+
+export interface PlanCostRow {
+  amount: string;
+  note: string;
+}
+
+export interface FranchisePlanData {
+  id: PlanTabId;
+  buttonLabel: string;
+  title: string;
+  subtitle: string;
+  rows: [PlanCostRow, PlanCostRow, PlanCostRow, PlanCostRow, PlanCostRow];
+  totalAmount: string;
+}
+
+export interface CompetitorPlanData {
+  title: string;
+  subtitle: string;
+  rows: [PlanCostRow, PlanCostRow, PlanCostRow, PlanCostRow, PlanCostRow];
+  totalAmount: string;
+}
+
+/**
+ * Business(파트너스 안내) - 맞춤형 창업 플랜 비교 항목 라벨 (중앙 열)
+ */
+export const PLAN_ROW_LABELS: [string, string, string, string, string] = [
+  '가맹비',
+  '기본 교육비',
+  '시설 구축',
+  '장비 및 비품',
+  '초기 운영자금',
+];
+
+/**
+ * Business(파트너스 안내) - Melloway A안 / B안 / C안 창업 플랜 데이터
+ */
+export const MELLOWAY_PLANS: Record<PlanTabId, FranchisePlanData> = {
+  A: {
+    id: 'A',
+    buttonLabel: 'A안',
+    title: 'Melloway A안',
+    subtitle: '기존 부지 활용형',
+    rows: [
+      { amount: '3,000만원', note: '(지분 가치 보유 / 소멸성 비용 없음)' },
+      { amount: '500만원', note: '(운영·차량 정비·CS 실무 올인원 교육)' },
+      { amount: '500~1,000만원', note: '(기존 보유 주차 부지 활용 최소 시공)' },
+      { amount: '700~1,000만원', note: '(본사 공동구매 공급가로 거품 제거)' },
+      { amount: '800~1,500만원', note: '(본사 플랫폼 통합 모객으로 홍보비 절감)' },
+    ],
+    totalAmount: '5,500~7,000만원',
+  },
+  B: {
+    id: 'B',
+    buttonLabel: 'B안',
+    title: 'Melloway B안',
+    subtitle: '신규 임대 및 표준 구축형',
+    rows: [
+      { amount: '3,000만원', note: '(지분 가치 보유 / 소멸성 비용 없음)' },
+      { amount: '500만원', note: '(운영·차량 정비·CS 실무 올인원 교육)' },
+      { amount: '1,000~2,000만원', note: '(표준 거점 오피스 및 필수 설비 구축)' },
+      { amount: '700~1,000만원', note: '(본사 공동구매 공급가로 거품 제거)' },
+      { amount: '1,800~3,000만원', note: '(본사 플랫폼 통합 모객으로 홍보비 절감)' },
+    ],
+    totalAmount: '8,000만~1억2,000만원',
+  },
+  C: {
+    id: 'C',
+    buttonLabel: 'C안',
+    title: 'Melloway C안',
+    subtitle: '대규모 부지 및 확장 운영형',
+    rows: [
+      { amount: '3,000만원', note: '(지분 가치 보유 / 소멸성 비용 없음)' },
+      { amount: '500만원', note: '(운영·차량 정비·CS 실무 올인원 교육)' },
+      { amount: '2,000~4,000만원', note: '(대규모 복합 차고지 및 라운지 조성)' },
+      { amount: '900~1,400만원', note: '(본사 공동구매 공급가로 거품 제거)' },
+      { amount: '3,600~5,100만원', note: '(본사 플랫폼 통합 모객으로 홍보비 절감)' },
+    ],
+    totalAmount: '5,500~7,000만원',
+  },
+};
+
+/**
+ * Business(파트너스 안내) - G사 비교안 기준 데이터
+ */
+export const COMPETITOR_PLAN: CompetitorPlanData = {
+  title: 'G사 비교안',
+  subtitle: '타사 단일 패키지 기준',
+  rows: [
+    { amount: '4,000만~5,000만원', note: '(소멸성 가맹비 / 매월 로열티 별도)' },
+    { amount: '800만~1,000만원', note: '(단순 이론 교육 / 현장 정비 교육 제외)' },
+    { amount: '3,000만~5,000만원', note: '(본사 지정 인테리어 및 사인물 의무 시공)' },
+    { amount: '1,500만~2,000만원', note: '(캠핑 용품 및 운영 비품 개별 시중가 매입)' },
+    { amount: '3,000만~4,000만원', note: '(초기 고객 유치를 위한 개별 마케팅비 과다)' },
+  ],
+  totalAmount: '1억 2,300만 ~ 1억 7,000만원',
+};
+
 export interface BeginsStepItem {
   id: number;
   number: string;
