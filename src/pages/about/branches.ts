@@ -164,15 +164,22 @@ export const useBranchesPage = (scopeRef: RefObject<HTMLElement | null>) => {
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
       tl.fromTo(
-        '.about-branches-kv-title',
-        { y: 36, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.85, delay: 0.1 }
-      ).fromTo(
-        '.about-branches-kv-subtitle',
-        { y: 28, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8 },
-        '-=0.45'
-      );
+        '.about-branches-kv-img',
+        { scale: 1.06 },
+        { scale: 1, duration: 1.4, ease: 'power2.out' }
+      )
+        .fromTo(
+          '.about-branches-kv-title',
+          { y: 36, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.9 },
+          '-=1.0'
+        )
+        .fromTo(
+          '.about-branches-kv-subtitle',
+          { y: 28, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.9 },
+          '-=0.65'
+        );
     },
     { scope: scopeRef }
   );
